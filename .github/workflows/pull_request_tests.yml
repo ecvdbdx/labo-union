@@ -1,9 +1,7 @@
 name: Run tests on Pull Request
 
 on:
-  push:
-    branches: 
-      - ci/test_ci
+  pull_request:
 
 jobs:
   build:
