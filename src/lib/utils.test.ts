@@ -15,8 +15,8 @@ describe('isTweetFr', () => {
 		expect(res).toBe(true);
 	});
 
-	it('It should return false if the tweet is in english', () => {
-		const res = isTweetFr({ lang: 'en' });
+	it('It should return false if the tweet is not in french', () => {
+		const res = isTweetFr({ lang: 'de' });
 
 		expect(res).toBe(false);
 	});
