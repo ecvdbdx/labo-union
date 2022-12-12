@@ -7,7 +7,7 @@
 		padding: 0;
 		margin: 0;
 		background-color: colors.$tertiary;
-		display: contents;
+		font-family: sans-serif;
 	}
 
 	:global(a) {
@@ -29,5 +29,10 @@
 		&:active {
 			color: colors.$active;
 		}
+	}
+
+	:global(.container) {
+		width: calc(100vw - 240px);
+		margin: 0 auto;
 	}
 </style>

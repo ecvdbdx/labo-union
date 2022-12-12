@@ -1,0 +1,75 @@
+<script lang="ts">
+	export let placeholder = 'Text description';
+	export let type: 'text' | 'password' | 'email' | 'number' | 'range' | 'checkbox' = 'text';
+	export let value: string | number | boolean;
+	export let noLabel = false;
+	export let error: string | null = null;
+
+	const handleInput = (e: Event) => {
+		if (type === 'checkbox') {
+			return (value = (e.target as HTMLInputElement).checked);
+		}
+
+		value = (e.target as HTMLInputElement).value;
+	};
+</script>
+
+<div class="group {error ? 'onError' : ''}">
+	{#if !noLabel}
+		<label>
+			<slot>Label*</slot>
+		</label>
+	{/if}
+	<input {type} {placeholder} {value} on:input={handleInput} on:change={handleInput} />
+	{#if error}
+		<div class="error">
+			{error}
+		</div>
+	{/if}
+</div>
+
+<style lang="scss">
+	@use './src/lib/styles/colors';
+
+	.group {
+		margin-bottom: 1rem;
+		width: 100%;
+
+		&.onError {
+			input {
+				border-color: colors.$error;
+				border-radius: 10px 10px 0 0;
+				background-color: colors.$errorBkg;
+			}
+
+			.error {
+				width: 100%;
+				border: 1px solid colors.$error;
+				border-radius: 0 0 10px 10px;
+				padding: 0.7rem;
+				background-color: colors.$error;
+				color: colors.$white;
+				font-size: 0.8rem;
+			}
+		}
+
+		label {
+			display: block;
+			margin-bottom: 0.5rem;
+		}
+
+		input {
+			width: 100%;
+			position: relative;
+			padding: 0.7rem;
+			border: 1px solid colors.$disabled;
+			background-color: colors.$white;
+			border-radius: 10px;
+			color: colors.$black;
+
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+</style>
