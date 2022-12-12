@@ -16,7 +16,7 @@
 		border-radius: 10px;
 		border: none;
 		cursor: pointer;
-		transition: 0.35s ease;
+		transition: 0.15s ease;
 
 		&:disabled {
 			background-color: colors.$disabled;
