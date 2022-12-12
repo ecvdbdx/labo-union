@@ -3,6 +3,10 @@
 <style lang="scss">
 	@use './src/lib/styles/colors';
 
+	:global(*) {
+		box-sizing: border-box;
+	}
+
 	:global(body) {
 		padding: 0;
 		margin: 0;

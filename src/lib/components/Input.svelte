@@ -4,6 +4,7 @@
 	export let value: string | number | boolean;
 	export let noLabel = false;
 	export let error: string | null = null;
+	export let name = `input_${Math.random().toString(36).substring(7)}`;
 
 	const handleInput = (e: Event) => {
 		if (type === 'checkbox') {
@@ -16,11 +17,11 @@
 
 <div class="group {error ? 'onError' : ''}">
 	{#if !noLabel}
-		<label>
+		<label for={name}>
 			<slot>Label*</slot>
 		</label>
 	{/if}
-	<input {type} {placeholder} {value} on:input={handleInput} on:change={handleInput} />
+	<input {type} {placeholder} {value} {name} on:input={handleInput} on:change={handleInput} />
 	{#if error}
 		<div class="error">
 			{error}
@@ -34,6 +35,7 @@
 	.group {
 		margin-bottom: 1rem;
 		width: 100%;
+		position: relative;
 
 		&.onError {
 			input {
