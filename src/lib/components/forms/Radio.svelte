@@ -2,11 +2,17 @@
 	export let name: string;
 	export let value: string;
 	export let label: string = value;
+	export let checked = false;
+	export let selected = '';
+
+	const handleInput = (e: Event) => {
+		selected = (e.target as HTMLInputElement).value;
+	};
 </script>
 
 <div class="group">
 	<label for={name}>{label}</label>
-	<input bind:value {name} type="radio" />
+	<input {name} {value} {checked} type="radio" on:input={handleInput} on:change={handleInput} />
 </div>
 
 <style lang="scss">

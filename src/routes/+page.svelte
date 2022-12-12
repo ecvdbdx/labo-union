@@ -8,9 +8,9 @@
 	let search = '';
 	let value = '';
 	let number = 0;
-
 	let bool_1 = false;
 	let bool_2 = false;
+	let radio_value = '';
 </script>
 
 <div class="container">
@@ -27,15 +27,13 @@
 	<p>Radio & checkbox</p>
 
 	<div style:margin={'0 0 10px 0'}>
-		<Radio name="radio_1" value="1" />
-		<Radio name="radio_1" value="2" />
-		<Radio name="radio_1" value="3" />
+		<Radio bind:selected={radio_value} name="radio_1" value="1" label="radio_1" checked />
+		<Radio bind:selected={radio_value} name="radio_1" value="2" />
+		<Radio bind:selected={radio_value} name="radio_1" value="3" />
 	</div>
 
-	{bool_1}
 	<Checkbox label={'Checkbox'} bind:value={bool_1} />
 
-	{bool_2}
 	<Checkbox reverse label={'Checkbox reversed'} bind:value={bool_2} />
 
 	<p>Buttons</p>
