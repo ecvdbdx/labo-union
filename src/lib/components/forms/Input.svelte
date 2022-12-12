@@ -1,16 +1,12 @@
 <script lang="ts">
 	export let placeholder = 'Text description';
-	export let type: 'text' | 'password' | 'email' | 'number' | 'range' | 'checkbox' = 'text';
 	export let value: string | number | boolean;
 	export let noLabel = false;
 	export let error: string | null = null;
 	export let name = `input_${Math.random().toString(36).substring(7)}`;
+	export let type: 'text' | 'password' | 'email' | 'number' | 'range' = 'text';
 
 	const handleInput = (e: Event) => {
-		if (type === 'checkbox') {
-			return (value = (e.target as HTMLInputElement).checked);
-		}
-
 		value = (e.target as HTMLInputElement).value;
 	};
 </script>
