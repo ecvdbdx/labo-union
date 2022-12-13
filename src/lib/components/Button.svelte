@@ -2,14 +2,14 @@
 	export let type: 'default' | 'rounded' | 'square' = 'default';
 </script>
 
-<button class="btn {type}" on:click>
+<button class="Button {type}" on:click>
 	<slot>Text Label</slot>
 </button>
 
 <style lang="scss">
 	@use './src/lib/styles/colors';
 
-	.btn {
+	.Button {
 		color: colors.$white;
 		background-color: colors.$primary;
 		padding: 0.6rem 1rem;

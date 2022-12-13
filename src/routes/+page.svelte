@@ -17,8 +17,6 @@
 	<h1>Welcome to Annuaire</h1>
 	<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 
-	<div style:height="10px" />
-
 	<Search bind:search label="Search*" />
 
 	<Input bind:value>Input*</Input>

@@ -11,7 +11,7 @@
 	};
 </script>
 
-<div class="group {error ? 'onError' : ''}">
+<div class="group" class:onError={error}>
 	{#if !noLabel}
 		<label for={name}>
 			<slot>Label*</slot>
