@@ -26,6 +26,7 @@
 		{required}
 		on:input={handleInput}
 		on:change={handleInput}
+		id={name}
 	/>
 	{#if error}
 		<div class="error">
