@@ -27,7 +27,7 @@
 			background-color: colors.$hover;
 		}
 
-		&:focus {
+		&:focus-visible {
 			background-color: colors.$focus;
 		}
 

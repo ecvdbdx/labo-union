@@ -2,7 +2,7 @@
 	export let search: string;
 	export let placeholder = 'Search...';
 	export let label: string | null = null;
-	export let name = `search_${Math.random().toString(36).substring(7)}`;
+	export let name: string;
 </script>
 
 <div class="group">
@@ -59,7 +59,7 @@
 				background-color: transparent;
 				padding: 0;
 
-				&:focus {
+				&:focus-visible {
 					outline: none;
 				}
 			}

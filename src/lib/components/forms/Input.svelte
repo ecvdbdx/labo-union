@@ -3,7 +3,7 @@
 	export let value: string | number | boolean;
 	export let noLabel = false;
 	export let error: string | null = null;
-	export let name = `input_${Math.random().toString(36).substring(7)}`;
+	export let name: string;
 	export let type: 'text' | 'password' | 'email' | 'number' | 'range' = 'text';
 
 	const handleInput = (e: Event) => {
@@ -65,7 +65,7 @@
 			border-radius: 10px;
 			color: colors.$black;
 
-			&:focus {
+			&:focus-visible {
 				outline: none;
 			}
 		}

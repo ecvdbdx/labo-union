@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let value = false;
 	export let label: string;
-	export let name = `checkbox_${Math.random().toString(36).substring(7)}`;
+	export let name: string;
 	export let reverse = false;
 </script>
 

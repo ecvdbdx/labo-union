@@ -17,10 +17,10 @@
 	<h1>Welcome to Annuaire</h1>
 	<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 
-	<Search bind:search label="Search*" />
+	<Search bind:search label="Search*" name="searchbar" />
 
-	<Input bind:value>Input*</Input>
-	<Input bind:value={number} type={'number'} noLabel />
+	<Input bind:value name="input_1">Input*</Input>
+	<Input bind:value={number} name="input_2" type={'number'} noLabel />
 
 	<p>Radio & checkbox</p>
 
@@ -30,9 +30,9 @@
 		<Radio bind:selected={radio_value} name="radio_1" value="3" />
 	</div>
 
-	<Checkbox label={'Checkbox'} bind:value={bool_1} />
+	<Checkbox name="checkbox_1" label={'Checkbox'} bind:value={bool_1} />
 
-	<Checkbox reverse label={'Checkbox reversed'} bind:value={bool_2} />
+	<Checkbox name="checkbox_2" reverse label={'Checkbox reversed'} bind:value={bool_2} />
 
 	<p>Buttons</p>
 
