@@ -12,7 +12,7 @@ const config = {
 	// for more information about preprocessors
 	preprocess: preprocess({
 		sass: {
-			prependData: `@import '${__dirname}/src/styles/env'`,
+			prependData: `@import '${__dirname}/src/styles/index'`,
 			renderSync: true,
 		},
 		postcss: {

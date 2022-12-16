@@ -1,0 +1,15 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	background-color: #faf5f0;
+	font-family: sans-serif;
+}
+
+.container {
+	width: calc(100vw - 240px);
+	margin: 0 auto;
+}
