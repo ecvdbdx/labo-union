@@ -14,7 +14,7 @@
 <div class="group" class:onError={error}>
 	{#if !noLabel}
 		<label for={name}>
-			<slot>Label*</slot>
+			<slot>Label</slot>
 		</label>
 	{/if}
 	<input {type} {placeholder} {value} {name} on:input={handleInput} on:change={handleInput} />
