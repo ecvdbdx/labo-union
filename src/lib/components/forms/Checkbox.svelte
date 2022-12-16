@@ -10,23 +10,19 @@
 	<input bind:checked={value} {name} type="checkbox" />
 </div>
 
-<style lang="scss">
-	@use './src/lib/styles/colors';
+<style lang="sass">
 
-	.group {
-		display: flex;
-		justify-content: start;
-		margin-bottom: 1rem;
-		align-items: center;
+	.group 
+		display: flex
+		justify-content: start
+		margin-bottom: 1rem
+		align-items: center
 
-		&.reverse {
-			flex-direction: row-reverse;
-		}
-	}
+		&.reverse 
+			flex-direction: row-reverse
 
-	input {
-		width: 20px;
-		height: 20px;
-		accent-color: colors.$primary;
-	}
+	input 
+		width: 20px
+		height: 20px
+		accent-color: $primary
 </style>

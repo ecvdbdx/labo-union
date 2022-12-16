@@ -25,49 +25,44 @@
 	{/if}
 </div>
 
-<style lang="scss">
-	@use './src/lib/styles/colors';
+<style lang="sass">
+	.group 
+		margin-bottom: 1rem
+		width: 100%
+		position: relative
 
-	.group {
-		margin-bottom: 1rem;
-		width: 100%;
-		position: relative;
+		&.onError 
+			input 
+				border-color: $error
+				border-radius: 10px 10px 0 0
+				background-color: $errorBkg
+			
+			.error 
+				width: 100%
+				border: 1px solid $error
+				border-radius: 0 0 10px 10px
+				padding: 0.7rem
+				background-color: $error
+				color: $white
+				font-size: 0.8rem
+			
+		
 
-		&.onError {
-			input {
-				border-color: colors.$error;
-				border-radius: 10px 10px 0 0;
-				background-color: colors.$errorBkg;
-			}
+		label 
+			display: block
+			margin-bottom: 0.5rem
+		
 
-			.error {
-				width: 100%;
-				border: 1px solid colors.$error;
-				border-radius: 0 0 10px 10px;
-				padding: 0.7rem;
-				background-color: colors.$error;
-				color: colors.$white;
-				font-size: 0.8rem;
-			}
-		}
+		input 
+			width: 100%
+			position: relative
+			padding: 0.7rem
+			border: 1px solid $disabled
+			background-color: $white
+			border-radius: 10px
+			color: $black
 
-		label {
-			display: block;
-			margin-bottom: 0.5rem;
-		}
+			&:focus-visible 
+				outline: none
 
-		input {
-			width: 100%;
-			position: relative;
-			padding: 0.7rem;
-			border: 1px solid colors.$disabled;
-			background-color: colors.$white;
-			border-radius: 10px;
-			color: colors.$black;
-
-			&:focus-visible {
-				outline: none;
-			}
-		}
-	}
 </style>

@@ -4,6 +4,7 @@
 	import Search from '$lib/components/Search.svelte';
 	import Radio from '$lib/components/forms/Radio.svelte';
 	import Checkbox from '$lib/components/forms/Checkbox.svelte';
+	import Link from '$lib/components/forms/Link.svelte';
 
 	let search = '';
 	let value = '';
@@ -15,7 +16,7 @@
 
 <div class="container">
 	<h1>Welcome to Annuaire</h1>
-	<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+	<p>Visit <Link href="https://kit.svelte.dev">kit.svelte.dev</Link> to read the documentation</p>
 
 	<Search bind:search label="Search*" name="searchbar" />
 

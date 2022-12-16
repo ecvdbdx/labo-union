@@ -15,23 +15,22 @@
 	<input {name} {value} {checked} type="radio" on:input={handleInput} on:change={handleInput} />
 </div>
 
-<style lang="scss">
-	@use './src/lib/styles/colors';
+<style lang="sass">
+	
+	.group 
+		display: inline-flex
+		align-items: center
+		margin: 0 10px
 
-	.group {
-		display: inline-flex;
-		align-items: center;
-		margin: 0 10px;
+		label 
+			margin: 0 8px
+		
 
-		label {
-			margin: 0 8px;
-		}
+		input 
+			cursor: pointer
+			position: relative
+			margin: 0
+			accent-color: $primary
+		
 
-		input {
-			cursor: pointer;
-			position: relative;
-			margin: 0;
-			accent-color: colors.$primary;
-		}
-	}
 </style>

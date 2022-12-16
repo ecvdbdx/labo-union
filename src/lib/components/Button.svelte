@@ -6,41 +6,40 @@
 	<slot>Text Label</slot>
 </button>
 
-<style lang="scss">
-	@use './src/lib/styles/colors';
+<style lang="sass">
 
-	.Button {
-		color: colors.$white;
-		background-color: colors.$primary;
-		padding: 0.6rem 1rem;
-		border-radius: 10px;
-		border: none;
-		cursor: pointer;
-		transition: 0.15s ease;
+	.Button 
+		color: $white
+		background-color: $primary
+		padding: 0.6rem 1rem
+		border-radius: 10px
+		border: none
+		cursor: pointer
+		transition: 0.15s ease
 
-		&:disabled {
-			background-color: colors.$disabled;
-			cursor: not-allowed;
-		}
+		&:disabled
+			background-color: $disabled
+			cursor: not-allowed
 
-		&:hover {
-			background-color: colors.$hover;
-		}
 
-		&:focus-visible {
-			background-color: colors.$focus;
-		}
+		&:hover
+			background-color: $hover
+		
 
-		&:active {
-			background-color: colors.$active;
-		}
+		&:focus-visible
+			background-color: $focus
+		
 
-		&.rounded {
-			border-radius: 50px;
-		}
+		&:active
+			background-color: $active
+		
 
-		&.square {
-			border-radius: 0;
-		}
-	}
+		&.rounded
+			border-radius: 50px
+		
+
+		&.square
+			border-radius: 0
+		
+
 </style>
