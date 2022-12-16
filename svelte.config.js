@@ -1,6 +1,10 @@
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
 import autoprefixer from 'autoprefixer';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -8,7 +12,7 @@ const config = {
 	// for more information about preprocessors
 	preprocess: preprocess({
 		sass: {
-			prependData: `@import './src/styles/env'`,
+			prependData: `@import '${__dirname}/src/styles/env'`,
 			renderSync: true,
 		},
 		postcss: {
