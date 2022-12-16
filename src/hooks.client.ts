@@ -1,1 +1,1 @@
-import '@utils/supabaseClient';
+import '$lib/auth';
