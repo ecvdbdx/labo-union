@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script lang="ts">
 	import type { ActionData } from './$types';
 	import { enhance } from '$app/forms';
@@ -33,12 +34,29 @@
 			required
 			error={form?.confirmedPassword_error}>Confirmer votre mot de passe*</Input
 		>
+=======
+<script>
+	import Input from '../../lib/components/forms/Input.svelte';
+	import Button from '../../lib/components/Button.svelte';
+	import Checkbox from '$lib/components/forms/Checkbox.svelte';
+
+	// let data;
+	// $: data, console.log('data :', data);
+</script>
+
+<div class="container">
+	<form method="POST">
+		<Input value="" name="email" type="email" placeholder="fabriceparmentier@gmail.com">Email</Input
+		>
+		<Input value="" name="password" type="password" placeholder="">Mot de passe</Input>
+>>>>>>> 2a5a1f6 (feat: init supabase auth)
 		<Checkbox
 			name="termAndConditions"
 			reverse
 			label="J’accepte les Conditions d’utilisation et la Politique de confidentialité"
 			value={false}
 		/>
+<<<<<<< HEAD
 		{#if form?.termAndConditions_error}
 			<p class="error">{form?.termAndConditions_error}</p>
 		{/if}
@@ -67,3 +85,8 @@
 			color: $success
 
 </style>
+=======
+		<Button>Créer un compte</Button>
+	</form>
+</div>
+>>>>>>> 2a5a1f6 (feat: init supabase auth)

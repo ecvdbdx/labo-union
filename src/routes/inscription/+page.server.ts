@@ -1,12 +1,18 @@
 import type { Actions } from './$types';
+<<<<<<< HEAD
 import { fail } from '@sveltejs/kit';
 
 import { supabase } from '$lib/auth';
 import { isPasswordValid } from '$lib/validators/auth';
+=======
+
+import { supabase } from '@utils/supabaseClient';
+>>>>>>> 2a5a1f6 (feat: init supabase auth)
 
 export const actions: Actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
+<<<<<<< HEAD
 
 		const email = formData.get('email')?.toString();
 		const password = formData.get('password')?.toString();
@@ -85,5 +91,17 @@ export const actions: Actions = {
 		}
 
 		return { success: true };
+=======
+		const email = formData.get('email');
+		const password = formData.get('password');
+		const termAndConditions = formData.get('termAndConditions');
+
+		if (email && password && termAndConditions) {
+			await supabase.auth.signUp({
+				email: email as string,
+				password: password as string,
+			});
+		}
+>>>>>>> 2a5a1f6 (feat: init supabase auth)
 	},
 };
