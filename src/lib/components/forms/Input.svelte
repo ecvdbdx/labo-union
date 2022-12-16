@@ -17,7 +17,15 @@
 			<slot>Label*</slot>
 		</label>
 	{/if}
-	<input {type} {placeholder} {value} {name} on:input={handleInput} on:change={handleInput} />
+	<input
+		{type}
+		{placeholder}
+		{value}
+		{name}
+		on:input={handleInput}
+		on:change={handleInput}
+		id={name}
+	/>
 	{#if error}
 		<div class="error">
 			{error}
