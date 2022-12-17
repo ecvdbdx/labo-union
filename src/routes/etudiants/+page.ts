@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '../../lib/auth';
 
 export async function load() {
 	const { data: profile, error: err } = await supabase.from('Profile').select('*');

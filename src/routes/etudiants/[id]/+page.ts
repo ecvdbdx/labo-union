@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { supabase } from '../../../utils/supabaseClient';
+import { supabase } from '../../../lib/auth';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ params }) => {
