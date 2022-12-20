@@ -4,7 +4,7 @@
 	import Search from '$lib/components/Search.svelte';
 	import Radio from '$lib/components/forms/Radio.svelte';
 	import Checkbox from '$lib/components/forms/Checkbox.svelte';
-	import Link from '$lib/components/forms/Link.svelte';
+	import Link from '$lib/components/Link.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 
 	let search = '';
