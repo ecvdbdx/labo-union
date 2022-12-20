@@ -6,8 +6,12 @@ import { supabase } from '$lib/auth';
 import { isPasswordValid } from '$lib/validators/auth';
 =======
 
+<<<<<<< HEAD
 import { supabase } from '@utils/supabaseClient';
 >>>>>>> 2a5a1f6 (feat: init supabase auth)
+=======
+import { supabase } from '$lib/auth';
+>>>>>>> 8f79a83 (feat: handle signup form errors (wip))
 
 export const actions: Actions = {
 	default: async ({ request }) => {
@@ -96,12 +100,25 @@ export const actions: Actions = {
 		const password = formData.get('password');
 		const termAndConditions = formData.get('termAndConditions');
 
-		if (email && password && termAndConditions) {
-			await supabase.auth.signUp({
-				email: email as string,
-				password: password as string,
-			});
+		if (!email) {
+			return { status: 400, email: 'Veuillez renseigner votre adresse email' };
 		}
+<<<<<<< HEAD
 >>>>>>> 2a5a1f6 (feat: init supabase auth)
+=======
+
+		if (!password) {
+			return { status: 400, password: 'Veuillez renseigner votre mot de passe' };
+		}
+
+		if (!termAndConditions) {
+			return { status: 400, termAndConditions: "Veuillez accepter les conditions d'utilisation" };
+		}
+
+		await supabase.auth.signUp({
+			email: email as string,
+			password: password as string,
+		});
+>>>>>>> 8f79a83 (feat: handle signup form errors (wip))
 	},
 };
