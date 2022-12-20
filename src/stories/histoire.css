@@ -1,0 +1,18 @@
+.controls {
+	padding: 10px;
+}
+
+.controls input,
+.controls select {
+  color: white;
+  background-color: transparent;
+  border: 1px solid #ffffff40;
+	margin-left: 10px;
+	border-radius: 4px;
+  padding: 4px;
+}
+
+.controls > div {
+  margin-bottom: 10px;
+  display: block;
+}

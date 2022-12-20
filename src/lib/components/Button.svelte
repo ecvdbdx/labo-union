@@ -1,8 +1,9 @@
 <script lang="ts">
 	export let type: 'default' | 'rounded' | 'square' = 'default';
+	export let disabled = false;
 </script>
 
-<button class="Button {type}" on:click>
+<button class="Button {type}" {disabled} on:click>
 	<slot>Text Label</slot>
 </button>
 

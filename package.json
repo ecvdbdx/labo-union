@@ -15,7 +15,7 @@
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"prepare": "husky install",
-		"story:dev": "histoire dev --port 8080",
+		"story:dev": "histoire dev",
 		"story:build": "histoire build",
 		"story:preview": "histoire preview"
 	},
