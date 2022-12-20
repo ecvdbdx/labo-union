@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let placeholder = 'Text description';
+	export let placeholder = '';
 	export let value: string | number | boolean;
 	export let noLabel = false;
 	export let error: string | null = null;
