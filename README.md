@@ -11,7 +11,6 @@ Get the Supabase API URL of the project and replace the variable `PUBLIC_SUPABAS
 Get the project API key on Supabase and replace the variable `PUBLIC_SUPABASE_ANON_KEY`.
 Go to someone who knows the project to get these informations.
 
-
 ## Developing
 
 ```bash
@@ -30,4 +29,3 @@ npm run build
 ```
 
 You can preview the production build with `npm run preview`.
-
