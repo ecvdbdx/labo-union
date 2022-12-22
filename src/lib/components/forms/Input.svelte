@@ -4,7 +4,7 @@
 	export let noLabel = false;
 	export let error: string | null = null;
 	export let name: string;
-	export let type: 'text' | 'password' | 'email' | 'number' | 'range' = 'text';
+	export let type: 'text' | 'password' | 'email' | 'number' | 'range' | 'tel' = 'text';
 
 	const handleInput = (e: Event) => {
 		value = (e.target as HTMLInputElement).value;
@@ -28,8 +28,8 @@
 <style lang="sass">
 	.group 
 		margin-bottom: 1rem
-		width: 100%
 		position: relative
+		width: 100%
 
 		&.onError 
 			input 
@@ -54,7 +54,9 @@
 		
 
 		input 
+			box-sizing: border-box
 			width: 100%
+			display: block 
 			position: relative
 			padding: 0.7rem
 			border: 1px solid $disabled
