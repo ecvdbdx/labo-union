@@ -36,6 +36,10 @@
 		{/if}
 
 		<Button>Créer un compte</Button>
+
+		{#if form?.success}
+			<p class="success">Votre compte a bien été créé !</p>
+		{/if}
 	</form>
 </div>
 
@@ -49,5 +53,8 @@
 		
 		.error
 			color: $error
+		
+		.success
+			color: $success
 
 </style>

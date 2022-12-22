@@ -52,6 +52,8 @@ export const actions: Actions = {
 			email: email as string,
 			password: password as string,
 		});
+
+		return { success: true };
 	},
 };
 
