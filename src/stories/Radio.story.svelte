@@ -4,7 +4,7 @@
 
 	export let Hst: HstType;
 
-	let content = 'Default checkbox';
+	let content = 'Default radio';
 	let checked = false;
 </script>
 
