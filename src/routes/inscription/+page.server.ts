@@ -154,7 +154,12 @@ export const actions: Actions = {
 			email: email as string,
 			password: password as string,
 		});
+<<<<<<< HEAD
 >>>>>>> 8f79a83 (feat: handle signup form errors (wip))
+=======
+
+		return { success: true };
+>>>>>>> c206b2d (feat: add success message)
 	},
 };
 

@@ -96,6 +96,7 @@
 		{#if form?.success}
 			<p class="success">Votre compte a bien été créé !</p>
 		{/if}
+<<<<<<< HEAD
 	</form>
 </div>
 
@@ -130,6 +131,8 @@
 		{/if}
 
 		<Button>Créer un compte</Button>
+=======
+>>>>>>> c206b2d (feat: add success message)
 	</form>
 </div>
 
@@ -143,6 +146,9 @@
 		
 		.error
 			color: $error
+		
+		.success
+			color: $success
 
 </style>
 >>>>>>> 8f79a83 (feat: handle signup form errors (wip))
