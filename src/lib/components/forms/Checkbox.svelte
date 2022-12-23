@@ -11,7 +11,6 @@
 </div>
 
 <style lang="sass">
-
 	.group 
 		display: flex
 		justify-content: start

@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let placeholder = 'Text description';
+	export let placeholder = '';
 	export let value: string | number | boolean;
 	export let noLabel = false;
 	export let error: string | null = null;
@@ -14,7 +14,7 @@
 <div class="group" class:onError={error}>
 	{#if !noLabel}
 		<label for={name}>
-			<slot>Label*</slot>
+			<slot>Label</slot>
 		</label>
 	{/if}
 	<input {type} {placeholder} {value} {name} on:input={handleInput} on:change={handleInput} />
