@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { supabase } from '$lib/auth';
 import { fakeAccount_user_id } from '$lib/constants';
+import type { User } from '@interfaces';
 
 export async function load() {
 	const { data, error: err } = await supabase
@@ -15,6 +16,6 @@ export async function load() {
 		});
 	}
 	return {
-		data: data,
+		profile: data as User,
 	};
 }
