@@ -18,14 +18,23 @@
 			value={form?.email ?? ''}
 			name="email"
 			type="email"
+			required
 			placeholder="john.doe@mail-ecv.com"
 			error={form?.email_error}>Email</Input
 		>
-		<Input value={form?.password ?? ''} name="password" type="password" error={form?.password_error}
-			>Mot de passe</Input
+		<Input
+			value={form?.password ?? ''}
+			name="password"
+			required
+			type="password"
+			error={form?.password_error}>Mot de passe</Input
 		>
-		<Input value={''} name="confirmedPassword" type="password" error={form?.confirmedPassword_error}
-			>Confirmer votre mot de passe</Input
+		<Input
+			value={''}
+			name="confirmedPassword"
+			type="password"
+			required
+			error={form?.confirmedPassword_error}>Confirmer votre mot de passe</Input
 		>
 		<Checkbox
 			name="termAndConditions"

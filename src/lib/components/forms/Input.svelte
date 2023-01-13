@@ -5,6 +5,7 @@
 	export let error: string | null = null;
 	export let name: string;
 	export let type: 'text' | 'password' | 'email' | 'number' | 'range' = 'text';
+	export let required = false;
 
 	const handleInput = (e: Event) => {
 		value = (e.target as HTMLInputElement).value;
@@ -17,7 +18,15 @@
 			<slot>Label</slot>
 		</label>
 	{/if}
-	<input {type} {placeholder} {value} {name} on:input={handleInput} on:change={handleInput} />
+	<input
+		{type}
+		{placeholder}
+		{value}
+		{name}
+		{required}
+		on:input={handleInput}
+		on:change={handleInput}
+	/>
 	{#if error}
 		<div class="error">
 			{error}

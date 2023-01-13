@@ -1,9 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
 	import Link from '$lib/components/Link.svelte';
 	import Icon from '$lib/components/Icon.svelte';
-
-	import { goto } from '$app/navigation';
 </script>
 
 <div class="container">
@@ -13,5 +10,5 @@
 		<Icon id="bookmark" />
 	</p>
 
-	<Button on:click={() => goto('/inscription', { replaceState: true })}>S'enregister</Button>
+	<Link href="inscription">S'enregister</Link>
 </div>
