@@ -1,4 +1,8 @@
-<div class="container">
+<script lang="ts">
+	import { fade } from 'svelte/transition';
+</script>
+
+<div class="container" transition:fade={{ duration: 300 }}>
 	<div class="PopIn">
 		<slot />
 	</div>
@@ -15,8 +19,7 @@
     align-items: center
     justify-content: center
     .PopIn
-      max-width: 1050px
-      width: 100%
+      width: 75vw
       height: auto
       border-radius: 30px
       padding: 50px
