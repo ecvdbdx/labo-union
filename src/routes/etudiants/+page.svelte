@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageData } from '../etudiants/$types';
+	import type { PageData } from './$types';
 	import Button from '$lib/components/Button.svelte';
 
 	export let data: PageData;
@@ -8,12 +8,12 @@
 <div>
 	<ul>
 		{#if data.profile}
-			{#each data.profile as user}
-				<Button type={'rounded'}>
-					<a href={`/etudiants/${user.user_id}`}>
+			{#each data.profile as { last_name, first_name, user_id }}
+				<Button type="rounded">
+					<a data-sveltekit-preload-data="hover" href="/etudiants/{user_id}">
 						<li>
-							{user.first_name}
-							{user.last_name}
+							{first_name}
+							{last_name}
 						</li>
 					</a>
 				</Button>

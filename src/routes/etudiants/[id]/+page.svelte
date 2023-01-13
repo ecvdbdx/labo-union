@@ -3,16 +3,17 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
+	$: ({ first_name, last_name, cursus } = data.profiles);
 </script>
 
 <div class="container">
 	<div class="left">
-		<img class="img-profile" src="https://picsum.photos/200/300" alt="profil-image" />
+		<img class="img-profile" src="https://picsum.photos/200/300" alt="profil" />
 		<div class="user-name">
-			<h1>{data.profile.first_name} {data.profile.last_name}</h1>
+			<h1>{first_name} {last_name}</h1>
 		</div>
-		<Button type={'rounded'}>
-			{data.profile.cursus}
+		<Button type="rounded">
+			{cursus}
 		</Button>
 		<div class="presentation">
 			<p>
@@ -26,7 +27,7 @@
 	</div>
 
 	<div class="right">
-		<img class="image-secondary" src="https://picsum.photos/560/450" alt="profil-image" />
+		<img class="image-secondary" src="https://picsum.photos/560/450" alt="profil" />
 	</div>
 </div>
 
@@ -36,7 +37,7 @@
   display: flex
   flex-direction: row
   width: 80%
-  margin: 80px 120px
+  margin: 5rem 7.5rem
   justify-content: space-between
 
 .right
@@ -48,7 +49,7 @@
   display: flex
   flex-direction: column
   width: 40%
-  margin-right: 20px
+  margin-right: 1.25rem
 
 .img-profile
   width: 84px
@@ -65,6 +66,4 @@
   border-radius: 5%
   box-shadow: 75px -45px #B6AEA7
 
-Button
-  width: 40%
 </style>

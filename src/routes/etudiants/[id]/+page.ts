@@ -1,9 +1,9 @@
 import { error } from '@sveltejs/kit';
-import { supabase } from '../../../lib/auth';
+import { supabase } from '$lib/auth';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ params }) => {
-	const { data: profile, error: err } = await supabase
+	const { data: profiles, error: err } = await supabase
 		.from('Profile')
 		.select()
 		.eq('user_id', params.id)
@@ -14,6 +14,6 @@ export const load = (async ({ params }) => {
 		});
 	}
 	return {
-		profile,
+		profiles,
 	};
 }) satisfies PageLoad;
