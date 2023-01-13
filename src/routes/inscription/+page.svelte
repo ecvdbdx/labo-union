@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 <script lang="ts">
 	import type { ActionData } from './$types';
+<<<<<<< HEAD
 	import { enhance } from '$app/forms';
 
 	import Input from '$lib/components/forms/Input.svelte';
@@ -45,6 +46,8 @@
 	import type { ActionData } from './$types';
 >>>>>>> 8f79a83 (feat: handle signup form errors (wip))
 
+=======
+>>>>>>> c8a9396 (feat: externalise form validators and check email)
 	import { enhance } from '$app/forms';
 
 	import Input from '$lib/components/forms/Input.svelte';
@@ -71,6 +74,7 @@
 		>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<Input value="" name="password" type="password" placeholder="">Mot de passe</Input>
 >>>>>>> 2a5a1f6 (feat: init supabase auth)
 =======
@@ -78,6 +82,11 @@
 >>>>>>> 8f79a83 (feat: handle signup form errors (wip))
 =======
 >>>>>>> 53f712a (feat: handle form error and email / password validation)
+=======
+		<Input value={''} name="confirmedPassword" type="password" error={form?.confirmedPassword_error}
+			>Confirmer votre mot de passe</Input
+		>
+>>>>>>> c8a9396 (feat: externalise form validators and check email)
 		<Checkbox
 			name="termAndConditions"
 			reverse

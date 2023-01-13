@@ -7,6 +7,7 @@ import { fail } from '@sveltejs/kit';
 
 import { supabase } from '$lib/auth';
 import { isPasswordValid } from '$lib/validators/auth';
+<<<<<<< HEAD
 =======
 
 <<<<<<< HEAD
@@ -15,6 +16,8 @@ import { supabase } from '@utils/supabaseClient';
 =======
 import { supabase } from '$lib/auth';
 >>>>>>> 8f79a83 (feat: handle signup form errors (wip))
+=======
+>>>>>>> c8a9396 (feat: externalise form validators and check email)
 
 export const actions: Actions = {
 	default: async ({ request }) => {
@@ -108,12 +111,16 @@ export const actions: Actions = {
 
 		const email = formData.get('email')?.toString();
 		const password = formData.get('password')?.toString();
+		const confirmedPassword = formData.get('confirmedPassword')?.toString();
 		const termAndConditions = formData.get('termAndConditions')?.toString();
 
-		if (!email || !password || !termAndConditions) {
+		if (!email || !password || !confirmedPassword || !termAndConditions) {
 			return fail(400, {
 				email_error: !email ? 'Veuillez renseigner votre adresse email' : null,
 				password_error: !password ? 'Veuillez renseigner votre mot de passe' : null,
+				confirmedPassword_error: !confirmedPassword
+					? 'Veuillez confirmer votre mot de passe'
+					: null,
 				termAndConditions_error: !termAndConditions
 					? "Veuillez accepter les conditions d'utilisation"
 					: null,
@@ -125,31 +132,25 @@ export const actions: Actions = {
 >>>>>>> 2a5a1f6 (feat: init supabase auth)
 =======
 
-		if (password.toString().length < 9) {
-			return fail(400, {
-				password_error: 'Votre mot de passe doit faire au moins 9 caractères',
-				email,
-				password,
-			});
-		}
-
-		if (!isValidPassword(password)) {
+		if (!isPasswordValid(password)) {
 			return fail(400, {
 				password_error:
-					'Votre mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial',
+					'Votre mot de passe doit contenir 9 caractères minimum, une majuscule, une minuscule, un chiffre et un caractère spécial',
 				email,
 				password,
 			});
 		}
 
-		if (!isEmailValid(email)) {
+		if (password !== confirmedPassword) {
 			return fail(400, {
-				email_error: "Vous devez utiliser une adresse mail de l'école",
+				password_error: 'Les mots de passe ne correspondent pas',
+				confirmedPassword_error: 'Les mots de passe ne correspondent pas',
 				email,
 				password,
 			});
 		}
 
+<<<<<<< HEAD
 		await supabase.auth.signUp({
 			email: email as string,
 			password: password as string,
@@ -157,18 +158,30 @@ export const actions: Actions = {
 <<<<<<< HEAD
 >>>>>>> 8f79a83 (feat: handle signup form errors (wip))
 =======
+=======
+		const isEmailValid = await supabase.from('AuthorizedEmail').select().eq('email', email);
+
+		if (isEmailValid.data?.length === 0) {
+			return fail(400, {
+				email_error: "Cette adresse email n'est pas autorisée",
+				email,
+				password,
+			});
+		}
+
+		try {
+			await supabase.auth.signUp({
+				email: email as string,
+				password: password as string,
+			});
+
+			// @TODO: Create profil based on email
+		} catch (error) {
+			console.error(error);
+		}
+>>>>>>> c8a9396 (feat: externalise form validators and check email)
 
 		return { success: true };
 >>>>>>> c206b2d (feat: add success message)
 	},
 };
-
-function isValidPassword(password: string): boolean {
-	const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{9,}$/;
-	return regex.test(password);
-}
-
-function isEmailValid(email: string): boolean {
-	const emailRegex = /^[^@]+@mail-ecv\.fr$/;
-	return emailRegex.test(email);
-}

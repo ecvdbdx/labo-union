@@ -12,6 +12,13 @@
 
 <div class="container">
 	<h1>Welcome to Annuaire</h1>
+<<<<<<< HEAD
+=======
+	<p>
+		Visit <Link href="https://kit.svelte.dev">kit.svelte.dev</Link> to read the documentation
+		<Icon id="bookmark" />
+	</p>
+>>>>>>> c8a9396 (feat: externalise form validators and check email)
 
 <<<<<<< HEAD
 	<Link href="inscription">S'enregistrer</Link>
