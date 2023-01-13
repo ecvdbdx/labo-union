@@ -5,14 +5,11 @@
 	import Input from '$lib/components/forms/Input.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import Checkbox from '$lib/components/forms/Checkbox.svelte';
-	import Link from '$lib/components/Link.svelte';
 
 	export let form: ActionData;
 </script>
 
 <div class="container sign-up">
-	<Link href="/">Retour</Link>
-
 	<form method="POST" use:enhance>
 		<Input
 			value={form?.email ?? ''}
@@ -34,8 +31,10 @@
 			name="confirmedPassword"
 			type="password"
 			required
-			error={form?.confirmedPassword_error}>Confirmer votre mot de passe</Input
+			error={form?.confirmedPassword_error}
 		>
+			Confirmer votre mot de passe
+		</Input>
 		<Checkbox
 			name="termAndConditions"
 			reverse
@@ -58,6 +57,7 @@
 
 	.sign-up
 		margin-top: 5vh
+		width: 100%
 
 		form
 			margin-top: 1rem
