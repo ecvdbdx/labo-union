@@ -1,4 +1,4 @@
-<!-- <script>
+<script>
 	import { supabase } from '$lib/auth';
 
 	let password = '';
@@ -7,7 +7,7 @@
 	let message = '';
 
 	async function handleReset() {
-		const { data, error: err } = await supabase.auth.updateUser({
+		const { error: err } = await supabase.auth.updateUser({
 			password: password,
 		});
 		if (err) error = err.message;
@@ -89,4 +89,3 @@
 		color: black;
 	}
 </style>
- -->
