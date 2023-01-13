@@ -3,7 +3,7 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	$: ({ first_name, last_name, cursus } = data.profiles);
+	$: ({ first_name, last_name, cursus } = data.profile);
 </script>
 
 <div class="container">

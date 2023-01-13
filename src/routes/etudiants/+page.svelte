@@ -7,8 +7,8 @@
 
 <div>
 	<ul>
-		{#if data.profile}
-			{#each data.profile as { last_name, first_name, user_id }}
+		{#if data.profiles}
+			{#each data.profiles as { last_name, first_name, user_id }}
 				<Button type="rounded">
 					<a data-sveltekit-preload-data="hover" href="/etudiants/{user_id}">
 						<li>
