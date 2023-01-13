@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
-
 	import { enhance } from '$app/forms';
 
 	import Input from '$lib/components/forms/Input.svelte';
@@ -24,6 +23,9 @@
 		>
 		<Input value={form?.password ?? ''} name="password" type="password" error={form?.password_error}
 			>Mot de passe</Input
+		>
+		<Input value={''} name="confirmedPassword" type="password" error={form?.confirmedPassword_error}
+			>Confirmer votre mot de passe</Input
 		>
 		<Checkbox
 			name="termAndConditions"
