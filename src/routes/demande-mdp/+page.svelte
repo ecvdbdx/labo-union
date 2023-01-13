@@ -1,31 +1,49 @@
 <script>
+	import { supabase } from '$lib/auth';
+	import { getURL } from '$lib/utils';
+
+	let email = '';
+	let error = '';
+	let message = '';
+
+	async function handleReset() {
+		const { error: err } = await supabase.auth.resetPasswordForEmail(email, {
+			redirectTo: getURL() + 'changement-mdp',
+		});
+		if (err) {
+			error = 'Le mail est invalide. Veuillez réessayez !';
+		} else {
+			message = 'Regardez vos mails pour changer le mot de passe !';
+		}
+	}
 </script>
 
 <div class="container">
-	<form>
+	<form on:submit|preventDefault={handleReset}>
 		<div class="form-widget">
-			<h1 class="header">Connexion</h1>
-			<p class="description">Entrez votre email et mdp pour vous connecter</p>
+			<h1 class="header">Demande de changement de mot de passe</h1>
+			<p class="description">Entrez votre email</p>
 			<div class="form-group">
 				<label for="email">Email</label>
-				<input id="email" class="form-control" type="email" placeholder="Votre Email" />
-			</div>
-			<div class="form-group">
-				<label for="password">Mot de passe</label>
 				<input
-					id="password"
+					id="email"
 					class="form-control"
-					type="password"
-					placeholder="Votre Mot de passe"
+					type="email"
+					placeholder="Votre Email"
+					bind:value={email}
 				/>
-			</div>
-			<div class="forget-container">
-				<a class="forget" href="/demande-mdp">Mode passe oublié</a>
 			</div>
 			<div class="bouton-container">
 				<input type="submit" class="btn btn-success" />
 			</div>
 		</div>
+		{#if message}
+			<div><p>{message}</p></div>
+		{/if}
+
+		{#if error}
+			<div><p class="danger">{error}</p></div>
+		{/if}
 	</form>
 </div>
 
@@ -53,9 +71,6 @@
 		border: 1px solid #d6d6d6;
 		border-radius: 12px;
 	}
-	.forget-container {
-		margin-top: 15px;
-	}
 	.bouton-container {
 		display: flex;
 		justify-content: flex-end;
@@ -71,5 +86,9 @@
 		color: white;
 		font-weight: bold;
 		border: 1px solid #f25824;
+	}
+	.danger {
+		background-color: red;
+		color: black;
 	}
 </style>
