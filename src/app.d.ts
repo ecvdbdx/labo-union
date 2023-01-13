@@ -1,6 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 // and what to do when importing types
+<<<<<<< HEAD
 declare namespace App {
 	interface Supabase {
 <<<<<<< HEAD
@@ -23,3 +24,6 @@ declare namespace App {
 	}
 >>>>>>> 8f79a83 (feat: handle signup form errors (wip))
 }
+=======
+declare namespace App {}
+>>>>>>> 44c6eae (feat: add required attribute to input)
