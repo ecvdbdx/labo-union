@@ -6,6 +6,7 @@ export interface User {
 	id: number;
 	last_name: string;
 	session: boolean;
+	description: string;
 	status: boolean;
 	user_email: string;
 	user_id: string;

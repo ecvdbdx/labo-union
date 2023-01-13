@@ -16,5 +16,5 @@
 	height={size}
 	on:click
 >
-	<use href={`feather-sprite.svg#${id}`} />
+	<use href={`/feather-sprite.svg#${id}`} />
 </svg>
