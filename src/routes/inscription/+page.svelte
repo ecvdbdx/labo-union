@@ -160,7 +160,6 @@
 </div>
 
 <style lang="sass">
-
 	.sign-up
 		margin-top: 5vh
 

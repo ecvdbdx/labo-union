@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
 	"**/*.{svelte,ts,js,json,md,html,css,sass}": ["prettier --write"],
+=======
+	"**/*.{svelte,ts,js,json}": ["prettier --write", "eslint --fix"],
+>>>>>>> 8703a4f (Clean errors)
 	"**/*.{svelte,ts,js}": ["eslint --fix"]
 }

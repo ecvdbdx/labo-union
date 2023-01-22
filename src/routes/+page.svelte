@@ -33,5 +33,10 @@
 >>>>>>> 8f79a83 (feat: handle signup form errors (wip))
 =======
 	<Link href="inscription">S'enregister</Link>
+<<<<<<< HEAD
 >>>>>>> 44c6eae (feat: add required attribute to input)
+=======
+	<br />
+	<Link href="login">Se connecter</Link>
+>>>>>>> 8703a4f (Clean errors)
 </div>
