@@ -10,6 +10,11 @@
 			invalidate('supabase:auth');
 		});
 
+		supabase.auth.signInWithPassword({
+			email: 'elisa.bourg@mail-ecv.fr',
+			password: 'tototov23',
+		});
+
 		return () => {
 			subscription.unsubscribe();
 		};

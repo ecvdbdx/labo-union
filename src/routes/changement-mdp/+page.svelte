@@ -1,5 +1,9 @@
-<script>
-	import { supabase } from '$lib/auth';
+<!--<script lang="ts">
+	import type { ActionData } from './$types';
+	import { enhance } from '$app/forms';
+	import Input from '$lib/components/forms/Input.svelte';
+	import Button from '$lib/components/Button.svelte';
+	export let form: ActionData;
 
 	let password = '';
 	let confirmPassword = '';
@@ -13,28 +17,37 @@
 		if (err) error = err.message;
 		else message = 'Bravo';
 	}
+	console.log(form);
 </script>
 
 <div class="container">
-	<form on:submit|preventDefault={handleReset}>
+	<form method="POST" use:enhance>
 		<div class="form-widget">
 			<h1 class="header">Changement de mot de passe</h1>
 			<p class="description">Entrez votre nouveau mot de passe</p>
+			{#if form?.missing}<p class="danger">Veuillez remplir votre mot de passe !</p>{/if}
 			<div class="form-group">
 				<div>
-					<input type="password" name="password" bind:value={password} placeholder="Password" />
+					<Input
+						type="password"
+						name="password"
+						value={form?.password ?? ' '}
+						placeholder="Mot de passe"
+						noLabel={true}
+					/>
 				</div>
 				<div>
-					<input
+					<Input
 						type="password"
 						name="confirmPassword"
-						bind:value={confirmPassword}
-						placeholder="Confirm password"
+						value={form?.password ?? ' '}
+						placeholder="Confirmation de Mot de passe"
+						noLabel={true}
 					/>
 				</div>
 			</div>
 			<div class="bouton-container">
-				<input type="submit" class="btn btn-success" />
+				<Button type="default">Envoyer</Button>
 			</div>
 		</div>
 		{#if message}
@@ -57,35 +70,13 @@
 		display: flex;
 		flex-direction: column;
 	}
-
-	input {
-		gap: 10px;
-
-		width: 500px;
-		height: 52px;
-
-		background: #ffffff;
-		border: 1px solid #d6d6d6;
-		border-radius: 12px;
-	}
 	.bouton-container {
 		display: flex;
 		justify-content: flex-end;
-	}
-	.btn {
-		width: 144px;
-		height: 39px;
-		margin-top: 20px;
-		background: #f25824;
-		border-radius: 10px;
-		padding: 10px 16px;
-		gap: 8px;
-		color: white;
-		font-weight: bold;
-		border: 1px solid #f25824;
 	}
 	.danger {
 		background-color: red;
 		color: black;
 	}
 </style>
+-->
