@@ -6,4 +6,6 @@
 	<h1>Welcome to Annuaire</h1>
 
 	<Link href="inscription">S'enregistrer</Link>
+	<br />
+	<Link href="connexion">Se connecter</Link>
 </div>
