@@ -42,20 +42,11 @@
 
 		&.onError 
 			input 
-				border-color: $error
-				border-radius: 10px 10px 0 0
-				background-color: $errorBkg
-			
-			.error 
-				width: 100%
 				border: 1px solid $error
-				border-radius: 0 0 10px 10px
-				padding: 0.7rem
-				background-color: $error
-				color: $white
-				font-size: 0.8rem
-			
-		
+				margin-bottom: 0.5rem
+
+			.error
+				color: red
 
 		label 
 			display: block

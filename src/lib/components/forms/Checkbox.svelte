@@ -24,4 +24,5 @@
 		width: 20px
 		height: 20px
 		accent-color: $primary
+		margin-right: 0.5rem
 </style>

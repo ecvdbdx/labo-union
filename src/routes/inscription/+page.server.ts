@@ -46,7 +46,7 @@ export const actions: Actions = {
 			});
 		}
 
-		const isEmailValid = await supabase.from('AuthorizedEmail').select().eq('email', email);
+		const isEmailValid = await supabase.from('AuthorizedEmail').select('*').eq('email', email);
 
 		if (isEmailValid.data?.length === 0) {
 			return fail(400, {
@@ -57,12 +57,29 @@ export const actions: Actions = {
 		}
 
 		try {
-			await supabase.auth.signUp({
+			const { data } = await supabase.auth.signUp({
 				email: email as string,
 				password: password as string,
 			});
 
-			// @TODO: Create profil based on email
+			const user_information = await supabase
+				.from('AuthorizedEmail')
+				.select('*')
+				.eq('email', email);
+
+			if (user_information.data === null) {
+				throw new Error('Profile cannot be created');
+			}
+
+			await supabase.from('Profile').insert({
+				created_at: new Date().toISOString(),
+				user_id: data.user?.id,
+				first_name: user_information.data[0].firstname,
+				last_name: user_information.data[0].lastname,
+				speciality: user_information.data[0].speciality,
+				grade: user_information.data[0].grade,
+				date_of_birth: user_information.data[0].birth,
+			});
 		} catch (error) {
 			console.error(error);
 		}

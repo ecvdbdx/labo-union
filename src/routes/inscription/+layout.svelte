@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
-	import Link from '$lib/components/Link.svelte';
 
 	export let data: LayoutData;
 
@@ -22,8 +21,8 @@
 
 <div class="container-registration">
 	<div class="container-content">
-		<Link href="/">Retour</Link>
 		<div class="container-form">
+			<img alt="" src="/svg/logo.svg" />
 			<div class="container-progress">
 				{#each steps as step}
 					<div class="step {step.id === data.step ? 'active-step' : ''}" />
@@ -34,10 +33,10 @@
 	</div>
 	<div class="container-pictures">
 		<div class="container-content-pictures">
-			<img alt="" class="svg-background" src="/background.svg" />
-			<div class="picture picture-1" />
-			<div class="picture picture-2" />
-			<div class="picture picture-3" />
+			<img alt="" class="svg-background" src="/svg/background.svg" />
+			<img alt="" class="picture picture-1" src="/png/placeholder_1.png" />
+			<img alt="" class="picture picture-2" src="/png/placeholder_2.png" />
+			<img alt="" class="picture picture-3" src="/png/placeholder_3.png" />
 		</div>
 	</div>
 </div>
@@ -64,7 +63,7 @@
 				width: 100%
 				height: fit-content
 				display: flex
-				margin-top: 50px
+				margin-top: 3rem
 
 				.step
 					width: 100%
@@ -116,6 +115,7 @@
 					border-radius: 22px
 					position: absolute
 					background-color: palegoldenrod
+					object-fit: cover
 
 				.picture-1
 					left: 25%

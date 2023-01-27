@@ -17,24 +17,22 @@
 			type="email"
 			required
 			placeholder="john.doe@mail-ecv.com"
-			error={form?.email_error}>Email</Input
+			error={form?.email_error}>Email*</Input
 		>
 		<Input
 			value={form?.password ?? ''}
 			name="password"
 			required
 			type="password"
-			error={form?.password_error}>Mot de passe</Input
+			error={form?.password_error}>Mot de passe*</Input
 		>
 		<Input
 			value={''}
 			name="confirmedPassword"
 			type="password"
 			required
-			error={form?.confirmedPassword_error}
+			error={form?.confirmedPassword_error}>Confirmer votre mot de passe*</Input
 		>
-			Confirmer votre mot de passe
-		</Input>
 		<Checkbox
 			name="termAndConditions"
 			reverse

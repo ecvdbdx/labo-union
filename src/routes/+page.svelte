@@ -10,5 +10,5 @@
 		<Icon id="bookmark" />
 	</p>
 
-	<Link href="inscription">S'enregister</Link>
+	<Link href="inscription">S'enregistrer</Link>
 </div>
