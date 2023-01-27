@@ -110,7 +110,7 @@
   height: 84px
   border-radius: 100%
 
-.available
+.availability
   margin: 0.75rem 0
   font-weight: 600
   color: #18181860
