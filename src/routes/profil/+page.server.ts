@@ -6,9 +6,16 @@ import { fail } from '@sveltejs/kit';
 
 import { redirect } from '@sveltejs/kit';
 
+import type { LayoutLoad } from './$types';
+
 interface Props {
 	request: any;
 }
+
+export const load = (async ({ parent }) => {
+	const { a } = await parent();
+	return { b: a + 1 };
+}) satisfies LayoutLoad;
 
 export const actions = {
 	default: async ({ request }: Props) => {
