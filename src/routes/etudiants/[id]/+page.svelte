@@ -14,7 +14,7 @@
 			</div>
 			<div class="available">
 				{status ? 'Je suis disponible' : 'Je suis pas disponible'}
-				<div class={status ? 'isavailable' : 'notavailable'} />
+				<div class={status ? 'is-available' : 'is-not-available'} />
 			</div>
 			<div class="grade">
 				{grade}
