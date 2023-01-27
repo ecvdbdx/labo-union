@@ -124,7 +124,7 @@
   border-radius: 50%
   margin-left: 0.313rem
 
-.isavailable
+.is-available
   background-color: green 
   width: 10px
   height: 10px
