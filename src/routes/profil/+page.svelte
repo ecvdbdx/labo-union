@@ -1,18 +1,23 @@
 <script lang="ts">
 	import Input from '$lib/components/forms/Input.svelte';
+	import Checkbox from '$lib/components/forms/Checkbox.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import { enhance } from '$app/forms';
-	import type { PageData } from './$types';
+	import type { PageData, ActionData } from './$types';
+
 	export let data: PageData;
+	export let form: ActionData;
 
 	let displayEditSummary = false;
 	let displayEditProfilImg = false;
-	// let displayEditImg:boolean = false;
-	// let displayEditExperiences:boolean = false;
 
-	$: ({ first_name, last_name, cursus, description } = data.profile);
+	$: ({ first_name, last_name, grade, speciality, description, status } = data.profile);
+
+	function handleCheck(e: Event) {
+		status = (e.target as HTMLInputElement).checked;
+	}
 </script>
 
 <div>Page profil</div>
@@ -35,20 +40,48 @@
 				return ({ update }) => update({ reset: false });
 			}}
 		>
-			<Input placeholder={'John'} value={first_name} name={'Prénom'} type={'text'}>Prénom *</Input>
-			<Input placeholder={'Dupont'} value={last_name} name={'Nom'} type={'text'}>Nom *</Input>
 			<Input
-				placeholder={'Webdesigner chez Progressif Media et Étudiant en M2 UX à l’ECV Digital'}
-				value={cursus}
-				name={'Cursus'}
-				type={'text'}>Titre du profil</Input
+				placeholder={'John'}
+				value={first_name}
+				name={'first_name'}
+				type={'text'}
+				required={true}
+				error={form?.first_name_error}>Prénom *</Input
+			>
+			<Input
+				placeholder={'Dupont'}
+				value={last_name}
+				name={'last_name'}
+				type={'text'}
+				required={true}
+				error={form?.last_name_error}>Nom *</Input
+			>
+			<Input placeholder={'M2'} value={grade} name={'grade'} required={false} type={'text'}
+				>Classe</Input
+			>
+			<Input
+				placeholder={'Développement Web'}
+				value={speciality}
+				name={'speciality'}
+				required={false}
+				type={'text'}>Spécialité</Input
 			>
 			<Input
 				placeholder={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus dignissim dolor at lacinia. Suspendisse cursus mollis dolor eu mattis. Sed ultricies commodo dictum. Suspendisse porta blandit quam. '}
 				value={description}
-				name={'Description'}
+				required={false}
+				name={'description'}
 				type={'text'}>Description</Input
 			>
+
+			<Checkbox
+				name={'status'}
+				reverse
+				label={'Je suis disponible'}
+				value={status}
+				on:change={(e) => handleCheck(e)}
+			/>
+
 			<Button>Enregistrer</Button>
 		</form>
 	</Modal>

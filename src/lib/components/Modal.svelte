@@ -21,8 +21,10 @@
     .PopIn
       width: 75vw
       height: auto
+      max-height: 90vh
       border-radius: 30px
       padding: 50px
       background-color: $background
+      overflow: auto
 
 </style>

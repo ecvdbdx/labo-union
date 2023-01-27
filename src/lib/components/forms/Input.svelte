@@ -4,7 +4,7 @@
 	export let noLabel = false;
 	export let error: string | null = null;
 	export let name: string;
-	export let type: 'text' | 'password' | 'email' | 'number' | 'range' = 'text';
+	export let type: 'text' | 'password' | 'email' | 'number' | 'range' | 'tel' = 'text';
 	export let required = false;
 
 	const handleInput = (e: Event) => {

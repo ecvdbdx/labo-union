@@ -2,6 +2,7 @@
 import { fakeAccount_user_id } from '$lib/constants';
 import { supabase } from '$lib/auth';
 import { error } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 
 import { redirect } from '@sveltejs/kit';
 
@@ -12,10 +13,19 @@ interface Props {
 export const actions = {
 	default: async ({ request }: Props) => {
 		const formData = await request.formData();
-		const first_name = formData.get('Prénom');
-		const last_name = formData.get('Nom');
-		const cursus = formData.get('Cursus');
-		const description = formData.get('Description');
+		const first_name = formData.get('first_name');
+		const last_name = formData.get('last_name');
+		const grade = formData.get('grade');
+		const speciality = formData.get('speciality');
+		const description = formData.get('description');
+		const status = formData.get('status');
+
+		if (first_name === '' || last_name === '') {
+			return fail(400, {
+				first_name_error: first_name === '' ? 'Veuillez renseigner votre prénom' : null,
+				last_name_error: last_name === '' ? 'Veuillez renseigner votre nom' : null,
+			});
+		}
 
 		//TODO When auth will be enable, we have to change Profile RLS policies to change true with : auth.email() = user.mail
 
@@ -24,8 +34,10 @@ export const actions = {
 			.update({
 				first_name: first_name,
 				last_name: last_name,
-				cursus: cursus,
+				grade: grade,
+				speciality: speciality,
 				description: description,
+				status: !!status,
 			})
 			.eq('user_id', fakeAccount_user_id);
 
