@@ -12,7 +12,7 @@
 			<div class="user-name">
 				<h1>{first_name} {last_name}</h1>
 			</div>
-			<div class="available">
+			<div class="availability">
 				{status ? 'Je suis disponible' : 'Je suis pas disponible'}
 				<div class={status ? 'is-available' : 'is-not-available'} />
 			</div>
