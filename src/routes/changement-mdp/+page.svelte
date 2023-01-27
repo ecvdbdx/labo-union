@@ -1,23 +1,10 @@
-<!--<script lang="ts">
+<script lang="ts">
 	import type { ActionData } from './$types';
 	import { enhance } from '$app/forms';
 	import Input from '$lib/components/forms/Input.svelte';
 	import Button from '$lib/components/Button.svelte';
 	export let form: ActionData;
-
-	let password = '';
-	let confirmPassword = '';
-	let error = '';
-	let message = '';
-
-	async function handleReset() {
-		const { error: err } = await supabase.auth.updateUser({
-			password: password,
-		});
-		if (err) error = err.message;
-		else message = 'Bravo';
-	}
-	console.log(form);
+	import { supabase } from '$lib/auth';
 </script>
 
 <div class="container">
@@ -26,12 +13,14 @@
 			<h1 class="header">Changement de mot de passe</h1>
 			<p class="description">Entrez votre nouveau mot de passe</p>
 			{#if form?.missing}<p class="danger">Veuillez remplir votre mot de passe !</p>{/if}
+			{#if form?.invalid}<p class="danger">Les deux mot de passe ne correspondent pas</p>{/if}
 			<div class="form-group">
+				<p>{supabase.auth.getUser()}</p>
 				<div>
 					<Input
 						type="password"
 						name="password"
-						value={form?.password ?? ' '}
+						value={form?.password ?? ''}
 						placeholder="Mot de passe"
 						noLabel={true}
 					/>
@@ -40,7 +29,7 @@
 					<Input
 						type="password"
 						name="confirmPassword"
-						value={form?.password ?? ' '}
+						value={form?.password ?? ''}
 						placeholder="Confirmation de Mot de passe"
 						noLabel={true}
 					/>
@@ -50,12 +39,8 @@
 				<Button type="default">Envoyer</Button>
 			</div>
 		</div>
-		{#if message}
-			<div><p>{message}</p></div>
-		{/if}
-
-		{#if error}
-			<div><p class="danger">{error}</p></div>
+		{#if form?.success}
+			<p class="success">Votre mot de passe est bien changé !</p>
 		{/if}
 	</form>
 </div>
@@ -79,4 +64,3 @@
 		color: black;
 	}
 </style>
--->
