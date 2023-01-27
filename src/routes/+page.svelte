@@ -37,6 +37,10 @@
 >>>>>>> 44c6eae (feat: add required attribute to input)
 =======
 	<br />
+<<<<<<< HEAD
 	<Link href="login">Se connecter</Link>
 >>>>>>> 8703a4f (Clean errors)
+=======
+	<Link href="connexion">Se connecter</Link>
+>>>>>>> e4d8f1c (clean: function login works)
 </div>
