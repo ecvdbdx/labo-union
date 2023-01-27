@@ -117,7 +117,7 @@
   font-size: 1.125rem
   display: flex
 
-.notavailable
+.is-not-available
   background-color: red 
   width: 10px
   height: 10px
