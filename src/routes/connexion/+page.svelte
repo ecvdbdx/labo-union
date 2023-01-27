@@ -32,7 +32,7 @@
 			<Button>Me connecter</Button>
 		</div>
 		{#if form?.success}
-			<p class="success">Vous êtes bien connecté !</p>
+			<p class="success">Vous êtes bien connecté(e) !</p>
 		{/if}
 	</form>
 </div>
