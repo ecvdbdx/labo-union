@@ -1,6 +1,7 @@
 export interface User {
 	created_at: string;
-	cursus: string;
+	grade: string;
+	speciality: string;
 	date_of_birth: string;
 	first_name: string;
 	id: number;
