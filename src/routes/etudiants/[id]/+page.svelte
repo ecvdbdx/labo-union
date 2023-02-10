@@ -2,9 +2,10 @@
 	import type { PageData } from './$types';
 	import Modal from '$lib/components/Modal.svelte';
 	import Icon from '$lib/components/Icon.svelte';
+	import ExperienceList from '$lib/components/ExperienceList.svelte';
+
 	export let data: PageData;
 	$: ({ profile, experiences } = data);
-	$: ({ first_name, last_name, speciality, description, status, grade } = profile);
 	let displayEditExp = false;
 </script>
 
@@ -13,19 +14,19 @@
 		<div class="left">
 			<img class="img-profile" src="https://picsum.photos/200/300" alt="profil" />
 			<div class="user-name">
-				<h1>{first_name} {last_name}</h1>
+				<h1>{profile.first_name} {profile.last_name}</h1>
 			</div>
 			<div class="availability">
-				{status ? 'Je suis disponible' : 'Je suis pas disponible'}
-				<div class={status ? 'is-available' : 'is-not-available'} />
+				{profile.status ? 'Je suis disponible' : 'Je suis pas disponible'}
+				<div class={profile.status ? 'is-available' : 'is-not-available'} />
 			</div>
 			<div class="grade">
-				{grade}
-				{speciality}
+				{profile.grade}
+				{profile.speciality}
 			</div>
 			<div class="presentation">
 				<p>
-					{description}
+					{profile.description}
 				</p>
 			</div>
 		</div>
@@ -39,53 +40,7 @@
 		<div class="professional-container">
 			<h2 class="experience-container-title">Expériences Professionnelles</h2>
 			<div class="edit-profile" on:click={() => (displayEditExp = true)}>edit profil</div>
-			{#each experiences as experience}
-				<div class="block-experience">
-					<div class="duration-experience">
-						<p>2017 {experience.start_date}-2022 {experience.end_date}</p>
-					</div>
-					<div class="name-experience">
-						<p>{experience.job}</p>
-					</div>
-
-					<div class="name-enterprise">
-						<p>{experience.company}</p>
-					</div>
-
-					<div class="location-experience">
-						<p>Bordeaux, France</p>
-					</div>
-
-					<div class="actions-experience">
-						<h4>Actions confiées</h4>
-						<p>
-							{experience.mission}
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus dignissim dolor at
-							lacinia. Suspendisse cursus mollis dolor eu mattis.
-						</p>
-					</div>
-				</div>
-			{/each}
-		</div>
-
-		<div class="degree-container">
-			<h2 class="degree-container-title">Formations</h2>
-			<div class="block-degree">
-				<div class="duration-degree">
-					<p>2022</p>
-				</div>
-				<div class="name-school">
-					<p>ECV Digital</p>
-				</div>
-
-				<div class="location-degree">
-					<p>Paris, Île-de-France, FR</p>
-				</div>
-
-				<div class="name-degree">
-					<p>Bachelor 3 Digital Project Manager, UX Design speciality, Honors</p>
-				</div>
-			</div>
+			<ExperienceList data={experiences} />
 		</div>
 	</div>
 </div>
@@ -99,195 +54,146 @@
 			<button>Ajouter +</button>
 		</div>
 		<div class="professional-container">
-			{#each experiences as experience}
-				<div class="block-experience">
-					<div class="duration-experience">
-						<p>2017 {experience.start_date}-2022 {experience.end_date}</p>
-					</div>
-					<div class="name-experience">
-						<p>{experience.job}</p>
-					</div>
-
-					<div class="name-enterprise">
-						<p>{experience.company}</p>
-					</div>
-
-					<div class="location-experience">
-						<p>Bordeaux, France</p>
-					</div>
-
-					<div class="actions-experience">
-						<h4>Actions confiées</h4>
-						<p>
-							{experience.mission}
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus dignissim dolor at
-							lacinia. Suspendisse cursus mollis dolor eu mattis.
-						</p>
-					</div>
-				</div>
-			{/each}
+			<ExperienceList data={experiences} />
 		</div>
 	</Modal>
 {/if}
 
 <style lang="sass">
 
-.container-top
-  position: relative
-  display: flex
-  flex-direction: row
-  width: 80%
-  margin: 5rem 7.5rem
-  justify-content: space-between
-  border-bottom: 1.5px solid #00000010
-  padding-bottom: 80px
+  .container-top
+    position: relative
+    display: flex
+    flex-direction: row
+    width: 80%
+    margin: 5rem 7.5rem
+    justify-content: space-between
+    border-bottom: 1.5px solid #00000010
+    padding-bottom: 80px
 
-.right
-  display: flex
-  flex-direction: column
-  width: 40%
+  .right
+    display: flex
+    flex-direction: column
+    width: 40%
 
-.left
-  display: flex
-  flex-direction: column
-  width: 40%
-  margin-right: 1.25rem
+  .left
+    display: flex
+    flex-direction: column
+    width: 40%
+    margin-right: 1.25rem
 
-.img-profile
-  width: 84px
-  height: 84px
-  border-radius: 100%
+  .img-profile
+    width: 84px
+    height: 84px
+    border-radius: 100%
 
-.availability
-  margin: 0.75rem 0
-  font-weight: 600
-  color: #18181860
-  font-size: 1.125rem
-  display: flex
+  .availability
+    margin: 0.75rem 0
+    font-weight: 600
+    color: #18181860
+    font-size: 1.125rem
+    display: flex
 
-.is-not-available
-  background-color: red 
-  width: 10px
-  height: 10px
-  border-radius: 50%
-  margin-left: 0.313rem
+  .is-not-available
+    background-color: red
+    width: 10px
+    height: 10px
+    border-radius: 50%
+    margin-left: 0.313rem
 
-.is-available
-  background-color: green 
-  width: 10px
-  height: 10px
-  border-radius: 50%
-  margin-left: 0.313rem
+  .is-available
+    background-color: green
+    width: 10px
+    height: 10px
+    border-radius: 50%
+    margin-left: 0.313rem
 
-.grade
-  margin: 0.75rem 0
-  font-weight: 600
-  color: #18181860
-  font-size: 1.125rem
+  .grade
+    margin: 0.75rem 0
+    font-weight: 600
+    color: #18181860
+    font-size: 1.125rem
 
-.user-name
-  display: flex
-  flex-direction: column
-  max-width: 180px
-  flex-wrap: wrap
+  .user-name
+    display: flex
+    flex-direction: column
+    max-width: 180px
+    flex-wrap: wrap
 
-.presentation
-  font-size: 1rem
-  color: #18181860
-  line-height: 24px
+  .presentation
+    font-size: 1rem
+    color: #18181860
+    line-height: 24px
 
-.image-secondary
-  border-radius: 5%
-  box-shadow: 50px -20px #B6AEA7
+  .image-secondary
+    border-radius: 5%
+    box-shadow: 50px -20px #B6AEA7
 
-.container-bottom
-  margin: 7.5rem
-  display: flex
-  flex-direction: row
-  flex-wrap: wrap
-  justify-content: space-between
+  .container-bottom
+    margin: 7.5rem
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
 
-.professional-container
-  max-width: 40vw
-  background-color: #FFFCFA
-  border-radius: 30px
-  padding: 16px 24px
-  margin-bottom: 15px
+  .professional-container
+    max-width: 40vw
 
-.degree-container-title
-  color: #F37144
+  .container-bottom
+    margin: 7.5rem
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
 
-.experience-container-title
-  color: #F37144
+  .professional-container
+    max-width: 40vw
 
-.degree-container
-  max-width: 40vw
-  background-color: #FFFCFA
-  border-radius: 30px
-  padding: 16px 24px
-  margin-bottom: 15px
+  .container-bottom
+    margin: 7.5rem
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
 
-.name-enterprise
-  color: #F25824
-  text-decoration: underline
-  grid-column: 2
+  .professional-container
+    max-width: 40vw
 
-.location-experience
-  color: #18181860
-  grid-column: 2
+  .container-bottom
+    margin: 7.5rem
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
 
-.actions-experience
-  color: #18181860
-  grid-column: 2
+  .professional-container
+    max-width: 40vw
 
-.location-degree
-  color: #18181860 
+  .container-bottom
+    margin: 7.5rem
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
 
-.name-degree
-  color: #18181860
+  .professional-container
+    max-width: 40vw
+    grid-column: 2
 
-.block-experience
-  display: grid
-  grid-template-columns: repeat(1fr, 2fr)
-  grid-gap: 20px
+  .title
+    font-weight: 700
+    font-size: 2rem
+    line-height: 36px
+    letter-spacing: 0.02em
+    margin-bottom: 60px
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-between
+    width: 100%
 
-  
-.duration-experience
-  grid-column: 1
-  
-.name-experience
-  grid-column: 2
-
-.block-degree
-  display: grid
-  grid-template-columns: repeat(1fr, 2fr)
-  grid-gap: 20px
-
-.duration-degree
-  grid-column: 1
-
-.name-school
-  grid-column: 2
-
-.name-degree
-  grid-column: 2
-
-.location-degree
-  grid-column: 2
-
-.title 
-  font-weight: 700
-  font-size: 2rem
-  line-height: 36px
-  letter-spacing: 0.02em
-  margin-bottom: 60px
-  display: flex
-  flex-direction: row
-  align-items: center
-  justify-content: space-between
-  width: 100%
-  .close 
-    border: none
-    background-color: transparent
-    cursor: pointer
+    .close
+      border: none
+      background-color: transparent
+      cursor: pointer
 </style>
