@@ -40,6 +40,6 @@ export const actions: Actions = {
 			});
 		}
 
-		return redirect(302, '/');
+		throw redirect(302, '/');
 	},
 };
