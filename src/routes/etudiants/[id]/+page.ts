@@ -13,11 +13,10 @@ export const load = (async ({ params }) => {
 			message: "Une erreur est survenue, les données n'ont pas pu être récupérées",
 		});
 	}
-	const { data: experience, error: err2 } = await supabase
+	const { data: experiences, error: err2 } = await supabase
 		.from('Experience')
 		.select(`*`)
-		.eq(`profile_id`, profile.id)
-		.single();
+		.eq(`profile_id`, profile.id);
 
 	if (err2) {
 		throw error(500, {
@@ -27,6 +26,6 @@ export const load = (async ({ params }) => {
 
 	return {
 		profile,
-		experience,
+		experiences,
 	};
 }) satisfies PageLoad;

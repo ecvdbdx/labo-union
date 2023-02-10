@@ -1,10 +1,11 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-
+	import Modal from '$lib/components/Modal.svelte';
+	import Icon from '$lib/components/Icon.svelte';
 	export let data: PageData;
-	$: ({ profile, experience } = data);
+	$: ({ profile, experiences } = data);
 	$: ({ first_name, last_name, speciality, description, status, grade } = profile);
-	$: ({ job, start_date, end_date, company, mission } = experience);
+	let displayEditExp = false;
 </script>
 
 <div class="container-page">
@@ -37,31 +38,34 @@
 	<div class="container-bottom">
 		<div class="professional-container">
 			<h2 class="experience-container-title">Expériences Professionnelles</h2>
-			<div class="block-experience">
-				<div class="duration-experience">
-					<p>2017 {start_date}-2022 {end_date}</p>
-				</div>
-				<div class="name-experience">
-					<p>{job}</p>
-				</div>
+			<div class="edit-profile" on:click={() => (displayEditExp = true)}>edit profil</div>
+			{#each experiences as experience}
+				<div class="block-experience">
+					<div class="duration-experience">
+						<p>2017 {experience.start_date}-2022 {experience.end_date}</p>
+					</div>
+					<div class="name-experience">
+						<p>{experience.job}</p>
+					</div>
 
-				<div class="name-enterprise">
-					<p>{company}</p>
-				</div>
+					<div class="name-enterprise">
+						<p>{experience.company}</p>
+					</div>
 
-				<div class="location-experience">
-					<p>Bordeaux, France</p>
-				</div>
+					<div class="location-experience">
+						<p>Bordeaux, France</p>
+					</div>
 
-				<div class="actions-experience">
-					<h4>Actions confiées</h4>
-					<p>
-						{mission}
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus dignissim dolor at lacinia.
-						Suspendisse cursus mollis dolor eu mattis.
-					</p>
+					<div class="actions-experience">
+						<h4>Actions confiées</h4>
+						<p>
+							{experience.mission}
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus dignissim dolor at
+							lacinia. Suspendisse cursus mollis dolor eu mattis.
+						</p>
+					</div>
 				</div>
-			</div>
+			{/each}
 		</div>
 
 		<div class="degree-container">
@@ -85,6 +89,46 @@
 		</div>
 	</div>
 </div>
+{#if displayEditExp === true}
+	<Modal>
+		<div class="title">
+			<button class="close" on:click={() => (displayEditExp = false)}>
+				<Icon id="x" color="black" size="2em" />
+			</button>
+			Expériences professionnelles
+			<button>Ajouter +</button>
+		</div>
+		<div class="professional-container">
+			{#each experiences as experience}
+				<div class="block-experience">
+					<div class="duration-experience">
+						<p>2017 {experience.start_date}-2022 {experience.end_date}</p>
+					</div>
+					<div class="name-experience">
+						<p>{experience.job}</p>
+					</div>
+
+					<div class="name-enterprise">
+						<p>{experience.company}</p>
+					</div>
+
+					<div class="location-experience">
+						<p>Bordeaux, France</p>
+					</div>
+
+					<div class="actions-experience">
+						<h4>Actions confiées</h4>
+						<p>
+							{experience.mission}
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus dignissim dolor at
+							lacinia. Suspendisse cursus mollis dolor eu mattis.
+						</p>
+					</div>
+				</div>
+			{/each}
+		</div>
+	</Modal>
+{/if}
 
 <style lang="sass">
 
@@ -230,4 +274,20 @@
 
 .location-degree
   grid-column: 2
+
+.title 
+  font-weight: 700
+  font-size: 2rem
+  line-height: 36px
+  letter-spacing: 0.02em
+  margin-bottom: 60px
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
+  width: 100%
+  .close 
+    border: none
+    background-color: transparent
+    cursor: pointer
 </style>
