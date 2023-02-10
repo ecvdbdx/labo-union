@@ -3,15 +3,12 @@
 
 	import Input from '$lib/components/forms/Input.svelte';
 	import Button from '$lib/components/Button.svelte';
-	import Link from '$lib/components/Link.svelte';
 	import { enhance } from '$app/forms';
 
 	export let form: ActionData;
 </script>
 
-<div class="container">
-	<Link href="/">Retour</Link>
-
+<div class="container login">
 	<form method="POST" use:enhance>
 		<div class="form-widget">
 			<h1 class="header">Me connecter</h1>
@@ -38,6 +35,10 @@
 </div>
 
 <style lang="sass">
-	.error 
-		color: red
+	.login 
+		margin-top: 5vh
+		width: 100%
+
+		.error 
+			color: red
 </style>

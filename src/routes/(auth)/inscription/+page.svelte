@@ -10,6 +10,8 @@
 </script>
 
 <div class="container sign-up">
+	<h1 class="header">S'inscrire</h1>
+
 	<form method="POST" use:enhance>
 		<Input
 			value={form?.email ?? ''}
