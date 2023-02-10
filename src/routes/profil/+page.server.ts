@@ -1,26 +1,19 @@
-/** @type {import('./$types').Actions} */
-import { fakeAccount_user_id } from '$lib/constants';
-import { supabase } from '$lib/auth';
+import type { PageServerLoad } from './$types';
+
+import { redirect } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 
-import { redirect } from '@sveltejs/kit';
-
-import type { PageServerLoad } from './$types';
-
-interface Props {
-	request: any;
-}
+import { supabase } from '$lib/auth';
 
 export const load = (async ({ params }) => {
 	return {
-		// post: await supabase.getPost(params.slug)
 		params,
 	};
 }) satisfies PageServerLoad;
 
 export const actions = {
-	default: async ({ request }: Props) => {
+	default: async ({ request }: any) => {
 		const formData = await request.formData();
 		const first_name = formData.get('first_name');
 		const last_name = formData.get('last_name');
@@ -36,7 +29,7 @@ export const actions = {
 			});
 		}
 
-		//TODO When auth will be enable, we have to change Profile RLS policies to change true with : auth.email() = user.mail
+		const user_id = (await supabase.auth.getUser()).data.user?.id;
 
 		const { error: err } = await supabase
 			.from('Profile')
@@ -48,7 +41,7 @@ export const actions = {
 				description: description,
 				status: !!status,
 			})
-			.eq('user_id', fakeAccount_user_id);
+			.eq('user_id', user_id);
 
 		if (err) {
 			throw error(500, {

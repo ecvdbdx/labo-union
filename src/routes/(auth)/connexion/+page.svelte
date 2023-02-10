@@ -34,11 +34,14 @@
 	</form>
 </div>
 
-<style lang="sass">
-	.login 
-		margin-top: 5vh
-		width: 100%
+<style lang="scss">
+	.login {
+		margin-top: 5vh;
 
-		.error 
-			color: red
+		width: 100%;
+	}
+
+	.error {
+		color: red;
+	}
 </style>

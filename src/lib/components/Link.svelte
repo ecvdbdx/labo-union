@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let href: string;
-	export let target: '_self' | '_blank' = '_self';
+	export let target: '' | '_blank' = '';
 </script>
 
 <a {href} {target}>
