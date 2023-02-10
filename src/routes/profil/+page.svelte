@@ -11,4 +11,4 @@
 <!-- <div on:click={() => (displayEditSummary = true)}>Open Summary edit</div>
 <div on:click={() => (displayEditProfilImg = true)}>Open Profil Image edit</div> -->
 
-<Profile profile={data.profile} editable={true} />
+<Profile profile={data.profile} editable={true} {form} />
