@@ -7,7 +7,7 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"test": "vitest run",
-		"update-types": "npx supabase gen types typescript --project-id 'obgvvzkqopswdaczgpxl' --schema public > src/lib/types/database.types.ts",
+		"update-types": "supabase gen types typescript --project-id 'obgvvzkqopswdaczgpxl' --schema public > src/lib/types/database.types.ts",
 		"test:watch": "vitest src",
 		"test:e2e": "playwright test",
 		"ts:check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
