@@ -1,33 +1,7 @@
-<script lang="ts">
-	import type { LayoutData } from './$types';
-
-	export let data: LayoutData;
-
-	const steps = [
-		{
-			id: 1,
-			active: false,
-		},
-		{
-			id: 2,
-			active: false,
-		},
-		{
-			id: 3,
-			active: false,
-		},
-	];
-</script>
-
-<div class="container-registration">
+<div class="container-auth">
 	<div class="container-content">
 		<div class="container-form">
-			<img alt="" src="/svg/logo.svg" />
-			<div class="container-progress">
-				{#each steps as step}
-					<div class="step {step.id === data.step ? 'active-step' : ''}" />
-				{/each}
-			</div>
+			<a href="/"><img alt="" src="/svg/logo.svg" /></a>
 			<slot />
 		</div>
 	</div>
@@ -42,7 +16,7 @@
 </div>
 
 <style lang="sass">
-	.container-registration
+	.container-auth
 		box-sizing: border-box
 		display: flex
 		width: 100vw
@@ -58,26 +32,6 @@
 			.container-form
 				width: 100%
 				height: fit-content
-
-			.container-progress
-				width: 100%
-				height: fit-content
-				display: flex
-				margin-top: 3rem
-
-				.step
-					width: 100%
-					height: 5px
-					background-color: $primary
-					margin-right: 10px
-					border-radius: 20px
-					opacity: 0.2
-
-					&:last-child
-						margin-right: 0
-
-				.active-step
-					opacity: 1
 
 
 		.container-pictures
