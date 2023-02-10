@@ -4,6 +4,7 @@
 
 	import Input from '$lib/components/forms/Input.svelte';
 	import Button from '$lib/components/Button.svelte';
+	import Link from '$lib/components/Link.svelte';
 	import Checkbox from '$lib/components/forms/Checkbox.svelte';
 
 	export let form: ActionData;
@@ -25,6 +26,7 @@
 			value={form?.password ?? ''}
 			name="password"
 			required
+			placeholder="**********"
 			type="password"
 			error={form?.password_error}>Mot de passe*</Input
 		>
@@ -32,6 +34,7 @@
 			value={''}
 			name="confirmedPassword"
 			type="password"
+			placeholder="**********"
 			required
 			error={form?.confirmedPassword_error}>Confirmer votre mot de passe*</Input
 		>
@@ -47,6 +50,7 @@
 
 		<Button>Créer un compte</Button>
 
+		<Link href="/">Retour</Link>
 		{#if form?.success}
 			<p class="success">Votre compte a bien été créé !</p>
 		{/if}
@@ -67,5 +71,7 @@
 		
 		.success
 			color: $success
+	Link
+		margin-left: 5%
 
 </style>

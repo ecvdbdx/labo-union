@@ -1,11 +1,25 @@
 <script lang="ts">
-	import Link from '$lib/components/Link.svelte';
+	import Button from '$lib/components/Button.svelte';
 </script>
 
 <div class="container">
-	<h1>Welcome to Annuaire</h1>
-
-	<Link href="inscription">S'enregistrer</Link>
-	<br />
-	<Link href="connexion">Se connecter</Link>
+	<nav class="navbar">
+		<div class="logo">
+			<img src="logo.png" alt="Logo" />
+		</div>
+		<ul class="navbar-tabs">
+			<li><a href="#">Accueil</a></li>
+			<li><a href="#">Opportunités</a></li>
+			<li><a href="#">Annuaire</a></li>
+			<li><a href="#">Messages</a></li>
+			<li><a href="#">Ressources</a></li>
+			<li><a href="#">Tarifs entreprises</a></li>
+			<li><a href="inscription">Inscription</a></li>
+			<Button><a class="connexionButton" href="connexion">Se connecter</a></Button>
+		</ul>
+	</nav>
 </div>
+
+<style lang="sass">
+
+</style>
