@@ -1,18 +1,18 @@
 <script lang="ts">
 	import type { ResponseProfile } from '../../utils/get.type';
+	import type { ActionData } from '../../../.svelte-kit/types/src/routes/profil/$types';
+
+	import { enhance } from '$app/forms';
+
 	import Icon from '$lib/components/Icon.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import Input from '$lib/components/forms/Input.svelte';
 	import Checkbox from '$lib/components/forms/Checkbox.svelte';
 	import Button from '$lib/components/Button.svelte';
 
-	import { enhance } from '$app/forms';
-
-	import type { ActionData } from './$types';
-
 	export let editable = false;
 	export let profile: ResponseProfile;
-	export let form: ActionData;
+	export let form: ActionData | null = null;
 
 	$: ({ first_name, last_name, speciality, description, status, grade } = profile);
 
@@ -119,12 +119,13 @@
 			class="form"
 			method="POST"
 			use:enhance={() => {
+				displayEditSummary = false;
 				return ({ update }) => update({ reset: false });
 			}}
 		>
 			<Input
 				placeholder={'John'}
-				value={first_name}
+				value={first_name ?? ''}
 				name={'first_name'}
 				type={'text'}
 				required={true}
@@ -132,25 +133,25 @@
 			>
 			<Input
 				placeholder={'Dupont'}
-				value={last_name}
+				value={last_name ?? ''}
 				name={'last_name'}
 				type={'text'}
 				required={true}
 				error={form?.last_name_error}>Nom *</Input
 			>
-			<Input placeholder={'M2'} value={grade} name={'grade'} required={false} type={'text'}
+			<Input placeholder={'M2'} value={grade ?? ''} name={'grade'} required={false} type={'text'}
 				>Classe</Input
 			>
 			<Input
 				placeholder={'Développement Web'}
-				value={speciality}
+				value={speciality ?? ''}
 				name={'speciality'}
 				required={false}
 				type={'text'}>Spécialité</Input
 			>
 			<Input
 				placeholder={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus dignissim dolor at lacinia. Suspendisse cursus mollis dolor eu mattis. Sed ultricies commodo dictum. Suspendisse porta blandit quam. '}
-				value={description}
+				value={description ?? ''}
 				required={false}
 				name={'description'}
 				type={'text'}>Description</Input
@@ -160,7 +161,7 @@
 				name={'status'}
 				reverse
 				label={'Je suis disponible'}
-				value={status}
+				value={status ?? false}
 				on:change={(e) => handleCheck(e)}
 			/>
 

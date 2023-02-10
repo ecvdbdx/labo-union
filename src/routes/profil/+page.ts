@@ -7,6 +7,7 @@ export async function load() {
 	const { data, error: err } = await supabase
 		.from('Profile')
 		.select()
+		//get accountuserId
 		.eq('user_id', fakeAccount_user_id)
 		.single();
 
@@ -15,6 +16,7 @@ export async function load() {
 			message: "Les données n'ont pas pu être collectées",
 		});
 	}
+
 	return {
 		profile: data as User,
 	};

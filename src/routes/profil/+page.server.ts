@@ -6,16 +6,18 @@ import { fail } from '@sveltejs/kit';
 
 import { redirect } from '@sveltejs/kit';
 
-import type { LayoutLoad } from './$types';
+import type { PageServerLoad } from './$types';
 
 interface Props {
 	request: any;
 }
 
-export const load = (async ({ parent }) => {
-	const { a } = await parent();
-	return { b: a + 1 };
-}) satisfies LayoutLoad;
+export const load = (async ({ params }) => {
+	return {
+		// post: await supabase.getPost(params.slug)
+		params,
+	};
+}) satisfies PageServerLoad;
 
 export const actions = {
 	default: async ({ request }: Props) => {
