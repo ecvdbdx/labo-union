@@ -39,6 +39,6 @@
 		margin-top: 5vh
 		width: 100%
 
-		.error 
-			color: red
+	.error 
+		color: red
 </style>

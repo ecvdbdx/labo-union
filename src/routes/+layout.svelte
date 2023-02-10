@@ -6,8 +6,12 @@
 	onMount(() => {
 		const {
 			data: { subscription },
-		} = supabase.auth.onAuthStateChange(() => {
+		} = supabase.auth.onAuthStateChange((_, session) => {
 			invalidate('supabase:auth');
+
+			if (session && session.user) {
+				// TODO: show popup to inform user that he is logged in
+			}
 		});
 
 		return () => {
