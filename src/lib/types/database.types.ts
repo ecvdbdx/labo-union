@@ -50,6 +50,8 @@ export interface Database {
 					speciality: string | null;
 					status: boolean | null;
 					user_id: string | null;
+					grade: string | null;
+					speciality: string | null;
 				};
 				Insert: {
 					created_at?: string | null;
@@ -62,6 +64,8 @@ export interface Database {
 					speciality?: string | null;
 					status?: boolean | null;
 					user_id?: string | null;
+					grade?: string | null;
+					speciality?: string | null;
 				};
 				Update: {
 					created_at?: string | null;
@@ -74,6 +78,8 @@ export interface Database {
 					speciality?: string | null;
 					status?: boolean | null;
 					user_id?: string | null;
+					grade?: string | null;
+					speciality?: string | null;
 				};
 			};
 		};

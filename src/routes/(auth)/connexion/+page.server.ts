@@ -4,7 +4,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import { supabase } from '$lib/auth';
 
 export const actions: Actions = {
-	default: async ({ request }) => {
+	default: async ({ cookies, request }) => {
 		const formData = await request.formData();
 
 		const email = formData.get('email')?.toString();
@@ -38,8 +38,16 @@ export const actions: Actions = {
 				email,
 				password,
 			});
-		}
+		} else if (req.data.session) {
+			const { access_token, refresh_token, provider_token, provider_refresh_token } =
+				req.data.session;
 
-		throw redirect(302, '/');
+			cookies.set(
+				'supabase-auth-token',
+				JSON.stringify([access_token, refresh_token, provider_token, provider_refresh_token]),
+			);
+
+			throw redirect(302, '/');
+		}
 	},
 };
