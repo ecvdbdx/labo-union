@@ -12,11 +12,14 @@
 	.Button 
 		color: $white
 		background-color: $primary
-		padding: 0.6rem 1rem
+		padding: 0.8rem 1rem
 		border-radius: 10px
 		border: none
 		cursor: pointer
 		transition: 0.15s ease
+		min-width: 6.25rem
+		font-size: 1rem
+		font-weight: 500
 
 		&:disabled
 			background-color: $disabled

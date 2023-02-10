@@ -1,21 +1,62 @@
 <script lang="ts">
+	import { supabase } from '$lib/auth';
+
 	import type { PageData } from './$types';
 	import Card from '$lib/components/Card.svelte';
+	import Filter from './Filter.svelte';
+	import Tooltip from '$lib/components/Tooltip.svelte';
+	import Search from '$lib/components/Search.svelte';
 
 	export let data: PageData;
 
-	// TODO: Update this variable when data from database is available
+	// TODO: Update this variables when data from database is available
 	const disponibilityIsVisible = true;
-	const disponibility = false;
 	const profilPictureUrl = undefined;
+
+	let search = '';
+	let grade: string | undefined;
+	let speciality: string | undefined;
+
+	$: filteredProfiles = data.profiles;
+
+	async function searchProfiles() {
+		const { data, error: err } = await supabase.rpc('searchprofile', {
+			search,
+			grade: grade || null,
+			speciality: speciality || null,
+		});
+
+		if (err) {
+			console.error(err);
+		}
+
+		filteredProfiles = await data;
+	}
+
+	function updateSpecialty(e: Event) {
+		const target = e.target as HTMLSelectElement;
+		speciality = target?.value;
+		searchProfiles();
+	}
+
+	function updateGrade(e: Event) {
+		const target = e.target as HTMLSelectElement;
+		grade = target?.value;
+		searchProfiles();
+	}
 </script>
 
-<div class="main-container">
-	<ul class="grid-container">
-		{#if data.profiles}
-			{#each data.profiles as { last_name, first_name, user_id, grade, speciality }}
+<div class="container main-container">
+	<Search rounded={true} name="profile" bind:search on:click={searchProfiles} />
+	<div class="container-filters">
+		<Filter label="Cursus" options={data.speciality} on:change={updateSpecialty} />
+		<Filter label="Classe" options={data.grade} on:change={updateGrade} />
+	</div>
+	{#if filteredProfiles?.length > 0}
+		<ul class="grid-container">
+			{#each filteredProfiles as { last_name, first_name, id, grade, speciality, status }}
 				<li class="list">
-					<a data-sveltekit-preload-data="hover" href="/etudiants/{user_id}">
+					<a data-sveltekit-preload-data="hover" href="/etudiants/{id}">
 						<Card>
 							<div class="picture-student">
 								{#if profilPictureUrl}
@@ -40,9 +81,9 @@
 								{#if disponibilityIsVisible}
 									<div
 										class="tag student-disponibility"
-										style={`background-color: ${disponibility ? '#3ccf4e' : '#d6d6d6'}`}
+										style={`background-color: ${status ? '#3ccf4e' : '#d6d6d6'}`}
 									>
-										<span>{disponibility ? 'Disponible' : 'Indisponible'}</span>
+										<span>{status ? 'Disponible' : 'Indisponible'}</span>
 									</div>
 								{/if}
 							</div>
@@ -50,92 +91,100 @@
 					</a>
 				</li>
 			{/each}
-		{/if}
-	</ul>
+		</ul>
+	{:else}
+		<Tooltip message="Aucun profile ne correspondent à votre recherche" />
+	{/if}
 </div>
 
 <style lang="sass">
 .main-container
+	margin-top: 2rem
 
-  ul.grid-container
-    padding: 0
-    display: grid
-    grid-gap: 2rem
-    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr))
+	.container-filters
+		width: 100%
+		display: flex
+		margin-bottom: 2rem
+
+	ul.grid-container
+		padding: 0
+		display: grid
+		grid-gap: 2rem
+		grid-template-columns: repeat(auto-fill, 17rem)
 	
-    li
-      position: relative
-      list-style: none
-      height: auto
-      margin: auto
+		li
+			position: relative
+			list-style: none
+			height: auto
+			width: fit-content
 
-      a
-        text-decoration: none
-        width: 100%
-        display: block
-        height: 100%
+			a
+				text-decoration: none
+				width: fit-content
+				display: block
+				height: 100%
 
-        .picture-student
-          width: 100%
-          height: 70%
-          margin: 0 auto
-          border-radius: 0.5rem
-          background-color: $tertiary
-          margin-bottom: 1.5rem
-          box-sizing: border-box
-          display: flex
-          justify-content: center
-          box-sizing: border-box
-          align-items: center
+				.picture-student
+					width: 100%
+					height: 70%
+					margin: 0 auto
+					border-radius: 0.5rem
+					background-color: $tertiary
+					margin-bottom: 1.5rem
+					box-sizing: border-box
+					display: flex
+					justify-content: center
+					box-sizing: border-box
+					align-items: center
 
-          img
-            width: 100%
-            height: 100%
-            object-fit: cover
+					img
+						width: 100%
+						height: 100%
+						object-fit: cover
 
-          .no-picture
-            opacity: 0.3
-            width: 30%
-            height: auto
+					.no-picture
+						opacity: 0.3
+						width: 30%
+						height: auto
 
-        .container-student
-          height: fit-content
-          font-size: 1rem
-          color: black
-          width: 100%
-          margin-bottom: 0.6rem
+				.container-student
+					height: fit-content
+					font-size: 1rem
+					color: black
+					width: 100%
+					margin-bottom: 0.6rem
         
-        .container-cursus
-          color: $gray
-          margin-bottom: 0.6rem
+				.container-cursus
+					color: $gray
+					margin-bottom: 0.6rem
 
-        .undefined
-          font-size: 1rem
-          font-weight: $font-400
-          color: $black
+				.undefined
+					font-size: 1rem
+					font-weight: 400
+					color: $black
 
-        .container-tags
-          position: absolute
-          width: 45%
-          top: 50%
-          right: 0
+				.container-tags
+					position: absolute
+					width: 45%
+					top: 50%
+					right: 0
 
-          .tag
-            height: 1.5rem
-            border-radius: 1.5rem 0 0 1.5rem
+					.tag
+						height: 1.5rem
+						border-radius: 1.5rem 0 0 1.5rem			
 
-            &:first-child
-              margin-bottom: 0.3rem
+					&:first-child
+						margin-bottom: 0.3rem
   
-            span
-              display: block
-              font-size: 0.8rem
-              color: $white
-              margin: 0
-              padding: 0.1rem 1.25rem 0 1.25rem
-              height: 100%
-              width: 100%
-              text-overflow: ellipsis
-              overflow: hidden
-              white-space: nowrap
+					span
+						display: block
+						font-size: 0.8rem
+						color: $white
+						margin: 0
+						padding: 0.28rem 1.25rem 0 1.25rem
+						height: fit-content
+						width: 100%
+						text-overflow: ellipsis
+						overflow: hidden
+						white-space: nowrap
 </style>

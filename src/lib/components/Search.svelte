@@ -1,27 +1,39 @@
 <script lang="ts">
 	import Icon from './Icon.svelte';
+	import Button from './Button.svelte';
 
 	export let search: string;
 	export let placeholder = 'Search...';
 	export let label: string | null = null;
 	export let name: string;
+	export let rounded = false;
+	export let buttonText: string | null = 'Button';
 </script>
 
 <div class="group">
 	{#if label}
 		<label for={name}>{label}</label>
 	{/if}
-	<div class="input">
-		<input bind:value={search} type="search" {name} {placeholder} />
+	{#if rounded}
+		<div class="input-rounded">
+			<input bind:value={search} type="search" {name} {placeholder} />
 
-		<button class="submit" on:click>
-			<Icon id="search" color="#f25824" size="1.5em" />
-		</button>
-	</div>
+			<Button type="rounded" on:click>
+				<p>{buttonText}</p>
+			</Button>
+		</div>
+	{:else}
+		<div class="input">
+			<input bind:value={search} type="search" {name} {placeholder} />
+
+			<button class="submit" on:click>
+				<Icon id="search" color="#f25824" size="1.5em" />
+			</button>
+		</div>
+	{/if}
 </div>
 
 <style lang="sass">
-	
 	.group 
 		margin-bottom: 1rem
 		width: 100%
@@ -56,7 +68,17 @@
 				cursor: pointer
 				display: flex
 				align-items: center
-			
-		
+
+		.input-rounded
+			widht: 100%
+			display: flex
+
+			input
+				padding: 0.6rem 1rem
+				background-color: $white
+				border: none
+				border-radius: 2rem
+				margin-right: 0.5rem
+				width: 100%
 
 </style>
