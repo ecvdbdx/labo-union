@@ -1,5 +1,5 @@
 import type { Actions } from './$types';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 
 import { supabase } from '$lib/auth';
 
@@ -40,11 +40,6 @@ export const actions: Actions = {
 			});
 		}
 
-		return {
-			status: 302,
-			headers: {
-				location: '/',
-			},
-		};
+		return redirect(302, '/');
 	},
 };
