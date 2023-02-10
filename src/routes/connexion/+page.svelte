@@ -31,12 +31,13 @@
 			>
 			<Button>Me connecter</Button>
 		</div>
-		{#if form?.success}
-			<p class="success">Vous êtes bien connecté(e) !</p>
+		{#if form?.error}
+			<p class="error">{form.error}</p>
 		{/if}
 	</form>
 </div>
 
 <style lang="sass">
-
+	.error 
+		color: red
 </style>
