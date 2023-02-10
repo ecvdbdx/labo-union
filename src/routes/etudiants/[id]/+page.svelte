@@ -2,7 +2,9 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	$: ({ first_name, last_name, speciality, description, status, grade } = data.profile);
+	$: ({ profile, experience } = data);
+	$: ({ first_name, last_name, speciality, description, status, grade } = profile);
+	$: ({ job, start_date, end_date, company, mission } = experience);
 </script>
 
 <div class="container-page">
@@ -37,14 +39,14 @@
 			<h2 class="experience-container-title">Expériences Professionnelles</h2>
 			<div class="block-experience">
 				<div class="duration-experience">
-					<p>2017-2022</p>
+					<p>2017 {start_date}-2022 {end_date}</p>
 				</div>
 				<div class="name-experience">
-					<p>UI designer</p>
+					<p>{job}</p>
 				</div>
 
 				<div class="name-enterprise">
-					<p>Back Market</p>
+					<p>{company}</p>
 				</div>
 
 				<div class="location-experience">
@@ -54,12 +56,14 @@
 				<div class="actions-experience">
 					<h4>Actions confiées</h4>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus dignissim dolor at
-						lacinia. Suspendisse cursus mollis dolor eu mattis.
+						{mission}
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus dignissim dolor at lacinia.
+						Suspendisse cursus mollis dolor eu mattis.
 					</p>
 				</div>
 			</div>
 		</div>
+
 		<div class="degree-container">
 			<h2 class="degree-container-title">Formations</h2>
 			<div class="block-degree">

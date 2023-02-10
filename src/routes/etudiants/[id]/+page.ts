@@ -13,7 +13,20 @@ export const load = (async ({ params }) => {
 			message: "Une erreur est survenue, les données n'ont pas pu être récupérées",
 		});
 	}
+	const { data: experience, error: err2 } = await supabase
+		.from('Experience')
+		.select(`*`)
+		.eq(`profile_id`, profile.id)
+		.single();
+
+	if (err2) {
+		throw error(500, {
+			message: "Une erreur est survenue, les données n'ont pas pu être récupérées",
+		});
+	}
+
 	return {
 		profile,
+		experience,
 	};
 }) satisfies PageLoad;
