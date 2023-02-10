@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { supabase } from '$lib/auth';
-	import Link from '$lib/components/Link.svelte';
-
 	import { page } from '$app/stores';
+
+	import Link from '$lib/components/Link.svelte';
+	import Button from '$lib/components/Button.svelte';
 </script>
 
 <div class="container">
@@ -14,7 +15,9 @@
 	<br />
 
 	{#if $page.data.session}
+		<hr />
 		<Link href="profil">Mon profil</Link>
-		<button on:click={() => supabase.auth.signOut()}>Sign out</button>
+		<br /><br />
+		<Button on:click={() => supabase.auth.signOut()}>Sign out</Button>
 	{/if}
 </div>

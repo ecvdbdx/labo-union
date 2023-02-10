@@ -8,7 +8,6 @@
 </a>
 
 <style lang="sass">
-  
   a 
     color: $primary
     transition: 0.35s ease
