@@ -6,9 +6,18 @@ export const load = (async () => {
 	const { data: profiles, error: err } = await supabase.from('Profile').select('*');
 	if (err) {
 		throw error(500, {
-			message: "Les données n'ont pas pu être chargées",
+			code: 500,
+			message: 'Une erreur est survenue',
 		});
 	}
+
+	if (profiles.length === 0) {
+		throw error(404, {
+			code: 404,
+			message: "Aucun étudiant n'a été trouvé",
+		});
+	}
+
 	return {
 		profiles,
 	};
