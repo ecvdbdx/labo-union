@@ -28,7 +28,7 @@
 			display: flex
 			justify-content: center
 			align-items: center
-			gap: 5px
+			gap: .25rem
 			margin-bottom: 1rem
 
 			p, span
