@@ -1,4 +1,4 @@
-export interface User {
+export type User = {
 	created_at: string;
 	grade: string;
 	speciality: string;
@@ -11,4 +11,4 @@ export interface User {
 	status: boolean;
 	user_email: string;
 	user_id: string;
-}
+};

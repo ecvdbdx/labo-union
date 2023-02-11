@@ -1,8 +1,8 @@
 /** @type {import('./$types').Actions} */
 
-import type { PageServerLoad, Actions } from './$types';
 import { fail, redirect, error } from '@sveltejs/kit';
 
+import type { PageServerLoad, Actions } from './$types';
 import { supabase } from '$lib/auth';
 
 export const load = (async ({ params }) => {
@@ -28,7 +28,10 @@ export const actions = {
 				refresh_token: JSON.parse(session_cookie)[1],
 			})
 			.catch((err) => {
-				throw error(500, err);
+				throw error(500, {
+					code: 500,
+					message: err.message,
+				});
 			});
 
 		const user_id = session.data.user?.id;
@@ -61,7 +64,10 @@ export const actions = {
 			.eq('user_id', user_id);
 
 		if (err) {
-			throw error(500, err);
+			throw error(500, {
+				code: 500,
+				message: err.message,
+			});
 		}
 
 		throw redirect(303, '/profil');

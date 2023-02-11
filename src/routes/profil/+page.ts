@@ -1,8 +1,8 @@
-import type { PageServerLoad } from './$types';
-
 import { error } from '@sveltejs/kit';
+
+import type { PageServerLoad } from './$types';
+import type { User } from '$lib/types/user';
 import { supabase } from '$lib/auth';
-import type { User } from '@interfaces';
 
 export const load: PageServerLoad = async ({ parent }) => {
 	const { session } = await parent();

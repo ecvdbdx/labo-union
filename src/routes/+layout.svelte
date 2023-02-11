@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { supabase } from '$lib/auth';
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
+
+	import { supabase } from '$lib/auth';
 
 	onMount(() => {
 		const {
