@@ -25,6 +25,7 @@
 </script>
 
 <div class="Profile">
+	<a href="/">home</a>
 	<div class="container-top">
 		<div class="left">
 			<img class="img-profile" src="https://picsum.photos/200/300" alt="profil" />

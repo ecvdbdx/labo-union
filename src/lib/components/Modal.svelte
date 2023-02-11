@@ -24,7 +24,7 @@
       max-height: 90vh
       border-radius: 30px
       padding: 50px
-      background-color: $background
+      background-color: $tertiary
       overflow: auto
 
 </style>

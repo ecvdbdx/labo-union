@@ -15,8 +15,9 @@ export const load: PageServerLoad = async ({ parent }) => {
 		.single();
 
 	if (err) {
-		throw error(500, {
-			message: "Les données n'ont pas pu être collectées",
+		throw error(401, {
+			code: 401,
+			message: 'Vous devez être connecté pour accéder à cette page',
 		});
 	}
 

@@ -47,7 +47,7 @@ export const actions: Actions = {
 				JSON.stringify([access_token, refresh_token, provider_token, provider_refresh_token]),
 			);
 
-			throw redirect(302, '/');
+			throw redirect(302, '/?notification=auth:success');
 		}
 	},
 };
