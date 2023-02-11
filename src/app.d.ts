@@ -12,7 +12,7 @@ declare namespace App {
 		session: import('@supabase/supabase-js').Session | null;
 	}
 	interface Error {
-		code: number;
+		code?: number;
 		message: string;
 	}
 	// interface Platform {}
