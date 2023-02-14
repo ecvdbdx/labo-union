@@ -16,7 +16,7 @@ export const load: PageLoad = async ({ parent }) => {
 	if (err) {
 		throw error(401, {
 			code: 401,
-			message: 'Vous devez être connecté pour accéder à cette page',
+			message: 'Vous devez être connecté•e pour accéder à cette page',
 		});
 	}
 
