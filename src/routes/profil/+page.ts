@@ -1,7 +1,6 @@
 import { error } from '@sveltejs/kit';
 
 import type { PageLoad } from './$types';
-import type { User } from '$lib/types/user';
 import { supabase } from '$lib/auth';
 
 export const load: PageLoad = async ({ parent }) => {
@@ -22,6 +21,6 @@ export const load: PageLoad = async ({ parent }) => {
 	}
 
 	return {
-		profile: data as User,
+		profile: data,
 	};
 };

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ResponseProfile } from '../../utils/get.type';
+	import type { Profile } from '$lib/types/profile';
 	import type { ActionData } from '../../../.svelte-kit/types/src/routes/profil/$types';
 
 	import { enhance } from '$app/forms';
@@ -11,7 +11,7 @@
 	import Button from '$lib/components/Button.svelte';
 
 	export let editable = false;
-	export let profile: ResponseProfile;
+	export let profile: Profile;
 	export let form: ActionData | null = null;
 
 	$: ({ first_name, last_name, speciality, description, status, grade } = profile);
