@@ -1,10 +1,10 @@
 import { error } from '@sveltejs/kit';
 
-import type { PageServerLoad } from './$types';
+import type { PageLoad } from './$types';
 import type { User } from '$lib/types/user';
 import { supabase } from '$lib/auth';
 
-export const load: PageServerLoad = async ({ parent }) => {
+export const load: PageLoad = async ({ parent }) => {
 	const { session } = await parent();
 	const user_id = session?.user.id;
 
