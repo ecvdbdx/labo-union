@@ -7,16 +7,23 @@ export const load: PageLoad = async ({ parent }) => {
 	const { session } = await parent();
 	const user_id = session?.user.id;
 
+	if (!user_id) {
+		throw error(401, {
+			code: 401,
+			message: 'Vous devez être connecté•e pour accéder à cette page',
+		});
+	}
+
 	const { data, error: err } = await supabase
 		.from('Profile')
 		.select()
 		.eq('user_id', user_id)
-		.single();
+		.maybeSingle();
 
 	if (err) {
-		throw error(401, {
-			code: 401,
-			message: 'Vous devez être connecté•e pour accéder à cette page',
+		throw error(500, {
+			code: 500,
+			message: 'Une erreur est survenue',
 		});
 	}
 

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Profile } from '$lib/types/profile';
-	import type { ActionData } from '../../../.svelte-kit/types/src/routes/profil/$types';
 
 	import { enhance } from '$app/forms';
 
@@ -12,16 +11,18 @@
 
 	export let editable = false;
 	export let profile: Profile;
-	export let form: ActionData | null = null;
+	export let form: { first_name_error: string; last_name_error: string } | null = null;
 
 	$: ({ first_name, last_name, speciality, description, status, grade } = profile);
 
 	let displayEditSummary = false;
 	let displayEditProfilImg = false;
 
-	function handleCheck(e: Event) {
+	const handleOpenEditModal = () => (displayEditSummary = true);
+
+	const handleCheck = (e: Event) => {
 		status = (e.target as HTMLInputElement).checked;
-	}
+	};
 </script>
 
 <div class="Profile">
@@ -32,7 +33,7 @@
 			<div class="user-name">
 				<h1>{first_name} {last_name}</h1>
 				{#if editable}
-					<div class="edit-profile" on:click={() => (displayEditSummary = true)}>
+					<div class="edit-profile" on:keydown={handleOpenEditModal} on:click={handleOpenEditModal}>
 						Modifier le profil
 						<Icon id="edit-2" color="black" size="1em" />
 					</div>
