@@ -1,17 +1,14 @@
 <script lang="ts">
-	import { supabase } from '$lib/auth';
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
+
+	import { supabase } from '$lib/auth';
 
 	onMount(() => {
 		const {
 			data: { subscription },
-		} = supabase.auth.onAuthStateChange((_, session) => {
+		} = supabase.auth.onAuthStateChange(() => {
 			invalidate('supabase:auth');
-
-			if (session && session.user) {
-				// TODO: show popup to inform user that he is logged in
-			}
 		});
 
 		return () => {

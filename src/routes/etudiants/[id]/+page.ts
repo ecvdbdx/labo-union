@@ -1,18 +1,28 @@
-import { error } from '@sveltejs/kit';
 import { supabase } from '$lib/auth';
+import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ params }) => {
 	const { data: profile, error: err } = await supabase
 		.from('Profile')
 		.select()
-		.eq('user_id', params.id)
-		.single();
-	if (err) {
-		throw error(500, {
-			message: "Une erreur est survenue, les données n'ont pas pu être récupérées",
+		.eq('id', params.id)
+		.maybeSingle();
+
+	if (!profile) {
+		throw error(404, {
+			code: 404,
+			message: "L'étudiant n'existe pas",
 		});
 	}
+
+	if (err) {
+		throw error(500, {
+			code: 500,
+			message: 'Une erreur est survenue',
+		});
+	}
+
 	return {
 		profile,
 	};

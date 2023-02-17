@@ -7,7 +7,7 @@
 
 <div class="group" class:reverse>
 	<label for={name}>{label}</label>
-	<input bind:checked={value} {name} type="checkbox" />
+	<input bind:checked={value} {name} type="checkbox" on:change />
 </div>
 
 <style lang="sass">
