@@ -10,13 +10,19 @@
 				<span>{experience.end_date?.split('-')[0] ?? "Aujourd'hui"}</span>
 			</p>
 			<div class="infos">
-				<p class="name-experience">{experience.job}</p>
-				<p class="name-enterprise">{experience.company}</p>
+				{#if experience.job}
+					<p class="name-experience">{experience.job}</p>
+				{/if}
+				{#if experience.company}
+					<p class="name-enterprise">{experience.company}</p>
+				{/if}
 				<p class="location-experience">Bordeaux, France</p>
 				<div class="actions-experience">
 					<span>Actions confiées :</span>
 					<p>
-						{experience.mission}
+						{#if experience.mission}
+							{experience.mission}
+						{/if}
 					</p>
 				</div>
 			</div>
