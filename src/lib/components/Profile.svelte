@@ -15,7 +15,7 @@
 	export let profile: Profile;
 	export let form: { first_name_error: string; last_name_error: string } | null = null;
 
-	$: ({ first_name, last_name, speciality, description, status, grade } = profile);
+	$: ({ first_name, last_name, speciality, description, status, grade, profile_img } = profile);
 
 	let displayEditSummary = false;
 	let displayEditProfilImg = false;
@@ -23,6 +23,7 @@
 	let isCurriculum = false;
 
 	const handleOpenEditModal = () => (displayEditSummary = true);
+	const handleOpenImgModal = () => (displayEditProfilImg = true);
 
 	const handleCheck = (e: Event) => {
 		status = (e.target as HTMLInputElement).checked;
@@ -33,7 +34,14 @@
 	<a href="/">home</a>
 	<div class="container-top">
 		<div class="left">
-			<img class="img-profile" src="https://picsum.photos/200/300" alt="profil" />
+			{#if editable}
+				<div class="img-profile" on:click={handleOpenImgModal}>
+					<Icon id="edit-2" color="black" size="1em" />
+				</div>
+			{/if}
+			{#if profile_img !== ''}
+				<img class="img-profile" src={profile_img} alt="" />
+			{/if}
 			<div class="user-name">
 				<h1>{first_name} {last_name}</h1>
 				{#if editable}
@@ -162,7 +170,9 @@
 			</button>
 		</div>
 		<div class="profilImg">
-			<img src="https://placebear.com/g/1000/1000" alt="" />
+			<div class="img-profile">
+				<Icon id="edit-2" color="black" size="1em" />
+			</div>
 		</div>
 		<div class="modifyImg">
 			<div class="params">
@@ -221,6 +231,10 @@
   width: 84px
   height: 84px
   border-radius: 100%
+  border: 1px solid #000 
+  display: flex
+  justify-content: center
+  align-items: center
 
 .availability
   margin: 0.75rem 0
@@ -280,6 +294,7 @@
   align-items: flex-end
   gap: 10px
   text-decoration: underline
+  cursor: pointer
 
 .title 
   font-weight: 700

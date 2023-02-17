@@ -12,22 +12,25 @@
 
 	const dispatch = createEventDispatcher();
 
-	const downloadImage = async (path: string) => {
-		try {
-			const { data, error } = await supabase.storage.from('image-profile').download(path);
+	// const downloadImage = async (path: string) => {
+	// 	try {
+	// 		const { data, error } = await supabase.storage.from('image-profile').download(path);
+	// 		console.log('path', path)
 
-			if (error) {
-				throw error;
-			}
+	// 		if (error) {
+	// 			throw error;
+	// 		}
 
-			const url = URL.createObjectURL(data);
-			avatarUrl = url;
-		} catch (error) {
-			if (error instanceof Error) {
-				//console.log('Error downloading image: ', error.message)
-			}
-		}
-	};
+	// 		const url = URL.createObjectURL(data);
+	// 		const finalUrl = 'https://obgvvzkqopswdaczgpxl.supabase.co/storage/v1/object/public/image-profile/' + path
+	// 		// avatarUrl = url;
+	// 		avatarUrl = finalUrl;
+	// 	} catch (error) {
+	// 		if (error instanceof Error) {
+	// 			//console.log('Error downloading image: ', error.message)
+	// 		}
+	// 	}
+	// };
 
 	const uploadAvatar = async () => {
 		try {
@@ -38,46 +41,64 @@
 			}
 
 			const file = files[0];
-			const test = file.name.split('.').pop();
+			const format = file.name.split('.').pop();
 			let fileExt = '';
-			if (test === 'png') {
-				fileExt = test;
+			if (format === 'png') {
+				fileExt = format;
 			} else {
-				//console.log('coucou erreur');
 				throw new Error('You must select an image with png format.');
 			}
 
 			const filePath = `${fakeAccount_user_id}-profile.${fileExt}`;
+			// const finalUrl = 'https://obgvvzkqopswdaczgpxl.supabase.co/storage/v1/object/public/image-profile/' + filePath
 
-			const { data } = await supabase.storage.from('image-profile').list();
-			// console.log('getFiles', data)
+			const { data } = await supabase.storage.from('image-profile').getPublicUrl(filePath);
 
-			if (data && data.length > 1) {
-				data.forEach(async (image) => {
-					//console.log('image.name', image.name)
-					//console.log('filePath', filePath)
-					if (image.name === filePath) {
-						let { error } = await supabase.storage.from('image-profile').update(filePath, file);
-						if (error) {
-							throw error;
-						}
-					} else {
-						let { error } = await supabase.storage.from('image-profile').upload(filePath, file);
-						if (error) {
-							throw error;
-						}
-					}
-				});
-			} else {
+			const { data: profile, error: err } = await supabase
+				.from('Profile')
+				.select('profile_img')
+				.eq('user_id', fakeAccount_user_id)
+				.maybeSingle();
+
+			if (err) {
+				throw err;
+			}
+
+			if (profile && profile.profile_img === '') {
 				let { error } = await supabase.storage.from('image-profile').upload(filePath, file);
 				if (error) {
 					throw error;
 				}
+
+				const { error: err2 } = await supabase
+					.from('Profile')
+					.update({
+						profile_img: data.publicUrl,
+					})
+					.eq('user_id', fakeAccount_user_id);
+
+				if (err2) {
+					throw err2;
+				}
+			} else if (profile && profile.profile_img !== '') {
+				let { error } = await supabase.storage.from('image-profile').update(filePath, file);
+				if (error) {
+					throw error;
+				}
+				const { error: err } = await supabase
+					.from('Profile')
+					.update({
+						profile_img: data.publicUrl,
+					})
+					.eq('user_id', fakeAccount_user_id);
+
+				if (err) {
+					throw err;
+				}
 			}
 
 			url = filePath;
-			//console.log(url)
-			//let finalUrl = 'https://obgvvzkqopswdaczgpxl.supabase.co/storage/v1/object/public/image-profile/' + filePath
+
 			dispatch('upload');
 		} catch (error) {
 			if (error instanceof Error) {
@@ -87,8 +108,7 @@
 			uploading = false;
 		}
 	};
-
-	$: if (url) downloadImage(url);
+	// $: if (url) downloadImage(url);
 </script>
 
 <div>
@@ -100,7 +120,7 @@
 			style="height: {size}em; width: {size}em;"
 		/>
 	{:else}
-		<div class="avatar no-image" style="height: {size}em; width: {size}em;" />
+		<div class="avatar no-image" style="height: {size}em; width: {size}em;">Pas d'image</div>
 	{/if}
 
 	<div style="width: {size}em;">
@@ -117,7 +137,4 @@
 			disabled={uploading}
 		/>
 	</div>
-
-	<!-- <img src={finalUrl} alt={avatarUrl ? 'Avatar' : 'No image'} class="avatar image"
-  style="height: {size}em; width: {size}em;" /> -->
 </div>
