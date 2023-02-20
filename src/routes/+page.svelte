@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-
 	import { supabase } from '$lib/auth';
 	import Link from '$lib/components/Link.svelte';
 	import Button from '$lib/components/Button.svelte';
