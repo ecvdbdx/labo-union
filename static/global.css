@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-	width: calc(100vw - 240px);
+	width: calc(100vw - 15rem);
 	margin: 0 auto;
 }
 
@@ -19,7 +19,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
-	padding: 10px 20px;
+	padding: 0.625rem 1.25rem;
 	background-color: #f5f5f5;
 	color: #1a110f;
 }
@@ -30,7 +30,7 @@ body {
 }
 
 .logo img {
-	height: 40px;
+	height: 1.5rem;
 }
 
 .navbar-tabs {
@@ -40,14 +40,10 @@ body {
 }
 
 .navbar-tabs li {
-	margin-right: 5vh;
+	margin-right: 7vh;
 }
 
 .navbar-tabs a {
 	color: rgb(26, 17, 15, 0.5);
 	text-decoration: none;
-}
-
-.connexionButton {
-	color: #f5f5f5 !important;
 }

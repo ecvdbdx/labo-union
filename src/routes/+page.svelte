@@ -9,7 +9,7 @@
 <div class="container">
 	<nav class="navbar">
 		<div class="logo">
-			<img src="logo.png" alt="Logo" />
+			<img src="../svg/logo.svg" alt="Logo" />
 		</div>
 		<ul class="navbar-tabs">
 			<li><a href="#">Accueil</a></li>
@@ -32,5 +32,6 @@
 </div>
 
 <style lang="sass">
-
+	.connexionButton
+		color: $tertiary
 </style>

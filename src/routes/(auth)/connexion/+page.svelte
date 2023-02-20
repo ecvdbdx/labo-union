@@ -48,5 +48,5 @@
 			color: red
 
 		.connexionPath
-			color: #d94f21
+			color: $hover
 </style>
