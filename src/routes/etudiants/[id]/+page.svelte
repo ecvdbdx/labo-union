@@ -3,9 +3,10 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import ExperienceList from '$lib/components/ExperienceList.svelte';
+	import TrainingList from '$lib/components/TrainingList.svelte';
 
 	export let data: PageData;
-	$: ({ profile, experiences } = data);
+	$: ({ profile, experiences, trainings } = data);
 	let displayEditExp = false;
 </script>
 
@@ -42,8 +43,13 @@
 			<div class="edit-profile" on:click={() => (displayEditExp = true)}>edit profil</div>
 			<ExperienceList data={experiences} />
 		</div>
+		<div class="training-container">
+			<h2 class="experience-container-title">Formations</h2>
+			<TrainingList data={trainings} />
+		</div>
 	</div>
 </div>
+
 {#if displayEditExp === true}
 	<Modal>
 		<div class="title">
@@ -149,6 +155,12 @@
   .professional-container
     max-width: 40vw
 
+  .training-container
+    width: 584px
+    background-color: $background
+    border-radius: 30px
+    padding: 16px 20px
+
   .container-bottom
     margin: 7.5rem
     display: flex
@@ -179,6 +191,9 @@
   .professional-container
     max-width: 40vw
     grid-column: 2
+  
+  .experience-container-title
+    color: $primary
 
   .title
     font-weight: 700

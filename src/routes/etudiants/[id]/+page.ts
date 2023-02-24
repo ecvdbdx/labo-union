@@ -24,8 +24,20 @@ export const load = (async ({ params }) => {
 		});
 	}
 
+	const { data: trainings, error: err3 } = await supabase
+		.from('Training')
+		.select(`*`)
+		.eq(`profile_id`, profile.id);
+
+	if (err3) {
+		throw error(500, {
+			message: "Une erreur est survenue, les données n'ont pas pu être récupérées",
+		});
+	}
+
 	return {
 		profile,
 		experiences,
+		trainings,
 	};
 }) satisfies PageLoad;
