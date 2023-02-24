@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Profile } from '$lib/types/profile';
-
 	import { enhance } from '$app/forms';
 
 	import Icon from '$lib/components/Icon.svelte';
@@ -10,6 +9,9 @@
 	import Button from '$lib/components/Button.svelte';
 	import Curriculum from './Curriculum.svelte';
 	import Portfolio from './Portfolio.svelte';
+
+	let files: FileList;
+	import { uploadImg, uploading } from '$lib/utils/upload';
 
 	export let editable = false;
 	export let profile: Profile;
@@ -34,13 +36,18 @@
 	<a href="/">home</a>
 	<div class="container-top">
 		<div class="left">
-			{#if editable}
+			{#if editable && profile_img === ''}
 				<div class="img-profile" on:click={handleOpenImgModal}>
 					<Icon id="edit-2" color="black" size="1em" />
 				</div>
 			{/if}
 			{#if profile_img !== ''}
-				<img class="img-profile" src={profile_img} alt="" />
+				<div class="img-profile" on:click={handleOpenImgModal}>
+					<div class="pencil">
+						<Icon id="edit-2" color="black" size="1em" />
+					</div>
+					<img class="img-profile" src={profile_img} alt="" />
+				</div>
 			{/if}
 			<div class="user-name">
 				<h1>{first_name} {last_name}</h1>
@@ -170,13 +177,31 @@
 			</button>
 		</div>
 		<div class="profilImg">
-			<div class="img-profile">
-				<Icon id="edit-2" color="black" size="1em" />
-			</div>
+			{#if editable && profile_img === ''}
+				<div class="img-profile">
+					<Icon id="edit-2" color="black" size="1em" />
+				</div>
+			{/if}
+			{#if profile_img !== ''}
+				<div class="img-profile img-modal">
+					<img src={profile_img} alt="" />
+				</div>
+			{/if}
 		</div>
 		<div class="modifyImg">
 			<div class="params">
-				Modifier / Ajouter une image
+				<label class="button primary block" for="single">
+					{uploading ? 'Uploading ...' : 'Modifier / Ajouter une image'}
+				</label>
+				<input
+					style="visibility: hidden; position:absolute;"
+					type="file"
+					id="single"
+					accept="image/*"
+					bind:files
+					on:change={() => uploadImg(files)}
+					disabled={uploading}
+				/>
 				<Icon id="edit-2" color="black" size="1em" />
 			</div>
 			<div class="params">
@@ -235,6 +260,25 @@
   display: flex
   justify-content: center
   align-items: center
+  position: relative
+
+.img-profile .pencil 
+  position: absolute
+  left: 0
+  right: 0
+  top: 0
+  bottom: 0
+  margin: auto
+  width: fit-content
+  height: fit-content
+  z-index: 2
+  background-color: #fff
+  border-radius: 50%
+  padding: 5px
+	
+.img-modal 
+  width: auto
+  height: auto
 
 .availability
   margin: 0.75rem 0
