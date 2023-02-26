@@ -21,11 +21,13 @@
 
 	let displayEditSummary = false;
 	let displayEditProfilImg = false;
+	//let displayEditCoverImg = false;
 
 	let isCurriculum = false;
 
 	const handleOpenEditModal = () => (displayEditSummary = true);
 	const handleOpenImgModal = () => (displayEditProfilImg = true);
+	//const handleOpenCoverImgModal = () => (displayEditCoverImg = true);
 
 	const handleCheck = (e: Event) => {
 		status = (e.target as HTMLInputElement).checked;
@@ -75,6 +77,19 @@
 
 		<div class="right">
 			<img class="image-secondary" src="https://picsum.photos/560/450" alt="profil" />
+			<!-- {#if editable && cover_img === ''}
+				<div class="cover-image" on:click={handleOpenCoverImgModal}>
+					<Icon id="edit-2" color="black" size="1em" />
+				</div>
+			{/if}
+			{#if profile_img !== ''}
+				<div class="cover-image" on:click={handleOpenCoverImgModal}>
+					<div class="pencil">
+						<Icon id="edit-2" color="black" size="1em" />
+					</div>
+					<img class="image-secondary" src={cover_img} alt=" " />
+				</div>
+			{/if} -->
 		</div>
 	</div>
 	<div class="tab">
@@ -212,6 +227,49 @@
 	</Modal>
 {/if}
 
+<!-- {#if displayEditCoverImg === true}
+	<Modal>
+		<div class="title">
+			Modifier votre photo de profil
+			<button class="close" on:click={() => (displayEditCoverImg = false)}>
+				<Icon id="x" color="black" size="2em" />
+			</button>
+		</div>
+		<div class="profilImg">
+			{#if editable && cover_img === ''}
+				<div class="img-profile">
+					<Icon id="edit-2" color="black" size="1em" />
+				</div>
+			{/if}
+			{#if cover_img !== ''}
+				<div class="img-profile img-modal">
+					<img src={cover_img} alt="" />
+				</div>
+			{/if}
+		</div>
+		<div class="modifyImg">
+			<div class="params">
+				<label class="button primary block" for="single">
+					{uploading ? 'Uploading ...' : 'Modifier / Ajouter une image'}
+				</label>
+				<input
+					style="visibility: hidden; position:absolute;"
+					type="file"
+					id="single"
+					accept="image/*"
+					bind:files
+					on:change={() => uploadImg(files)}
+					disabled={uploading}
+				/>
+				<Icon id="edit-2" color="black" size="1em" />
+			</div>
+			<div class="params">
+				Supprimer
+				<Icon id="x" color="black" size="1em" />
+			</div>
+		</div>
+	</Modal>
+{/if} -->
 <style lang="sass">
 
 .container-top
