@@ -14,6 +14,7 @@
 	import { uploadImg, uploading } from '$lib/utils/upload';
 
 	export let editable = false;
+	export let userId;
 	export let profile: Profile;
 	export let form: { first_name_error: string; last_name_error: string } | null = null;
 
@@ -214,7 +215,7 @@
 					id="single"
 					accept=".jpg, .png, .jpeg, .JPEG, .webp"
 					bind:files
-					on:change={() => uploadImg(files, profile)}
+					on:change={() => uploadImg(files, profile, userId)}
 					disabled={uploading}
 				/>
 				<Icon id="edit-2" color="black" size="1em" />

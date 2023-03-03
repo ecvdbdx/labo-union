@@ -1,5 +1,4 @@
 import { supabase } from '$lib/auth';
-import { fakeAccount_user_id } from '$lib/constants';
 import type { Profile } from '$lib/types/profile';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -8,7 +7,7 @@ export let url: string;
 
 export let uploading = false;
 
-export const uploadImg = async (files: FileList, profile: Profile) => {
+export const uploadImg = async (files: FileList, profile: Profile, userId: string) => {
 	try {
 		uploading = true;
 
@@ -37,7 +36,7 @@ export const uploadImg = async (files: FileList, profile: Profile) => {
 		const { error: err } = await supabase
 			.from('Profile')
 			.update({ profile_img: data.publicUrl })
-			.eq('user_id', fakeAccount_user_id);
+			.eq('user_id', userId);
 		if (err) {
 			throw err;
 		}
