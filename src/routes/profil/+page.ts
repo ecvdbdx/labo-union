@@ -16,10 +16,10 @@ export const load: PageLoad = async ({ parent }) => {
 
 	const { data, error: err } = await supabase
 		.from('Profile')
-		.select()
+		.select('*, Experience(*)')
 		.eq('user_id', user_id)
 		.maybeSingle();
-
+	err && console.error(err);
 	if (err) {
 		throw error(500, {
 			code: 500,

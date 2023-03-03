@@ -6,4 +6,4 @@
 	export let form: ActionData;
 </script>
 
-<Profile profile={data.profile} editable={true} {form} />
+<Profile editable={true} {form} profile={data.profile} />

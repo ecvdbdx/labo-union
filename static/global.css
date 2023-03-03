@@ -9,7 +9,8 @@ body {
 	font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-.container {
+.container,
+.wrapper-section {
 	width: calc(100vw - 240px);
 	margin: 0 auto;
 }

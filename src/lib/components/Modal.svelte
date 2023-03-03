@@ -18,6 +18,8 @@
     display: flex
     align-items: center
     justify-content: center
+    z-index: 100000
+
     .PopIn
       width: 75vw
       height: auto
