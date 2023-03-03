@@ -5,8 +5,8 @@ import type { PageLoad } from './$types';
 export const load = (async ({ params }) => {
 	const { data: profile, error: err } = await supabase
 		.from('Profile')
-		.select()
-		.eq('id', params.id)
+		.select('*, Experience(*), Formation(*)')
+		.eq('user_id', params.id)
 		.maybeSingle();
 
 	if (!profile) {

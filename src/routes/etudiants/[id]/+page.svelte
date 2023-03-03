@@ -1,8 +1,9 @@
 <script lang="ts">
+	import type { PageData, ActionData } from './$types';
 	import Profile from '$lib/components/Profile.svelte';
-	import type { PageData } from './$types';
 
 	export let data: PageData;
+	export let form: ActionData;
 </script>
 
-<Profile profile={data.profile} />
+<Profile editable={true} {form} profile={data.profile} />
