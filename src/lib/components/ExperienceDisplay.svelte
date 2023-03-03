@@ -2,16 +2,18 @@
 	import { supabase } from '$lib/auth';
 	import Icon from '$lib/components/Icon.svelte';
 	import Button from '$lib/components/Button.svelte';
+	import { invalidateAll } from '$app/navigation';
 
 	export let data;
+	$: ({ id, job, start_date, end_date, company, mission, profile_id } = data);
 	export let action;
 
 	let editmode = false;
 
 	async function deleteExperience(experience_id) {
-		const { data, error } = await supabase.from('Experience').delete().eq('id', experience_id);
+		const { error } = await supabase.from('Experience').delete().eq('id', experience_id);
 		error && console.error(error);
-		return data;
+		invalidateAll();
 	}
 </script>
 
@@ -19,17 +21,17 @@
 	<div class="Experience">
 		<div class="wrapper">
 			<p class="duration-experience">
-				<span>{data.start_date?.split('-')[0] ?? "Aujourd'hui"} - </span>
-				<span>{data.end_date?.split('-')[0] ?? "Aujourd'hui"}</span>
+				<span>{start_date?.split('-')[0] ?? "Aujourd'hui"} - </span>
+				<span>{end_date?.split('-')[0] ?? "Aujourd'hui"}</span>
 			</p>
 			<div class="infos">
-				<p class="name-experience">{data.job}</p>
-				<p class="name-enterprise">{data.company}</p>
+				<p class="name-experience">{job}</p>
+				<p class="name-enterprise">{company}</p>
 				<p class="location-experience">Bordeaux, France</p>
 				<div class="actions-experience">
 					<span>Actions confiées :</span>
 					<p>
-						{data.mission}
+						{mission}
 					</p>
 				</div>
 			</div>
@@ -40,7 +42,7 @@
 					>Modifier
 					<Icon color="black" id="edit-2" size="1em" />
 				</button>
-				<button on:click={() => deleteExperience(data.id)}
+				<button on:click={() => deleteExperience(id)}
 					>Supprimer
 					<Icon color="black" id="x" size="1em" />
 				</button>
@@ -51,16 +53,16 @@
 	<div class="Experience">
 		<div class="wrapper">
 			<p class="duration-experience">
-				<span>{data.start_date?.split('-')[0] ?? "Aujourd'hui"} - </span>
-				<span>{data.end_date?.split('-')[0] ?? "Aujourd'hui"}</span>
+				<input type="date" value={start_date} />
+				<input type="date" value={end_date} />
 			</p>
 			<div class="infos">
-				<input class="name-experience" value={data.job} />
-				<input class="name-enterprise" value={data.company} />
+				<input class="name-experience" value={job} on:input={(e) => (job = e.target.value)} />
+				<input class="name-enterprise" value={company} />
 				<input class="location-experience" value="Bordeaux, France" />
 				<div class="actions-experience">
 					<span>Actions confiées :</span>
-					<input value={data.mission} />
+					<input value={mission} />
 				</div>
 			</div>
 		</div>
@@ -70,7 +72,7 @@
 					Modifier
 					<Icon color="black" id="edit-2" size="1em" />
 				</button>
-				<button on:click={() => deleteExperience(data.id)}
+				<button on:click={() => deleteExperience(id)}
 					>Supprimer
 					<Icon color="black" id="edit-2" size="1em" />
 				</button>

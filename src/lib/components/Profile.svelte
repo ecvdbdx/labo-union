@@ -18,8 +18,6 @@
 
 	let displayEditSummary = false;
 	let displayEditProfilImg = false;
-	let displayEditExp = false;
-	let displayEditForm = false;
 	const handleOpenEditModal = () => (displayEditSummary = true);
 
 	const handleCheck = (e: Event) => {
@@ -74,29 +72,8 @@
 			<div class="illus" />
 		</div>
 	</section>
-	<section class="exp_studies">
-		<div class="wrapper-section container">
-			<div class="professional-container">
-				<div class="head">
-					<h2 class="experience-container-title">Expériences Professionnelles</h2>
-					<div class="edit" on:click={() => (displayEditExp = true)} title="Editer les experiences">
-						<Icon color="black" id="edit-2" size="1em" />
-					</div>
-				</div>
-				<ExperienceList action={false} data={profile.Experience} />
-			</div>
-			<div class="professional-container">
-				<div class="head">
-					<h2 class="experience-container-title">Formations</h2>
-					<div class="edit" on:click={() => (displayEditForm = true)} title="Editer les formations">
-						<Icon color="black" id="edit-2" size="1em" />
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	<ExperienceList action={false} data={profile.Experience} />
 </div>
-
 {#if displayEditSummary === true}
 	<Modal>
 		<div class="title">
@@ -108,6 +85,7 @@
 		<form
 			class="form"
 			method="POST"
+			action="?/updateProfile"
 			use:enhance={() => {
 				displayEditSummary = false;
 				return ({ update }) => update({ reset: false });
@@ -159,7 +137,6 @@
 		</form>
 	</Modal>
 {/if}
-
 {#if displayEditProfilImg === true}
 	<Modal>
 		<div class="title">
@@ -184,46 +161,13 @@
 	</Modal>
 {/if}
 
-{#if displayEditExp === true}
-	<Modal>
-		<section class="displayEditExp modalSection">
-			<div class="title">
-				<div class="left">
-					<button class="close" on:click={() => (displayEditExp = false)} title="Fermer">
-						<Icon id="x" color="black" size="2em" />
-					</button>
-					<span>Expériences professionnelles</span>
-				</div>
-				<button title="Ajouter une experience">Ajouter +</button>
-			</div>
-			<div class="professional-container">
-				<ExperienceList data={profile.Experience} action={true} />
-			</div>
-		</section>
-	</Modal>
-{/if}
-
-{#if displayEditForm === true}
-	<Modal>
-		<section class="displayEditForm modalSection">
-			<div class="title">
-				<div class="left">
-					<button class="close" on:click={() => (displayEditForm = false)} title="Fermer">
-						<Icon id="x" color="black" size="2em" />
-					</button>
-					<span>Formations</span>
-				</div>
-				<button title="Ajouter une experience">Ajouter +</button>
-			</div>
-			<div class="professional-container" />
-		</section>
-	</Modal>
-{/if}
-
 <style lang="sass">
   .Profile
+
     section
+
       &.summary
+
         div.wrapper-section
           display: grid
           grid-template-columns: auto repeat(2, calc((50vw - 120px) - 3rem)) auto
@@ -350,62 +294,5 @@
             object-fit: cover
             object-position: center
 
-      &.exp_studies
-        margin-block-start: 3rem
 
-        div.wrapper-section
-          padding-block-start: 3rem
-          border-top: 1px solid rgba($gray, .1)
-          display: grid
-          grid-template-columns: repeat(2, 1fr)
-          gap: 2rem
-
-          .professional-container
-            background: $white
-            border-radius: 30px
-            padding: 3rem 2rem
-
-            .head
-              display: flex
-              align-items: center
-              gap: 2rem
-              margin-bottom: 2rem
-
-              h2
-                font-size: 1.5rem
-                font-weight: 600
-                color: $primary
-
-              .edit
-                cursor: pointer
-                display: flex
-                align-items: center
-                justify-content: center
-
-  .modalSection
-    display: flex
-    flex-direction: column
-    gap: 4rem
-
-    .title
-      display: flex
-      align-items: center
-      justify-content: space-between
-
-      .left
-        display: flex
-        align-items: center
-        gap: 2rem
-
-        span
-          font-size: 2rem
-
-      button
-        all: inherit
-        text-decoration: underline
-
-        &:hover, &:focus
-          transition: all ease-in-out 150ms
-          color: $primary
-          cursor: pointer
 </style>
