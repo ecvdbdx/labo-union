@@ -1,12 +1,13 @@
 <script lang="ts">
 	import type { Profile } from '$lib/types/profile';
 	import { enhance } from '$app/forms';
+	import { v4 as uuidv4 } from 'uuid';
 
 	import Icon from '$lib/components/Icon.svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/forms/Input.svelte';
 	import Checkbox from '$lib/components/forms/Checkbox.svelte';
-	import Button from '$lib/components/Button.svelte';
 	import Curriculum from './Curriculum.svelte';
 	import Portfolio from './Portfolio.svelte';
 
@@ -14,7 +15,7 @@
 	import { uploadImg, uploading } from '$lib/utils/upload';
 
 	export let editable = false;
-	export let userId;
+	export let userId: string;
 	export let profile: Profile;
 	export let form: { first_name_error: string; last_name_error: string } | null = null;
 
@@ -33,6 +34,25 @@
 	const handleCheck = (e: Event) => {
 		status = (e.target as HTMLInputElement).checked;
 	};
+
+	function changeImg() {
+		const currentImg = profile.profile_img.split('image-profile/');
+
+		if (!files || files.length === 0) {
+			throw new Error('You must select an image to upload.');
+		}
+
+		const file = files[0];
+		const format = file.name.split('.').pop();
+
+		profile.profile_img = URL.createObjectURL(file);
+
+		const hashProfile = uuidv4();
+
+		const filePath = `${hashProfile}-profile.${format}`;
+
+		uploadImg(userId, filePath, currentImg, file);
+	}
 </script>
 
 <div class="Profile">
@@ -215,7 +235,7 @@
 					id="single"
 					accept=".jpg, .png, .jpeg, .JPEG, .webp"
 					bind:files
-					on:change={() => uploadImg(files, profile, userId)}
+					on:change={() => changeImg()}
 					disabled={uploading}
 				/>
 				<Icon id="edit-2" color="black" size="1em" />
