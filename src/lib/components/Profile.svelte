@@ -212,9 +212,9 @@
 					style="visibility: hidden; position:absolute;"
 					type="file"
 					id="single"
-					accept="image/*"
+					accept=".jpg, .png, .jpeg, .JPEG, .webp"
 					bind:files
-					on:change={() => uploadImg(files)}
+					on:change={() => uploadImg(files, profile)}
 					disabled={uploading}
 				/>
 				<Icon id="edit-2" color="black" size="1em" />
