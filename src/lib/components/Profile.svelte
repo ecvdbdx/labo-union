@@ -9,6 +9,7 @@
 	import Checkbox from '$lib/components/forms/Checkbox.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import ExperienceList from '$lib/components/ExperienceList.svelte';
+	import TrainingList from '$lib/components/TrainingList.svelte';
 
 	export let editable = false;
 	export let profile: Profile;
@@ -73,6 +74,7 @@
 		</div>
 	</section>
 	<ExperienceList action={false} data={profile.Experience} />
+    <TrainingList data={profile.Training} /> 
 </div>
 {#if displayEditSummary === true}
 	<Modal>
