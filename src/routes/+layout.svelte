@@ -4,6 +4,7 @@
 
 	import { supabase } from '$lib/auth';
 	import Header from '$lib/components/Header.svelte';
+	import Modal from '$lib/components/Modal.svelte';
 
 	export let data;
 
@@ -25,4 +26,5 @@
 <Header {user} />
 <main>
 	<slot />
+	<Modal />
 </main>

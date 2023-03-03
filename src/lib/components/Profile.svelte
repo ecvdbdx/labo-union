@@ -20,7 +20,7 @@
 	export let editable = false;
 	export let userId: string;
 	export let profile: Profile;
-	export let form: { first_name_error: string; last_name_error: string } | null = null;
+	export let openEditModal: () => void | null;
 
 	$: ({ first_name, last_name, speciality, description, status, grade, profile_img } = profile);
 
@@ -111,7 +111,7 @@
 			<div class="user-name">
 				<h1>{first_name} {last_name}</h1>
 				{#if editable}
-					<div class="edit-profile" on:keydown={handleOpenEditModal} on:click={handleOpenEditModal}>
+					<div class="edit-profile" on:keydown={openEditModal} on:click={openEditModal}>
 						Modifier le profil
 						<Icon id="edit-2" color="black" size="1em" />
 					</div>
