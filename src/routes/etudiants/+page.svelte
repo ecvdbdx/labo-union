@@ -47,7 +47,10 @@
 </script>
 
 <div class="container main-container">
-	<Search rounded={true} name="profile" bind:search on:click={searchProfiles} />
+	<h2>L'annuaire</h2>
+	<div class="container-search-bar">
+		<Search rounded={true} name="profile" bind:search on:click={searchProfiles} />
+	</div>
 	<div class="container-filters">
 		<Filter label="Cursus" options={data.speciality} on:change={updateSpecialty} />
 		<Filter label="Classe" options={data.grade} on:change={updateGrade} />
@@ -75,14 +78,11 @@
 							</div>
 							<div class="undefined">Alternance</div>
 							<div class="container-tags">
-								<div class="tag student-tag" style="background-color: #f25824">
+								<div class="tag student-tag">
 									<span>{speciality}</span>
 								</div>
 								{#if disponibilityIsVisible}
-									<div
-										class="tag student-disponibility"
-										style={`background-color: ${status ? '#3ccf4e' : '#d6d6d6'}`}
-									>
+									<div class="tag student-disponibility" class:is-available={status}>
 										<span>{status ? 'Disponible' : 'Indisponible'}</span>
 									</div>
 								{/if}
@@ -100,6 +100,18 @@
 <style lang="sass">
 .main-container
 	margin-top: 2rem
+
+	@media screen and (max-width: 768px)
+		width: 90vw
+
+	h2
+		margin-bottom: 2rem	
+
+	.container-search-bar
+		width: 55%
+
+		@media screen and (max-width: 1024px)
+			width: 100%  	
 
 	.container-filters
 		width: 100%
@@ -172,9 +184,19 @@
 					.tag
 						height: 1.5rem
 						border-radius: 1.5rem 0 0 1.5rem			
+						background-color: $disabled
 
 					&:first-child
 						margin-bottom: 0.3rem
+
+					.student-tag
+						background-color: $primary
+
+					.is-available
+						background-color: $success
+
+					.student-disponibility
+						margin-top: 0.5rem
   
 					span
 						display: block
