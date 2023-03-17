@@ -1,7 +1,6 @@
 <div class="container-auth">
 	<div class="container-content">
 		<div class="container-form">
-			<a href="/"><img alt="" src="/svg/logo.svg" /></a>
 			<slot />
 		</div>
 	</div>
@@ -22,12 +21,21 @@
 		width: 100vw
 		height: fit-content
 		min-height: 100%
+		margin-top: 5rem
 
 		.container-content
 			width: 50%
-			min-height: 100vh
 			height: fit-content
 			padding: 20px 7.5rem
+
+			@media screen and (max-width: 1024px)
+				width: 100%
+
+			@media screen and (max-width: 768px)
+				padding: 20px 4rem
+
+			@media screen and (max-width: 480px)
+				padding: 20px 2rem
 
 			.container-form
 				width: 100%
@@ -37,9 +45,12 @@
 		.container-pictures
 			position: fixed
 			width: 50%
-			height: 100%
+			height: calc(100% - 5rem)
 			right: 0
 			padding: 20px
+
+			@media screen and (max-width: 1024px)
+				display: none
 
 			.container-content-pictures
 				width: 100%

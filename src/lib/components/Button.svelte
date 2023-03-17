@@ -1,9 +1,10 @@
 <script lang="ts">
 	export let type: 'default' | 'rounded' | 'square' = 'default';
 	export let disabled = false;
+	export let light = false;
 </script>
 
-<button class="Button {type}" {disabled} on:click>
+<button class="Button {type}" class:light {disabled} on:click>
 	<slot>Text Label</slot>
 </button>
 
@@ -45,5 +46,12 @@
 		&.square
 			border-radius: 0
 		
+	.light
+		background-color: $white
+		color: $primary
+		box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05)
 
+		&:hover
+			opacity: 0.7
+			background-color: $white
 </style>

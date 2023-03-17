@@ -37,7 +37,6 @@
 
 <style lang="sass">
 	.group 
-		margin-bottom: 1rem
 		position: relative
 		width: 100%
 
@@ -64,6 +63,7 @@
 			background-color: $white
 			border-radius: 10px
 			color: $black
+			margin-bottom: 1.8rem
 
 			&:focus-visible 
 				outline: none

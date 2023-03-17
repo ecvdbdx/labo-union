@@ -10,7 +10,7 @@
 </script>
 
 <div class="container sign-up">
-	<h1 class="header">S'inscrire</h1>
+	<h2 class="header">S'inscrire</h2>
 
 	<form method="POST" use:enhance>
 		<Input
@@ -54,18 +54,22 @@
 </div>
 
 <style lang="sass">
+h2
+	margin-bottom: 2rem
+	
+.sign-up
+	margin-top: 5vh
+	width: 100%
 
-	.sign-up
-		margin-top: 5vh
-		width: 100%
+	@media screen and (max-width: 480px)
+		padding: 0
 
-		form
-			margin-top: 1rem
-		
-		.error
-			color: $error
-		
-		.success
-			color: $success
-
+	form
+		margin-top: 1rem
+	
+	.error
+		color: $error
+	
+	.success
+		color: $success
 </style>

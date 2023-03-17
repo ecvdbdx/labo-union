@@ -69,7 +69,6 @@
 </script>
 
 <div class="Profile">
-	<a href="/">home</a>
 	<div class="container-top">
 		<div class="left">
 			{#if editable && profile_img === ''}
@@ -98,15 +97,17 @@
 				{status ? 'Je suis disponible' : 'Je suis pas disponible'}
 				<div class={status ? 'is-available' : 'is-not-available'} />
 			</div>
-			<div class="grade">
+			<h3 class="grade">
 				{grade}
 				{speciality}
-			</div>
-			<div class="presentation">
-				<p>
-					{description}
-				</p>
-			</div>
+			</h3>
+			{#if description}
+				<div class="presentation">
+					<p>
+						{description}
+					</p>
+				</div>
+			{/if}
 		</div>
 
 		<div class="right">
@@ -247,6 +248,12 @@
 {/if}
 
 <style lang="sass">
+.Profile
+  padding-top: 5rem
+
+p
+  opacity: 1
+  color: $black
 
 .container-top
   position: relative
@@ -274,6 +281,16 @@
 
 .portfolio
   cursor: pointer
+
+  @media screen and (max-width: 768px)
+    margin: 5rem 2rem
+
+h1
+  margin-bottom: 1.3rem
+
+h2
+  margin-bottom: 3rem
+  color: $primary-300
 
 .right
   display: flex
@@ -317,12 +334,13 @@
   width: auto
   height: auto
   cursor: initial 
+  margin-bottom: 0.75rem
 
 .availability
   margin: 0.75rem 0
   font-weight: 600
   color: #18181860
-  font-size: 1.125rem
+  font-size: 1.25rem
   display: flex
 
 .is-not-available
@@ -342,8 +360,8 @@
 .grade
   margin: 0.75rem 0
   font-weight: 600
-  color: #18181860
-  font-size: 1.125rem
+  color: $gray
+  font-size: 1.25rem
 
 .user-name
   display: flex
@@ -353,7 +371,6 @@
 
 .presentation
   font-size: 1rem
-  color: #18181860
   line-height: 24px
 
 .image-secondary
@@ -370,6 +387,102 @@
 .location-degree
   color: #18181860 
 
+  @media screen and (max-width: 768px)
+    margin: 7.5rem 2rem
+
+.professional-container
+  max-width: 40vw
+  background-color: #FFFCFA
+  border-radius: 30px
+  padding: 2.6rem 1.5rem
+  margin-bottom: 15px
+
+  @media screen and (max-width: 1024px)
+    margin-left: auto
+    margin-right: auto
+    max-width: 100% 
+    width: 100%
+
+.degree-container
+  max-width: 40vw
+  background-color: #FFFCFA
+  border-radius: 30px
+  padding: 2.6rem 1.5rem
+  margin-bottom: 15px
+
+  @media screen and (max-width: 1024px)
+    margin-left: auto
+    margin-right: auto
+    max-width: 100%
+    width: 100%
+
+  @media screen and (max-width: 768px)
+
+.name-enterprise
+  text-decoration: underline
+  grid-column: 2
+  color: $primary
+
+  p
+    color: $primary
+
+.location-experience
+  color: #18181860
+  grid-column: 2
+
+.actions-experience
+  color: $black
+  grid-column: 2
+
+  h4
+    font-weight: 600
+    margin-bottom: 0.5rem
+
+.location-degree
+  color: #18181860 
+
+.name-degree
+  color: #18181860
+
+.block-experience
+  display: grid
+  grid-template-columns: repeat(1fr, 2fr)
+  grid-gap: 0.75rem 2rem
+
+  
+.duration-experience
+  grid-column: 1
+
+  p
+    color: $black
+    opacity: 1
+    font-weight: 600
+  
+.name-experience
+  grid-column: 2
+
+.block-degree
+  display: grid
+  grid-template-columns: repeat(1fr, 2fr)
+  grid-gap: 0.75rem 2rem
+
+.duration-degree
+  grid-column: 1
+
+  p
+    color: $black
+    opacity: 1
+    font-weight: 600
+
+.name-school
+  grid-column: 2
+
+.name-degree
+  grid-column: 2
+
+.location-degree
+  grid-column: 2
+
 .edit-profile
   display: flex
   flex-direction: row
@@ -377,6 +490,10 @@
   gap: 10px
   text-decoration: underline
   cursor: pointer
+  margin-bottom: 1.3rem
+
+  &:hover
+    cursor: pointer
 
 .title 
   font-weight: 700
