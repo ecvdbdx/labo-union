@@ -8,6 +8,8 @@
 	import Input from '$lib/components/forms/Input.svelte';
 	import Checkbox from '$lib/components/forms/Checkbox.svelte';
 	import Button from '$lib/components/Button.svelte';
+	import Curriculum from './Curriculum.svelte';
+	import Portfolio from './Portfolio.svelte';
 
 	export let editable = false;
 	export let profile: Profile;
@@ -17,6 +19,8 @@
 
 	let displayEditSummary = false;
 	let displayEditProfilImg = false;
+
+	let isCurriculum = false;
 
 	const handleOpenEditModal = () => (displayEditSummary = true);
 
@@ -58,54 +62,31 @@
 			<img class="image-secondary" src="https://picsum.photos/560/450" alt="profil" />
 		</div>
 	</div>
+	<div class="tab">
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div
+			class="curriculum"
+			on:click={() => (isCurriculum = true)}
+			class:tab-selected={isCurriculum === true}
+		>
+			Curriculum
+		</div>
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div
+			class="portfolio"
+			on:click={() => (isCurriculum = false)}
+			class:tab-selected={isCurriculum === false}
+		>
+			Portfolio
+		</div>
+	</div>
 
 	<div class="container-bottom">
-		<div class="professional-container">
-			<h2 class="experience-container-title">Expériences Professionnelles</h2>
-			<div class="block-experience">
-				<div class="duration-experience">
-					<p>2017-2022</p>
-				</div>
-				<div class="name-experience">
-					<p>UI designer</p>
-				</div>
-
-				<div class="name-enterprise">
-					<p>Back Market</p>
-				</div>
-
-				<div class="location-experience">
-					<p>Bordeaux, France</p>
-				</div>
-
-				<div class="actions-experience">
-					<h4>Actions confiées</h4>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus dignissim dolor at
-						lacinia. Suspendisse cursus mollis dolor eu mattis.
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="degree-container">
-			<h2 class="degree-container-title">Formations</h2>
-			<div class="block-degree">
-				<div class="duration-degree">
-					<p>2022</p>
-				</div>
-				<div class="name-school">
-					<p>ECV Digital</p>
-				</div>
-
-				<div class="location-degree">
-					<p>Paris, Île-de-France, FR</p>
-				</div>
-
-				<div class="name-degree">
-					<p>Bachelor 3 Digital Project Manager, UX Design speciality, Honors</p>
-				</div>
-			</div>
-		</div>
+		{#if isCurriculum}
+			<Curriculum />
+		{:else}
+			<Portfolio />
+		{/if}
 	</div>
 </div>
 
@@ -202,11 +183,28 @@
   position: relative
   display: flex
   flex-direction: row
-  width: 80%
   margin: 5rem 7.5rem
+  width: 80%
   justify-content: space-between
+  
+.tab
+  display: flex
+  flex-direction: row
+  margin: 5rem 7.5rem
   border-bottom: 1.5px solid #00000010
-  padding-bottom: 80px
+  padding-bottom: 1.25rem
+  div
+    color: #1818184D
+
+.tab-selected
+  color: #181818!important
+      
+.curriculum
+  padding-right: 1.5rem
+  cursor: pointer
+
+.portfolio
+  cursor: pointer
 
 .right
   display: flex
@@ -273,73 +271,8 @@
   flex-wrap: wrap
   justify-content: space-between
 
-.professional-container
-  max-width: 40vw
-  background-color: #FFFCFA
-  border-radius: 30px
-  padding: 16px 24px
-  margin-bottom: 15px
-
-.degree-container-title
-  color: #F37144
-
-.experience-container-title
-  color: #F37144
-
-.degree-container
-  max-width: 40vw
-  background-color: #FFFCFA
-  border-radius: 30px
-  padding: 16px 24px
-  margin-bottom: 15px
-
-.name-enterprise
-  color: #F25824
-  text-decoration: underline
-  grid-column: 2
-
-.location-experience
-  color: #18181860
-  grid-column: 2
-
-.actions-experience
-  color: #18181860
-  grid-column: 2
-
 .location-degree
   color: #18181860 
-
-.name-degree
-  color: #18181860
-
-.block-experience
-  display: grid
-  grid-template-columns: repeat(1fr, 2fr)
-  grid-gap: 20px
-
-  
-.duration-experience
-  grid-column: 1
-  
-.name-experience
-  grid-column: 2
-
-.block-degree
-  display: grid
-  grid-template-columns: repeat(1fr, 2fr)
-  grid-gap: 20px
-
-.duration-degree
-  grid-column: 1
-
-.name-school
-  grid-column: 2
-
-.name-degree
-  grid-column: 2
-
-.location-degree
-  grid-column: 2
 
 .edit-profile
   display: flex
@@ -360,10 +293,10 @@
   justify-content: space-between
   width: 100%
 
-  .close 
-    border: none
-    background-color: transparent
-    cursor: pointer
+.close 
+  border: none
+  background-color: transparent
+  cursor: pointer
 
 .form 
   display: flex
