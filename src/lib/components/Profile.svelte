@@ -238,7 +238,7 @@
 				/>
 				<Icon id="edit-2" color="black" size="1em" />
 			</div>
-			<button class="params" on:click={() => deleteImg()}>
+			<button class="params" on:click={deleteImg}>
 				Supprimer
 				<Icon id="x" color="black" size="1em" />
 			</button>
