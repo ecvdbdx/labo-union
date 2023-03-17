@@ -233,7 +233,7 @@
 					id="single"
 					accept=".jpg, .png, .jpeg, .JPEG, .webp"
 					bind:files
-					on:change={() => changeImg()}
+					on:change={changeImg}
 					disabled={uploading}
 				/>
 				<Icon id="edit-2" color="black" size="1em" />
