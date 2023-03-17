@@ -74,7 +74,7 @@
 		</div>
 	</section>
 	<ExperienceList action={false} data={profile.Experience} />
-    <TrainingList data={profile.Training} /> 
+	<TrainingList action={false} data={profile.Training} />
 </div>
 {#if displayEditSummary === true}
 	<Modal>
