@@ -4,8 +4,9 @@
 
 	import Link from './Link.svelte';
 	import Button from './Button.svelte';
+	import type { Profile } from '$lib/types/profile';
 
-	export let user;
+	export let user: Profile;
 
 	const links: { label: string; url: string | null }[] = [
 		{
@@ -38,13 +39,13 @@
 					{link.label}
 				</Link>
 			{/each}
-			{#if user.length === 1}
+			{#if user}
 				<div class="container-profil">
 					<Link active={$page.url.pathname === '/profil'} href="/profil">
-						{user[0]?.first_name}
+						{user?.first_name}
 					</Link>
-					{#if user[0].profile_img !== ''}
-						<img src={user[0].profile_img} alt="" />
+					{#if user.profile_img !== ''}
+						<img src={user.profile_img} alt="" />
 					{:else}
 						<span class="profil-img-not-available" />
 					{/if}
@@ -53,7 +54,7 @@
 				<Link active={$page.url.pathname === '/connexion'} href="/connexion">Connexion</Link>
 			{/if}
 		</nav>
-		{#if user.length === 1}
+		{#if user}
 			<Button on:click={() => supabase.auth.signOut()}>Déconnexion</Button>
 		{/if}
 	</div>
@@ -84,7 +85,7 @@
 
 		.container-links
 			display: flex
-			align-items: center 
+			align-items: center
 
 			nav
 				display: flex
