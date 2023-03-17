@@ -3,6 +3,9 @@
 	import { enhance } from '$app/forms';
 	import { v4 as uuidv4 } from 'uuid';
 
+	import { supabase } from '$lib/auth';
+	import { invalidate } from '$app/navigation';
+
 	import Icon from '$lib/components/Icon.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import Button from '$lib/components/Button.svelte';
@@ -23,13 +26,11 @@
 
 	let displayEditSummary = false;
 	let displayEditProfilImg = false;
-	//let displayEditCoverImg = false;
 
 	let isCurriculum = false;
 
 	const handleOpenEditModal = () => (displayEditSummary = true);
 	const handleOpenImgModal = () => (displayEditProfilImg = true);
-	//const handleOpenCoverImgModal = () => (displayEditCoverImg = true);
 
 	const handleCheck = (e: Event) => {
 		status = (e.target as HTMLInputElement).checked;
@@ -53,6 +54,18 @@
 
 		uploadImg(userId, filePath, currentImg, file);
 	}
+
+	async function deleteImg() {
+		const { error: err } = await supabase
+			.from('Profile')
+			.update({ profile_img: '' })
+			.eq('user_id', userId);
+		if (err) {
+			return err;
+		}
+
+		invalidate('app:profile');
+	}
 </script>
 
 <div class="Profile">
@@ -60,17 +73,17 @@
 	<div class="container-top">
 		<div class="left">
 			{#if editable && profile_img === ''}
-				<div class="img-profile" on:click={handleOpenImgModal}>
-					<Icon id="edit-2" color="black" size="1em" />
-				</div>
+				<button class="img-profile" on:click={handleOpenImgModal}>
+					<Icon id="plus" color="black" size="1em" />
+				</button>
 			{/if}
 			{#if profile_img !== ''}
-				<div class="img-profile" on:click={handleOpenImgModal}>
+				<button class="img-profile" on:click={handleOpenImgModal}>
 					<div class="pencil">
 						<Icon id="edit-2" color="black" size="1em" />
 					</div>
 					<img class="img-profile" src={profile_img} alt="" />
-				</div>
+				</button>
 			{/if}
 			<div class="user-name">
 				<h1>{first_name} {last_name}</h1>
@@ -98,19 +111,6 @@
 
 		<div class="right">
 			<img class="image-secondary" src="https://picsum.photos/560/450" alt="profil" />
-			<!-- {#if editable && cover_img === ''}
-				<div class="cover-image" on:click={handleOpenCoverImgModal}>
-					<Icon id="edit-2" color="black" size="1em" />
-				</div>
-			{/if}
-			{#if profile_img !== ''}
-				<div class="cover-image" on:click={handleOpenCoverImgModal}>
-					<div class="pencil">
-						<Icon id="edit-2" color="black" size="1em" />
-					</div>
-					<img class="image-secondary" src={cover_img} alt=" " />
-				</div>
-			{/if} -->
 		</div>
 	</div>
 	<div class="tab">
@@ -214,9 +214,7 @@
 		</div>
 		<div class="profilImg">
 			{#if editable && profile_img === ''}
-				<div class="img-profile">
-					<Icon id="edit-2" color="black" size="1em" />
-				</div>
+				<div class="img-profile" />
 			{/if}
 			{#if profile_img !== ''}
 				<div class="img-profile img-modal">
@@ -240,57 +238,14 @@
 				/>
 				<Icon id="edit-2" color="black" size="1em" />
 			</div>
-			<div class="params">
+			<button class="params" on:click={() => deleteImg()}>
 				Supprimer
 				<Icon id="x" color="black" size="1em" />
-			</div>
+			</button>
 		</div>
 	</Modal>
 {/if}
 
-<!-- {#if displayEditCoverImg === true}
-	<Modal>
-		<div class="title">
-			Modifier votre photo de profil
-			<button class="close" on:click={() => (displayEditCoverImg = false)}>
-				<Icon id="x" color="black" size="2em" />
-			</button>
-		</div>
-		<div class="profilImg">
-			{#if editable && cover_img === ''}
-				<div class="img-profile">
-					<Icon id="edit-2" color="black" size="1em" />
-				</div>
-			{/if}
-			{#if cover_img !== ''}
-				<div class="img-profile img-modal">
-					<img src={cover_img} alt="" />
-				</div>
-			{/if}
-		</div>
-		<div class="modifyImg">
-			<div class="params">
-				<label class="button primary block" for="single">
-					{uploading ? 'Uploading ...' : 'Modifier / Ajouter une image'}
-				</label>
-				<input
-					style="visibility: hidden; position:absolute;"
-					type="file"
-					id="single"
-					accept="image/*"
-					bind:files
-					on:change={() => uploadImg(files)}
-					disabled={uploading}
-				/>
-				<Icon id="edit-2" color="black" size="1em" />
-			</div>
-			<div class="params">
-				Supprimer
-				<Icon id="x" color="black" size="1em" />
-			</div>
-		</div>
-	</Modal>
-{/if} -->
 <style lang="sass">
 
 .container-top
@@ -340,6 +295,9 @@
   justify-content: center
   align-items: center
   position: relative
+  object-fit: cover
+  cursor: pointer
+  padding: 0
 
 .img-profile .pencil 
   position: absolute
@@ -358,6 +316,7 @@
 .img-modal 
   width: auto
   height: auto
+  cursor: initial 
 
 .availability
   margin: 0.75rem 0
@@ -453,10 +412,9 @@
   width: 100%
   img
     border-radius: 50%
-    max-width: 300px
-    max-height: 300px
-    width: 100%
-    height: 100%
+    width: 300px
+    height: 300px
+    object-fit: cover
 
 .modifyImg
   display: flex
@@ -471,4 +429,12 @@
     gap: 10px
     text-decoration: underline
     cursor: pointer
+    border: none
+    font-style: inherit
+    background-color: transparent
+    padding: 0
+    font-family: 'Plus Jakarta Sans', sans-serif
+    font-size: 16px
+    label
+      cursor: pointer
 </style>

@@ -12,26 +12,6 @@
 
 	const dispatch = createEventDispatcher();
 
-	// const downloadImage = async (path: string) => {
-	// 	try {
-	// 		const { data, error } = await supabase.storage.from('image-profile').download(path);
-	// 		console.log('path', path)
-
-	// 		if (error) {
-	// 			throw error;
-	// 		}
-
-	// 		const url = URL.createObjectURL(data);
-	// 		const finalUrl = 'https://obgvvzkqopswdaczgpxl.supabase.co/storage/v1/object/public/image-profile/' + path
-	// 		// avatarUrl = url;
-	// 		avatarUrl = finalUrl;
-	// 	} catch (error) {
-	// 		if (error instanceof Error) {
-	// 			//console.log('Error downloading image: ', error.message)
-	// 		}
-	// 	}
-	// };
-
 	const uploadAvatar = async () => {
 		try {
 			uploading = true;
@@ -50,7 +30,6 @@
 			}
 
 			const filePath = `${fakeAccount_user_id}-profile.${fileExt}`;
-			// const finalUrl = 'https://obgvvzkqopswdaczgpxl.supabase.co/storage/v1/object/public/image-profile/' + filePath
 
 			const { data } = await supabase.storage.from('image-profile').getPublicUrl(filePath);
 
@@ -108,7 +87,6 @@
 			uploading = false;
 		}
 	};
-	// $: if (url) downloadImage(url);
 </script>
 
 <div>
