@@ -1,5 +1,6 @@
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { supabase } from '$lib/auth';
+import { error } from '@sveltejs/kit';
 
 import type { LayoutLoad } from './$types';
 
