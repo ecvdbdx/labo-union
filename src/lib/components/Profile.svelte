@@ -1,21 +1,28 @@
 <script lang="ts">
 	import type { Profile } from '$lib/types/profile';
-
 	import { enhance } from '$app/forms';
+	import { v4 as uuidv4 } from 'uuid';
+
+	import { supabase } from '$lib/auth';
+	import { invalidate } from '$app/navigation';
 
 	import Icon from '$lib/components/Icon.svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/forms/Input.svelte';
 	import Checkbox from '$lib/components/forms/Checkbox.svelte';
-	import Button from '$lib/components/Button.svelte';
 	import Curriculum from './Curriculum.svelte';
 	import Portfolio from './Portfolio.svelte';
 
+	let files: FileList;
+	import { uploadImg, uploading } from '$lib/utils/upload';
+
 	export let editable = false;
+	export let userId: string;
 	export let profile: Profile;
 	export let form: { first_name_error: string; last_name_error: string } | null = null;
 
-	$: ({ first_name, last_name, speciality, description, status, grade } = profile);
+	$: ({ first_name, last_name, speciality, description, status, grade, profile_img } = profile);
 
 	let displayEditSummary = false;
 	let displayEditProfilImg = false;
@@ -23,17 +30,61 @@
 	let isCurriculum = false;
 
 	const handleOpenEditModal = () => (displayEditSummary = true);
+	const handleOpenImgModal = () => (displayEditProfilImg = true);
 
 	const handleCheck = (e: Event) => {
 		status = (e.target as HTMLInputElement).checked;
 	};
+
+	function changeImg() {
+		const currentImg = profile.profile_img.split('image-profile/');
+
+		if (!files || files.length === 0) {
+			throw new Error('You must select an image to upload.');
+		}
+
+		const file = files[0];
+		const format = file.name.split('.').pop();
+
+		profile.profile_img = URL.createObjectURL(file);
+
+		const hashProfile = uuidv4();
+
+		const filePath = `${hashProfile}-profile.${format}`;
+
+		uploadImg(userId, filePath, currentImg, file);
+	}
+
+	async function deleteImg() {
+		const { error: err } = await supabase
+			.from('Profile')
+			.update({ profile_img: '' })
+			.eq('user_id', userId);
+		if (err) {
+			return err;
+		}
+
+		invalidate('app:profile');
+	}
 </script>
 
 <div class="Profile">
 	<a href="/">home</a>
 	<div class="container-top">
 		<div class="left">
-			<img class="img-profile" src="https://picsum.photos/200/300" alt="profil" />
+			{#if editable && profile_img === ''}
+				<button class="img-profile" on:click={handleOpenImgModal}>
+					<Icon id="plus" color="black" size="1em" />
+				</button>
+			{/if}
+			{#if profile_img !== ''}
+				<button class="img-profile" on:click={handleOpenImgModal}>
+					<div class="pencil">
+						<Icon id="edit-2" color="black" size="1em" />
+					</div>
+					<img class="img-profile" src={profile_img} alt="" />
+				</button>
+			{/if}
 			<div class="user-name">
 				<h1>{first_name} {last_name}</h1>
 				{#if editable}
@@ -162,17 +213,35 @@
 			</button>
 		</div>
 		<div class="profilImg">
-			<img src="https://placebear.com/g/1000/1000" alt="" />
+			{#if editable && profile_img === ''}
+				<div class="img-profile" />
+			{/if}
+			{#if profile_img !== ''}
+				<div class="img-profile img-modal">
+					<img src={profile_img} alt="" />
+				</div>
+			{/if}
 		</div>
 		<div class="modifyImg">
 			<div class="params">
-				Modifier / Ajouter une image
+				<label class="button primary block" for="single">
+					{uploading ? 'Uploading ...' : 'Modifier / Ajouter une image'}
+				</label>
+				<input
+					style="visibility: hidden; position:absolute;"
+					type="file"
+					id="single"
+					accept=".jpg, .png, .jpeg, .JPEG, .webp"
+					bind:files
+					on:change={changeImg}
+					disabled={uploading}
+				/>
 				<Icon id="edit-2" color="black" size="1em" />
 			</div>
-			<div class="params">
+			<button class="params" on:click={deleteImg}>
 				Supprimer
 				<Icon id="x" color="black" size="1em" />
-			</div>
+			</button>
 		</div>
 	</Modal>
 {/if}
@@ -221,6 +290,33 @@
   width: 84px
   height: 84px
   border-radius: 100%
+  border: 1px solid #000 
+  display: flex
+  justify-content: center
+  align-items: center
+  position: relative
+  object-fit: cover
+  cursor: pointer
+  padding: 0
+
+.img-profile .pencil 
+  position: absolute
+  left: 0
+  right: 0
+  top: 0
+  bottom: 0
+  margin: auto
+  width: fit-content
+  height: fit-content
+  z-index: 2
+  background-color: #fff
+  border-radius: 50%
+  padding: 5px
+	
+.img-modal 
+  width: auto
+  height: auto
+  cursor: initial 
 
 .availability
   margin: 0.75rem 0
@@ -280,6 +376,7 @@
   align-items: flex-end
   gap: 10px
   text-decoration: underline
+  cursor: pointer
 
 .title 
   font-weight: 700
@@ -315,10 +412,9 @@
   width: 100%
   img
     border-radius: 50%
-    max-width: 300px
-    max-height: 300px
-    width: 100%
-    height: 100%
+    width: 300px
+    height: 300px
+    object-fit: cover
 
 .modifyImg
   display: flex
@@ -333,4 +429,12 @@
     gap: 10px
     text-decoration: underline
     cursor: pointer
+    border: none
+    font-style: inherit
+    background-color: transparent
+    padding: 0
+    font-family: 'Plus Jakarta Sans', sans-serif
+    font-size: 16px
+    label
+      cursor: pointer
 </style>
