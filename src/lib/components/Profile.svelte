@@ -82,9 +82,9 @@
 	</div>
 
 	<div class="container-bottom">
-		{#if isCurriculum === true}
+		{#if isCurriculum}
 			<Curriculum />
-		{:else if isCurriculum === false}
+		{:else}
 			<Portfolio />
 		{/if}
 	</div>
