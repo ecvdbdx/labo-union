@@ -1,10 +1,6 @@
 import { supabase } from '$lib/auth';
 import { invalidate } from '$app/navigation';
 
-function rerunLoadFunction() {
-	invalidate('app:profile');
-}
-
 export const size = 15;
 export let url: string;
 
@@ -48,7 +44,7 @@ export const uploadImg = async (
 
 		url = filePath;
 
-		rerunLoadFunction();
+		invalidate('app:profile');
 	} catch (error) {
 		if (error instanceof Error) {
 			// alert(error.message)
