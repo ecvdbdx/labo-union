@@ -3,6 +3,11 @@
 	import { onMount } from 'svelte';
 
 	import { supabase } from '$lib/auth';
+	import Header from '$lib/components/Header.svelte';
+
+	export let data;
+
+	$: user = data.user;
 
 	onMount(() => {
 		const {
@@ -17,6 +22,7 @@
 	});
 </script>
 
+<Header {user} />
 <main>
 	<slot />
 </main>

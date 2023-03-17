@@ -1,14 +1,23 @@
 <script lang="ts">
 	export let type: 'default' | 'rounded' | 'square' = 'default';
 	export let disabled = false;
+	export let light = false;
+	export let href: string | null = null;
 </script>
 
-<button class="Button {type}" {disabled} on:click>
-	<slot>Text Label</slot>
-</button>
+{#if href}
+	<button class="Button button-link {type}" class:light {disabled}>
+		<a {href}>
+			<slot>Text link</slot>
+		</a>
+	</button>
+{:else}
+	<button class="Button {type}" class:light {disabled} on:click>
+		<slot>Text Label</slot>
+	</button>
+{/if}
 
 <style lang="sass">
-
 	.Button 
 		color: $white
 		background-color: $primary
@@ -45,5 +54,17 @@
 		&.square
 			border-radius: 0
 		
+	.light
+		background-color: $white
+		color: $primary
+		box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05)
 
+		&:hover
+			opacity: 0.7
+			background-color: $white
+
+	.button-link
+		a
+			color: $primary
+			text-decoration: none
 </style>
