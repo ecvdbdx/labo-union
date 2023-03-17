@@ -5,7 +5,8 @@
 	import Link from './Link.svelte';
 	import Button from './Button.svelte';
 
-	$: currentUser = null;
+	export let user;
+
 	const links: { label: string; url: string | null }[] = [
 		{
 			label: 'Annuaire',
@@ -20,19 +21,6 @@
 			url: null,
 		},
 	];
-
-	async function setCurrentUser() {
-		if (!$page.data.session) return;
-
-		const response = await supabase
-			.from('Profile')
-			.select()
-			.eq('user_id', $page.data.session.user.id);
-
-		currentUser = response.data[0];
-	}
-
-	setCurrentUser();
 </script>
 
 <header class="Header">
@@ -42,24 +30,30 @@
 	<div class="container-links">
 		<nav>
 			{#each links as link}
-				<Link headerLink href={link.url}>{link.label}</Link>
+				<Link
+					active={$page.url.pathname === link.url}
+					href={link.url}
+					empty={link.url === null ? true : false}
+				>
+					{link.label}
+				</Link>
 			{/each}
-			{#if $page.data.session && currentUser}
+			{#if user.length === 1}
 				<div class="container-profil">
-					<Link headerLink href="/profil">
-						{currentUser?.first_name}
+					<Link active={$page.url.pathname === '/profil'} href="/profil">
+						{user[0]?.first_name}
 					</Link>
-					{#if currentUser.profile_img !== ''}
-						<img src={currentUser.profile_img} alt="" />
+					{#if user[0].profile_img !== ''}
+						<img src={user[0].profile_img} alt="" />
 					{:else}
 						<span class="profil-img-not-available" />
 					{/if}
 				</div>
 			{:else}
-				<Link headerLink href="/connexion">Connexion</Link>
+				<Link active={$page.url.pathname === '/connexion'} href="/connexion">Connexion</Link>
 			{/if}
 		</nav>
-		{#if $page.data.session && currentUser}
+		{#if user.length === 1}
 			<Button on:click={() => supabase.auth.signOut()}>Déconnexion</Button>
 		{/if}
 	</div>
@@ -116,6 +110,9 @@
 				span.profil-img-not-available
 					background-color: $disabled
 
-			.sign-out-link
+
+	:global(.Header a:not(.active):not(.empty))
+		text-decoration: none
+		color: $black
 
 </style>

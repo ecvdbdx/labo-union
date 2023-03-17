@@ -5,6 +5,10 @@
 	import { supabase } from '$lib/auth';
 	import Header from '$lib/components/Header.svelte';
 
+	export let data;
+
+	$: user = data.user;
+
 	onMount(() => {
 		const {
 			data: { subscription },
@@ -18,7 +22,7 @@
 	});
 </script>
 
-<Header />
+<Header {user} />
 <main>
 	<slot />
 </main>

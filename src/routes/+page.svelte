@@ -82,9 +82,7 @@
 					Complétez votre profil pour qu’il soit plus attractif pour vous et pour les autres :
 					expériences, compétences, lien utiles ...
 				</p>
-				<Button light>
-					<a href="/connexion">Se connecter</a>
-				</Button>
+				<Button href="/connexion" light>Se connecter</Button>
 			</div>
 		</div>
 		<div class="container-part">
@@ -111,9 +109,7 @@
 					Retrouvez des offres d’emploi liées à votre secteur d’activité. Postulez en candidature
 					spontanée grâce à tous les autres contacts d’entreprise enregistrées
 				</p>
-				<Button light>
-					<a href="/connexion">Se connecter</a>
-				</Button>
+				<Button href="/connexion" light>Se connecter</Button>
 			</div>
 		</div>
 	</section>
