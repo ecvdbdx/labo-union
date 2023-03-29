@@ -26,7 +26,7 @@
 		border: none
 		cursor: pointer
 		transition: 0.15s ease
-		min-width: 6.25rem
+		min-width: 7.25rem
 		font-size: 1rem
 		font-weight: 500
 
