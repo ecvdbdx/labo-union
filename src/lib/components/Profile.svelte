@@ -78,10 +78,10 @@
 			{/if}
 			{#if editable && profile_img !== ''}
 				<button class="img-profile" on:click={handleOpenImgModal}>
+					<img class="img-profile" src={profile_img} alt="" />
 					<div class="pencil">
 						<Icon id="edit-2" color="black" size="1em" />
 					</div>
-					<img class="img-profile" src={profile_img} alt="" />
 				</button>
 			{/if}
 			{#if !editable && profile_img !== ''}
@@ -318,23 +318,23 @@ h2
   align-items: center
   position: relative
   object-fit: cover
-  cursor: pointer
   padding: 0
 
-.img-profile .pencil 
+.pencil 
   position: absolute
-  left: 0
-  right: 0
-  top: 0
+  display: flex
+  cursor: pointer
+  align-items: center
+  justify-content: center
+  right: 1px
+  top: 3.5rem
   bottom: 0
   margin: auto
-  width: fit-content
-  height: fit-content
-  z-index: 2
+  width: 30px
+  height: 30px
   background-color: #fff
   border-radius: 50%
-  padding: 5px
-	
+
 .img-modal 
   width: auto
   height: auto
