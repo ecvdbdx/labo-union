@@ -56,14 +56,14 @@
 	}
 
 	async function deleteImg() {
-		const currentImg = profile.profile_img.split('image-profile/');
+		const currentImg = profile.profile_img.split('image-profile/')[1];
 		const { error: err } = await supabase
 			.from('Profile')
 			.update({ profile_img: '' })
 			.eq('user_id', userId);
 		const { error: errRemoveImg } = await supabase.storage
 			.from('image-profile')
-			.remove([currentImg[1]]);
+			.remove([currentImg]);
 		if (err) {
 			return err;
 		}
