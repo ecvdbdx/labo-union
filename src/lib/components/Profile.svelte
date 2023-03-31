@@ -76,19 +76,24 @@
 					<Icon id="plus" color="black" size="1em" />
 				</button>
 			{/if}
-			{#if editable && profile_img !== ''}
-				<button class="img-profile" on:click={handleOpenImgModal}>
-					<img class="img-profile" src={profile_img} alt="" />
-					<div class="pencil">
-						<Icon id="edit-2" color="black" size="1em" />
+
+			{#if profile_img !== ''}
+				{#if editable && profile_img !== ''}
+					<button class="img-profile" on:click={handleOpenImgModal}>
+						<img class="img-profile" src={profile_img} alt="" />
+						<div class="pencil">
+							<Icon id="edit-2" color="black" size="1em" />
+						</div>
+					</button>
+				{/if}
+
+				{#if !editable && profile_img !== ''}
+					<div class="img-profile">
+						<img class="img-profile" src={profile_img} alt="" />
 					</div>
-				</button>
+				{/if}
 			{/if}
-			{#if !editable && profile_img !== ''}
-				<div class="img-profile">
-					<img class="img-profile" src={profile_img} alt="" />
-				</div>
-			{/if}
+
 			<div class="user-name">
 				<h1>{first_name} {last_name}</h1>
 				{#if editable}
