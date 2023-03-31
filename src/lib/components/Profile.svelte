@@ -30,6 +30,8 @@
 
 	let isCurriculum = true;
 
+	const sizeLimitInKo = 500;
+
 	const handleOpenEditModal = () => (displayEditSummary = true);
 	const handleOpenImgModal = () => (displayEditProfilImg = true);
 
@@ -46,7 +48,7 @@
 
 		const file = files[0];
 
-		if (file.size <= 500000) {
+		if (file.size <= sizeLimitInKo * 1000) {
 			imageIsTooBig = false;
 			const format = file.name.split('.').pop();
 
@@ -239,7 +241,7 @@
 			{/if}
 		</div>
 		{#if imageIsTooBig}
-			<p class="big-img-msg">Votre image dépasse 500 ko.</p>
+			<p class="big-img-msg">Votre image dépasse {sizeLimitInKo} ko.</p>
 		{/if}
 		<div class="modifyImg">
 			<div class="params">
