@@ -26,6 +26,7 @@ export const load = (async (event) => {
 
 	const { session } = await getSupabase(event);
 
+	// If the profile is the current user's profile, redirect to /profil
 	if (profile.user_id === session?.user.id) {
 		throw redirect(302, '/profil');
 	}
