@@ -59,7 +59,7 @@
 				<ul class="ExperienceList">
 					{#each data as experience}
 						<li class="block-experience">
-							<ExperienceDisplay data={experience} action={true} />
+							<ExperienceDisplay data={experience} action />
 						</li>
 					{/each}
 				</ul>
