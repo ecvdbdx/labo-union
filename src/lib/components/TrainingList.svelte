@@ -29,7 +29,7 @@
 						<Icon color="black" id="edit-2" size="1em" />
 					</button>
 				{/if}
-				<button class="edit" on:click={() => (addNew = !addNew)} title="Ajouter une experiences">
+				<button class="edit" on:click={() => (addNew = !addNew)} title="Ajouter une expérience">
 					<Icon color="black" id="plus" size="1em" />
 				</button>
 			</div>
