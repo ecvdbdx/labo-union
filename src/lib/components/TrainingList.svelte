@@ -103,7 +103,7 @@
 					<Input value="" type="date" name="end_date">Date de fin</Input>
 				{/if}
 				<Input value="" type="text" name="school">École</Input>
-				<Input value="" type="text" name="diploma">Diplome</Input>
+				<Input value="" type="text" name="diploma">Diplôme</Input>
 				<Button>Enregistrer</Button>
 			</form>
 		</div>
