@@ -1,0 +1,184 @@
+<script lang="ts">
+	import TrainingDisplay from '$lib/components/TrainingDisplay.svelte';
+	import Modal from '$lib/components/Modal.svelte';
+	import Icon from '$lib/components/Icon.svelte';
+	import Input from '$lib/components/forms/Input.svelte';
+	import Button from '$lib/components/Button.svelte';
+	import { enhance } from '$app/forms';
+	import Checkbox from '$lib/components/forms/Checkbox.svelte';
+
+	let displayEditTrain = false;
+	let addNew = false;
+	let displayEndDate = false;
+
+	export let data;
+	export let action: boolean;
+</script>
+
+<section>
+	<div class="wrapper-section">
+		<div class="head">
+			<h2 class="experience-container-title">Formations</h2>
+			<div class="actions">
+				{#if !!data?.length}
+					<button
+						class="edit"
+						on:click={() => (displayEditTrain = true)}
+						title="Éditer les expériences"
+					>
+						<Icon color="black" id="edit-2" size="1em" />
+					</button>
+				{/if}
+				<button class="edit" on:click={() => (addNew = !addNew)} title="Ajouter une expérience">
+					<Icon color="black" id="plus" size="1em" />
+				</button>
+			</div>
+		</div>
+		<ul class="ExperienceList">
+			{#if data}
+				{#each data as train}
+					<li class="block-experience">
+						<TrainingDisplay data={train} {action} />
+					</li>
+				{/each}
+			{/if}
+		</ul>
+	</div>
+</section>
+
+{#if displayEditTrain === true}
+	<Modal>
+		<div class="modalSection">
+			<div class="title">
+				<div class="left">
+					<button class="close" on:click={() => (displayEditTrain = false)} title="Fermer">
+						<Icon id="x" color="black" size="2em" />
+					</button>
+					<span>Formations</span>
+				</div>
+			</div>
+			<div class="professional-container">
+				<ul class="ExperienceList">
+					{#if data}
+						{#each data as train}
+							<li class="block-experience">
+								<TrainingDisplay data={train} action={true} />
+							</li>
+						{/each}
+					{/if}
+				</ul>
+			</div>
+		</div>
+	</Modal>
+{/if}
+
+{#if addNew}
+	<Modal>
+		<div class="modalSection">
+			<div class="title">
+				<div class="left">
+					<button class="close" on:click={() => (addNew = false)} title="Fermer">
+						<Icon id="x" color="black" size="2em" />
+					</button>
+					<span>Ajouter une expériences professionnelles</span>
+				</div>
+			</div>
+			<form
+				class="form"
+				method="POST"
+				action="?/postTraining"
+				use:enhance={() => {
+					addNew = false;
+					return ({ update }) => update({ reset: false });
+				}}
+			>
+				<Input value="" type="date" name="start_date">Date de début</Input>
+				<Checkbox
+					value={displayEndDate}
+					name="end_date_check"
+					label="Je suis actuellement dans cette école"
+					on:change={(e) => (displayEndDate = e.target.checked)}
+				/>
+				{#if !displayEndDate}
+					<Input value="" type="date" name="end_date">Date de fin</Input>
+				{/if}
+				<Input value="" type="text" name="school">École</Input>
+				<Input value="" type="text" name="diploma">Diplôme</Input>
+				<Button>Enregistrer</Button>
+			</form>
+		</div>
+	</Modal>
+{/if}
+
+<style lang="sass">
+  section
+
+    div.wrapper-section
+      border-top: 1px solid rgba($gray, .1)
+      display: grid
+      grid-template-columns: repeat(2, 1fr)
+      grid-template-rows: auto
+      gap: 2rem
+      background-color: $white
+      border-radius: 30px
+      padding: 2rem 2rem
+
+      ul.ExperienceList
+        display: flex
+        flex-direction: column
+        gap: 4em
+        width: 100%
+
+    .head
+      display: flex
+      align-items: center
+      gap: 2rem
+      margin-bottom: 2rem
+      grid-column: 1/3
+
+      h2
+        font-size: 1.5rem
+        font-weight: 600
+        color: $primary
+
+      .actions
+        display: flex
+        align-items: center
+        gap: 1rem
+
+        button
+          all: inherit
+          cursor: pointer
+          display: flex
+          align-items: center
+          justify-content: center
+
+  .modalSection
+    display: flex
+    flex-direction: column
+    gap: 4rem
+
+    .title
+      display: flex
+      align-items: center
+      justify-content: space-between
+
+      .left
+        display: flex
+        align-items: center
+        gap: 2rem
+
+        span
+          font-size: 2rem
+
+      button
+        all: inherit
+        text-decoration: underline
+
+        &:hover, &:focus
+          transition: all ease-in-out 150ms
+          color: $primary
+          cursor: pointer
+
+
+</style>

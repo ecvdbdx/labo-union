@@ -177,6 +177,7 @@
 		<form
 			class="form"
 			method="POST"
+			action="?/updateProfile"
 			use:enhance={() => {
 				displayEditSummary = false;
 				return ({ update }) => update({ reset: false });
@@ -293,7 +294,7 @@ p
 .tab
   display: flex
   flex-direction: row
-  margin: 5rem 7.5rem
+  margin: 2rem 7.5rem
   border-bottom: 1.5px solid #00000010
   padding-bottom: 1.25rem
   div
@@ -405,11 +406,12 @@ h2
   box-shadow: 50px -20px #B6AEA7
 
 .container-bottom
-  margin: 7.5rem
-  display: flex
-  flex-direction: row
-  flex-wrap: wrap
-  justify-content: space-between
+ margin-inline: 7.5rem
+ display: flex
+ flex-direction: row
+ gap: 2rem
+  //flex-wrap: wrap
+ justify-content: space-between
 
 .location-degree
   color: #18181860
