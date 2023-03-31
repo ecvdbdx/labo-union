@@ -159,7 +159,7 @@
 
 	<div class="container-bottom">
 		{#if isCurriculum}
-			<Curriculum />
+			<Curriculum {profile} />
 		{:else}
 			<Portfolio />
 		{/if}
@@ -289,7 +289,7 @@ p
   margin: 5rem 7.5rem
   width: 80%
   justify-content: space-between
-  
+
 .tab
   display: flex
   flex-direction: row
@@ -301,7 +301,7 @@ p
 
 .tab-selected
   color: #181818!important
-      
+
 .curriculum
   padding-right: 1.5rem
   cursor: pointer
@@ -334,7 +334,7 @@ h2
   width: 84px
   height: 84px
   border-radius: 100%
-  border: 1px solid #000 
+  border: 1px solid #000
   display: flex
   justify-content: center
   align-items: center
@@ -360,7 +360,7 @@ h2
 .img-modal 
   width: auto
   height: auto
-  cursor: initial 
+  cursor: initial
   margin-bottom: 0.75rem
 
 .availability
@@ -371,14 +371,14 @@ h2
   display: flex
 
 .is-not-available
-  background-color: red 
+  background-color: red
   width: 10px
   height: 10px
   border-radius: 50%
   margin-left: 0.313rem
 
 .is-available
-  background-color: green 
+  background-color: green
   width: 10px
   height: 10px
   border-radius: 50%
@@ -412,7 +412,7 @@ h2
   justify-content: space-between
 
 .location-degree
-  color: #18181860 
+  color: #18181860
 
   @media screen and (max-width: 768px)
     margin: 7.5rem 2rem
@@ -427,7 +427,7 @@ h2
   @media screen and (max-width: 1024px)
     margin-left: auto
     margin-right: auto
-    max-width: 100% 
+    max-width: 100%
     width: 100%
 
 .degree-container
@@ -466,7 +466,7 @@ h2
     margin-bottom: 0.5rem
 
 .location-degree
-  color: #18181860 
+  color: #18181860
 
 .name-degree
   color: #18181860
@@ -476,7 +476,7 @@ h2
   grid-template-columns: repeat(1fr, 2fr)
   grid-gap: 0.75rem 2rem
 
-  
+
 .duration-experience
   grid-column: 1
 
@@ -484,7 +484,7 @@ h2
     color: $black
     opacity: 1
     font-weight: 600
-  
+
 .name-experience
   grid-column: 2
 
@@ -522,7 +522,7 @@ h2
   &:hover
     cursor: pointer
 
-.title 
+.title
   font-weight: 700
   font-size: 2rem
   line-height: 36px
@@ -534,7 +534,7 @@ h2
   justify-content: space-between
   width: 100%
 
-.close 
+.close
   border: none
   background-color: transparent
   cursor: pointer
@@ -554,7 +554,7 @@ h2
   :global(.Button)
     align-self: end
 
-.profilImg 
+.profilImg
   display: flex
   align-items: center
   justify-content: center
