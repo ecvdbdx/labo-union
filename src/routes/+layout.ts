@@ -9,6 +9,8 @@ export const load: LayoutLoad = async (event) => {
 
 	const id = session?.user.id;
 
+	event.depends('app:profile');
+
 	const userResponse = id
 		? await supabase.from('Profile').select('*').eq('user_id', session?.user.id)
 		: null;
