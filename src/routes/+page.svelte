@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Icon from '$lib/components/Icon.svelte';
+	import { page } from '$app/stores';
 	import Button from '$lib/components/Button.svelte';
+	$: isNotConnected = !$page.data.session?.user.id;
 </script>
 
 <div class="container">
@@ -82,7 +84,9 @@
 					Complétez votre profil pour qu’il soit plus attractif pour vous et pour les autres :
 					expériences, compétences, lien utiles ...
 				</p>
-				<Button href="/connexion" light>Se connecter</Button>
+				{#if isNotConnected}
+					<Button href="/connexion" light>Se connecter</Button>
+				{/if}
 			</div>
 		</div>
 		<div class="container-part">
@@ -109,7 +113,9 @@
 					Retrouvez des offres d’emploi liées à votre secteur d’activité. Postulez en candidature
 					spontanée grâce à tous les autres contacts d’entreprise enregistrées
 				</p>
-				<Button href="/connexion" light>Se connecter</Button>
+				{#if isNotConnected}
+					<Button href="/connexion" light>Se connecter</Button>
+				{/if}
 			</div>
 		</div>
 	</section>
@@ -120,9 +126,11 @@
 			</div>
 			<h3>Vous souhaitez rejoindre la communauté ?</h3>
 			<p>Inscrivez-vous dès maintenant</p>
-			<Button type="rounded" light>
-				<a href="/connexion">Se connecter</a>
-			</Button>
+			{#if isNotConnected}
+				<Button type="rounded" light>
+					<a href="/connexion">Se connecter</a>
+				</Button>
+			{/if}
 		</div>
 	</section>
 </div>
