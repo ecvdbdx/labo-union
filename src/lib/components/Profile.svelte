@@ -134,7 +134,7 @@
 	</div>
 
 	<div class="container-bottom">
-		{#if isCurriculum}
+		{#if !isCurriculum}
 			<Curriculum />
 		{:else}
 			<Portfolio />
