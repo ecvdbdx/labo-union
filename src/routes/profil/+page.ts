@@ -19,7 +19,6 @@ export const load: PageLoad = async ({ parent }) => {
 		.select('*, Experience(*), Training(*)')
 		.eq('user_id', user_id)
 		.maybeSingle();
-	err && console.error(err);
 	if (err) {
 		throw error(500, {
 			code: 500,
