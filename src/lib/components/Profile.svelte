@@ -27,7 +27,7 @@
 	let displayEditSummary = false;
 	let displayEditProfilImg = false;
 
-	let isCurriculum = false;
+	let isCurriculum = true;
 
 	const handleOpenEditModal = () => (displayEditSummary = true);
 	const handleOpenImgModal = () => (displayEditProfilImg = true);
@@ -134,7 +134,7 @@
 	</div>
 
 	<div class="container-bottom">
-		{#if !isCurriculum}
+		{#if isCurriculum}
 			<Curriculum />
 		{:else}
 			<Portfolio />
