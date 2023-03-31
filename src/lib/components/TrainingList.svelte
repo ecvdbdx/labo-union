@@ -102,7 +102,7 @@
 				{#if !displayEndDate}
 					<Input value="" type="date" name="end_date">Date de fin</Input>
 				{/if}
-				<Input value="" type="text" name="school">Ecole</Input>
+				<Input value="" type="text" name="school">École</Input>
 				<Input value="" type="text" name="diploma">Diplome</Input>
 				<Button>Enregistrer</Button>
 			</form>
