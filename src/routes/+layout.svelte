@@ -5,6 +5,7 @@
 	import type { Profile } from '$lib/types/profile';
 	import Header from '$lib/components/Header.svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 
 	export let data;
 
@@ -31,3 +32,4 @@
 	<slot />
 </main>
 <Modal />
+<Footer />
