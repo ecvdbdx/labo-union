@@ -3,11 +3,11 @@
 	import Button from './Button.svelte';
 
 	export let search: string;
-	export let placeholder = 'Search...';
+	export let placeholder = 'Chercher un nom...';
 	export let label: string | null = null;
 	export let name: string;
 	export let rounded = false;
-	export let buttonText: string | null = 'Button';
+	export let buttonText: string | null = 'Rechercher';
 </script>
 
 <div class="group">
@@ -19,7 +19,7 @@
 			<input bind:value={search} type="search" {name} {placeholder} />
 
 			<Button type="rounded" on:click>
-				<p>{buttonText}</p>
+				{buttonText}
 			</Button>
 		</div>
 	{:else}
