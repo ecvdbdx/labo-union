@@ -35,7 +35,7 @@ export const actions = {
 			});
 
 		const user_id = session.data.user?.id;
-		const { data, error: errr } = await supabase
+		const { data, error: err } = await supabase
 			.from('Profile')
 			.select('id')
 			.eq('user_id', user_id)
