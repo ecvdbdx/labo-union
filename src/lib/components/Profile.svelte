@@ -26,6 +26,7 @@
 
 	let displayEditSummary = false;
 	let displayEditProfilImg = false;
+	$: imageIsTooBig = false;
 
 	let isCurriculum = true;
 
@@ -44,15 +45,21 @@
 		}
 
 		const file = files[0];
-		const format = file.name.split('.').pop();
 
-		profile.profile_img = URL.createObjectURL(file);
+		if (file.size <= 500000) {
+			imageIsTooBig = false;
+			const format = file.name.split('.').pop();
 
-		const hashProfile = uuidv4();
+			profile.profile_img = URL.createObjectURL(file);
 
-		const filePath = `${hashProfile}-profile.${format}`;
+			const hashProfile = uuidv4();
 
-		uploadImg(userId, filePath, currentImg, file);
+			const filePath = `${hashProfile}-profile.${format}`;
+
+			uploadImg(userId, filePath, currentImg, file);
+		} else {
+			imageIsTooBig = true;
+		}
 	}
 
 	async function deleteImg() {
@@ -231,6 +238,9 @@
 				</div>
 			{/if}
 		</div>
+		{#if imageIsTooBig}
+			<p class="big-img-msg">Votre image dépasse 500 ko.</p>
+		{/if}
 		<div class="modifyImg">
 			<div class="params">
 				<label class="button primary block" for="single">
@@ -519,6 +529,11 @@ h2
   border: none
   background-color: transparent
   cursor: pointer
+
+.big-img-msg
+  text-align: center
+  margin-top: 1rem
+  font-size: 0.8rem
 
 .form 
   display: flex
