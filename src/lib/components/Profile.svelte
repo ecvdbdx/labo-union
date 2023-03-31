@@ -78,16 +78,14 @@
 			{/if}
 
 			{#if profile_img !== ''}
-				{#if editable && profile_img !== ''}
+				{#if editable}
 					<button class="img-profile" on:click={handleOpenImgModal}>
 						<img class="img-profile" src={profile_img} alt="" />
 						<div class="pencil">
 							<Icon id="edit-2" color="black" size="1em" />
 						</div>
 					</button>
-				{/if}
-
-				{#if !editable && profile_img !== ''}
+				{:else}
 					<div class="img-profile">
 						<img class="img-profile" src={profile_img} alt="" />
 					</div>
