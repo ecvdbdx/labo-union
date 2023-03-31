@@ -24,7 +24,7 @@
 					<button
 						class="edit"
 						on:click={() => (displayEditTrain = true)}
-						title="Editer les experiences"
+						title="Éditer les expériences"
 					>
 						<Icon color="black" id="edit-2" size="1em" />
 					</button>
