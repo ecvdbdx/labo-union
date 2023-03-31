@@ -1,12 +1,13 @@
+import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { supabase } from '$lib/auth';
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-export const load = (async ({ params }) => {
+export const load = (async (event) => {
 	const { data: profile, error: err } = await supabase
 		.from('Profile')
 		.select()
-		.eq('id', params.id)
+		.eq('id', event.params.id)
 		.maybeSingle();
 
 	if (err) {
@@ -21,6 +22,12 @@ export const load = (async ({ params }) => {
 			code: 404,
 			message: "L'étudiant n'existe pas",
 		});
+	}
+
+	const { session } = await getSupabase(event);
+
+	if (profile.user_id === session?.user.id) {
+		throw redirect(302, '/profil');
 	}
 
 	return {
