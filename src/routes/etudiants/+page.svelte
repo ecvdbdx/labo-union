@@ -11,7 +11,6 @@
 
 	// TODO: Update this variables when data from database is available
 	const disponibilityIsVisible = true;
-	const profilPictureUrl = undefined;
 
 	let search = '';
 	let grade: string | undefined;
@@ -57,13 +56,13 @@
 	</div>
 	{#if filteredProfiles?.length > 0}
 		<ul class="grid-container">
-			{#each filteredProfiles as { last_name, first_name, id, grade, speciality, status }}
+			{#each filteredProfiles as { last_name, first_name, id, grade, speciality, status, profile_img }}
 				<li class="list">
 					<a data-sveltekit-preload-data="hover" href="/etudiants/{id}">
 						<Card>
 							<div class="picture-student">
-								{#if profilPictureUrl}
-									<img src={profilPictureUrl} alt={`picture-${first_name}`} />
+								{#if profile_img}
+									<img src={profile_img} alt={`picture-${first_name}`} />
 								{:else}
 									<img class="no-picture" src="/svg/no-picture.svg" alt="" />
 								{/if}
