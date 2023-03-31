@@ -20,7 +20,7 @@
 		<div class="head">
 			<h2 class="experience-container-title">Expériences Professionnelles</h2>
 			<div class="actions">
-				{#if !!data.length}
+				{#if !!data?.length}
 					<button
 						class="edit"
 						on:click={() => (displayEditExp = true)}

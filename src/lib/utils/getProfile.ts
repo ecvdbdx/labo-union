@@ -7,7 +7,6 @@ export default async (userId: string) => {
 		.select('*, Experience(*), Training(*)')
 		.eq('user_id', userId)
 		.maybeSingle();
-
 	if (err) {
 		throw error(500, {
 			code: 500,

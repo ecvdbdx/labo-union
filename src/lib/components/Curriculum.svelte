@@ -4,5 +4,9 @@
 	export let profile;
 </script>
 
-<ExperienceList action={false} data={profile.Experience} />
-<TrainingList action={false} data={profile.Training} />
+{#if profile?.Experience?.length > 0}
+	<ExperienceList action={false} data={profile.Experience} />
+{/if}
+{#if profile?.Training?.length > 0}
+	<TrainingList action={false} data={profile.Training} />
+{/if}
