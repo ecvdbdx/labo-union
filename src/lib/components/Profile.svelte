@@ -1,50 +1,47 @@
 <script lang="ts">
 	import type { Profile } from '$lib/types/profile';
-	import { enhance } from '$app/forms';
-	import { v4 as uuidv4 } from 'uuid';
+	// import { enhance } from '$app/forms';
+	// import { v4 as uuidv4 } from 'uuid';
 
-	import { supabase } from '$lib/auth';
-	import { invalidate } from '$app/navigation';
+	// import { supabase } from '$lib/auth';
+	// import { invalidate } from '$app/navigation';
 
 	import Icon from '$lib/components/Icon.svelte';
-	import Modal from '$lib/components/Modal.svelte';
-	import Button from '$lib/components/Button.svelte';
-	import Input from '$lib/components/forms/Input.svelte';
-	import Checkbox from '$lib/components/forms/Checkbox.svelte';
+	// import Modal from '$lib/components/Modal.svelte';
+	// import Button from '$lib/components/Button.svelte';
+	// import Input from '$lib/components/forms/Input.svelte';
+	// import Checkbox from '$lib/components/forms/Checkbox.svelte';
 	import Curriculum from './Curriculum.svelte';
 	import Portfolio from './Portfolio.svelte';
 
-	let files: FileList;
-	import { uploadImg, uploading } from '$lib/utils/upload';
+	// let files: FileList;
+	// import { uploadImg, uploading } from '$lib/utils/upload';
 
 	export let editable = false;
-	export let userId: string;
 	export let profile: Profile;
 	export let openEditModal: () => void | null;
-
-	$: ({ first_name, last_name, speciality, description, status, grade, profile_img } = profile);
-
-	let displayEditSummary = false;
-	let displayEditProfilImg = false;
-	$: imageIsTooBig = false;
-
-	let isCurriculum = true;
-
+	export let openAvatarModal: () => void | null;
+  
 	const sizeLimitInKo = 500;
+	let isCurriculum = true;
+	$: ({ first_name, last_name, speciality, description, status, grade, profile_img } = profile);
+	$: imageIsTooBig = false;
+  
 
-	const handleOpenEditModal = () => (displayEditSummary = true);
-	const handleOpenImgModal = () => (displayEditProfilImg = true);
 
-	const handleCheck = (e: Event) => {
-		status = (e.target as HTMLInputElement).checked;
-	};
+	// const handleCheck = (e: Event) => {
+	// 	status = (e.target as HTMLInputElement).checked;
+	// };
 
-	function changeImg() {
-		const currentImg = profile.profile_img.split('image-profile/');
+	// function changeImg() {
+	// 	const currentImg = profile_img!.split('image-profile/')[0];
 
-		if (!files || files.length === 0) {
-			throw new Error('You must select an image to upload.');
-		}
+	// 	if (!files || files.length === 0) {
+	// 		throw new Error('You must select an image to upload.');
+	// 	}
+
+	// 	const file = files[0];
+	// 	const format = file.name.split('.').pop();
 
 		const file = files[0];
 
@@ -88,7 +85,7 @@
 	<div class="container-top">
 		<div class="left">
 			{#if editable && profile_img === ''}
-				<button class="img-profile" on:click={handleOpenImgModal}>
+				<button class="img-profile" on:click={openAvatarModal}>
 					<Icon id="plus" color="black" size="1em" />
 				</button>
 			{/if}
@@ -166,11 +163,10 @@
 	</div>
 </div>
 
-{#if displayEditSummary === true}
-	<Modal>
+<!-- <Modal>
 		<div class="title">
 			Modifier le résumé de votre profil
-			<button class="close" on:click={() => (displayEditSummary = false)}>
+			<button class="close">
 				<Icon id="x" color="black" size="2em" />
 			</button>
 		</div>
@@ -179,7 +175,6 @@
 			method="POST"
 			action="?/updateProfile"
 			use:enhance={() => {
-				displayEditSummary = false;
 				return ({ update }) => update({ reset: false });
 			}}
 		>
@@ -227,14 +222,12 @@
 
 			<Button>Enregistrer</Button>
 		</form>
-	</Modal>
-{/if}
+	</Modal> -->
 
-{#if displayEditProfilImg === true}
-	<Modal>
+<!-- <Modal>
 		<div class="title">
 			Modifier votre photo de profil
-			<button class="close" on:click={() => (displayEditProfilImg = false)}>
+			<button class="close">
 				<Icon id="x" color="black" size="2em" />
 			</button>
 		</div>
@@ -272,9 +265,7 @@
 				<Icon id="x" color="black" size="1em" />
 			</button>
 		</div>
-	</Modal>
-{/if}
-
+	</Modal> -->
 <style lang="sass">
 .Profile
   padding-top: 5rem
