@@ -30,7 +30,7 @@
 <dialog bind:this={element} on:click={closeOnBackdrop} on:keydown={closeOnBackdrop} class="modal">
 	<div class="title">
 		{$modal ? $modal.title : 'Modal'}
-		<button class="close" on:click={() => modal.set(null)}>
+		<button class="close" on:click={() => modal.set(null)} aria-label="close modal">
 			<Icon id="x" color="black" size="2em" />
 		</button>
 	</div>
