@@ -19,20 +19,22 @@
 	<div class="wrapper-section">
 		<div class="head">
 			<h2 class="experience-container-title">Expériences Professionnelles</h2>
-			<div class="actions">
-				{#if !!data?.length}
-					<button
-						class="edit"
-						on:click={() => (displayEditExp = true)}
-						title="Editer les experiences"
-					>
-						<Icon color="black" id="edit-2" size="1em" />
+			{#if action}
+				<div class="actions">
+					{#if !!data?.length}
+						<button
+							class="edit"
+							on:click={() => (displayEditExp = true)}
+							title="Editer les experiences"
+						>
+							<Icon color="black" id="edit-2" size="1em" />
+						</button>
+					{/if}
+					<button class="edit" on:click={() => (addNew = !addNew)} title="Ajouter une experience">
+						<Icon color="black" id="plus" size="1em" />
 					</button>
-				{/if}
-				<button class="edit" on:click={() => (addNew = !addNew)} title="Ajouter une experience">
-					<Icon color="black" id="plus" size="1em" />
-				</button>
-			</div>
+				</div>
+			{/if}
 		</div>
 		<ul class="ExperienceList">
 			{#each data as experience}

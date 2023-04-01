@@ -19,20 +19,22 @@
 	<div class="wrapper-section">
 		<div class="head">
 			<h2 class="experience-container-title">Formations</h2>
-			<div class="actions">
-				{#if !!data?.length}
-					<button
-						class="edit"
-						on:click={() => (displayEditTrain = true)}
-						title="Éditer les expériences"
-					>
-						<Icon color="black" id="edit-2" size="1em" />
+			{#if action}
+				<div class="actions">
+					{#if !!data?.length}
+						<button
+							class="edit"
+							on:click={() => (displayEditTrain = true)}
+							title="Éditer les expériences"
+						>
+							<Icon color="black" id="edit-2" size="1em" />
+						</button>
+					{/if}
+					<button class="edit" on:click={() => (addNew = !addNew)} title="Ajouter une expérience">
+						<Icon color="black" id="plus" size="1em" />
 					</button>
-				{/if}
-				<button class="edit" on:click={() => (addNew = !addNew)} title="Ajouter une expérience">
-					<Icon color="black" id="plus" size="1em" />
-				</button>
-			</div>
+				</div>
+			{/if}
 		</div>
 		<ul class="ExperienceList">
 			{#if data}
