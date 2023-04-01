@@ -72,7 +72,6 @@
 		>
 			Curriculum
 		</div>
-		>
 		<div
 			class="portfolio"
 			on:click={() => (isCurriculum = false)}

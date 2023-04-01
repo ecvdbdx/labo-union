@@ -56,7 +56,7 @@
 	</div>
 </div>
 {#if imageIsTooBig}
-	<p class="big-img-msg">Votre image dépasse {sizeLimitInKo} ko.</p>
+	<p class="big-img-msg">Votre image dépasse {sizeLimitInKo} ko !</p>
 {/if}
 <div class="modifyImg">
 	<div class="params">
@@ -131,5 +131,6 @@
 .big-img-msg
   text-align: center
   margin-top: 1rem
+  color: $error
   font-size: 0.8rem
 </style>
