@@ -46,6 +46,7 @@
     padding: 50px
     background-color: $tertiary
     border: none
+    width: 75vw
     animation: fade-in .3s ease-in-out
     transition: all .3s ease-in-out
 

@@ -21,7 +21,7 @@
 
 	const openAvatarModal = () => {
 		modal.set({
-			title: 'Modifier votre profil',
+			title: 'Modifier votre photo de profil',
 			component: EditAvatarForm,
 			props: {
 				form,
@@ -32,7 +32,7 @@
 </script>
 
 {#if data.profile}
-	<Profile profile={data.profile} editable {openEditModal} {openAvatarModal} />
+	<Profile profile={data.profile} {openEditModal} {openAvatarModal} />
 {:else}
 	<div>loading...</div>
 {/if}

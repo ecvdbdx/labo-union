@@ -1,113 +1,41 @@
 <script lang="ts">
 	import type { Profile } from '$lib/types/profile';
-	// import { enhance } from '$app/forms';
-	// import { v4 as uuidv4 } from 'uuid';
-
-	// import { supabase } from '$lib/auth';
-	// import { invalidate } from '$app/navigation';
 
 	import Icon from '$lib/components/Icon.svelte';
-	// import Modal from '$lib/components/Modal.svelte';
-	// import Button from '$lib/components/Button.svelte';
-	// import Input from '$lib/components/forms/Input.svelte';
-	// import Checkbox from '$lib/components/forms/Checkbox.svelte';
 	import Curriculum from './Curriculum.svelte';
 	import Portfolio from './Portfolio.svelte';
 
-	// let files: FileList;
-	// import { uploadImg, uploading } from '$lib/utils/upload';
-
-	export let editable = false;
 	export let profile: Profile;
-	export let openEditModal: () => void | null;
-	export let openAvatarModal: () => void | null;
-  
-	const sizeLimitInKo = 500;
-	let isCurriculum = true;
+	export let openEditModal: null | (() => void) = null;
+	export let openAvatarModal: null | (() => void) = null;
+
 	$: ({ first_name, last_name, speciality, description, status, grade, profile_img } = profile);
-	$: imageIsTooBig = false;
-  
-
-
-	// const handleCheck = (e: Event) => {
-	// 	status = (e.target as HTMLInputElement).checked;
-	// };
-
-	// function changeImg() {
-	// 	const currentImg = profile_img!.split('image-profile/')[0];
-
-	// 	if (!files || files.length === 0) {
-	// 		throw new Error('You must select an image to upload.');
-	// 	}
-
-	// 	const file = files[0];
-	// 	const format = file.name.split('.').pop();
-
-		const file = files[0];
-
-		if (file.size <= sizeLimitInKo * 1000) {
-			imageIsTooBig = false;
-			const format = file.name.split('.').pop();
-
-			profile.profile_img = URL.createObjectURL(file);
-
-			const hashProfile = uuidv4();
-
-			const filePath = `${hashProfile}-profile.${format}`;
-
-			uploadImg(userId, filePath, currentImg, file);
-		} else {
-			imageIsTooBig = true;
-		}
-	}
-
-	async function deleteImg() {
-		const currentImg = profile.profile_img.split('image-profile/')[1];
-		const { error: err } = await supabase
-			.from('Profile')
-			.update({ profile_img: '' })
-			.eq('user_id', userId);
-		const { error: errRemoveImg } = await supabase.storage
-			.from('image-profile')
-			.remove([currentImg]);
-		if (err) {
-			return err;
-		}
-		if (errRemoveImg) {
-			return errRemoveImg;
-		}
-
-		invalidate('app:profile');
-	}
+	let isCurriculum = true;
 </script>
 
 <div class="Profile">
 	<div class="container-top">
 		<div class="left">
-			{#if editable && profile_img === ''}
-				<button class="img-profile" on:click={openAvatarModal}>
-					<Icon id="plus" color="black" size="1em" />
-				</button>
-			{/if}
-
-			{#if profile_img !== ''}
-				{#if editable}
-					<button class="img-profile" on:click={handleOpenImgModal}>
+			{#if openAvatarModal}
+				{#if profile_img !== ''}
+					<button class="img-profile" on:click={openAvatarModal}>
 						<img class="img-profile" src={profile_img} alt="" />
 						<div class="pencil">
 							<Icon id="edit-2" color="black" size="1em" />
 						</div>
 					</button>
 				{:else}
-					<div class="img-profile">
-						<img class="img-profile" src={profile_img} alt="" />
-					</div>
+					<button class="img-profile" on:click={openAvatarModal}>
+						<Icon id="plus" color="black" size="1em" />
+					</button>
 				{/if}
+			{:else}
+				<img class="img-profile" src={profile_img} alt="" />
 			{/if}
 
 			<div class="user-name">
 				<h1>{first_name} {last_name}</h1>
-				{#if editable}
+				{#if openEditModal}
 					<div class="edit-profile" on:keydown={openEditModal} on:click={openEditModal}>
 						Modifier le profil
 						<Icon id="edit-2" color="black" size="1em" />
@@ -136,18 +64,19 @@
 		</div>
 	</div>
 	<div class="tab">
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div
 			class="curriculum"
 			on:click={() => (isCurriculum = true)}
+			on:keydown={() => (isCurriculum = true)}
 			class:tab-selected={isCurriculum === true}
 		>
 			Curriculum
 		</div>
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		>
 		<div
 			class="portfolio"
 			on:click={() => (isCurriculum = false)}
+			on:keydown={() => (isCurriculum = false)}
 			class:tab-selected={isCurriculum === false}
 		>
 			Portfolio
@@ -163,109 +92,6 @@
 	</div>
 </div>
 
-<!-- <Modal>
-		<div class="title">
-			Modifier le résumé de votre profil
-			<button class="close">
-				<Icon id="x" color="black" size="2em" />
-			</button>
-		</div>
-		<form
-			class="form"
-			method="POST"
-			action="?/updateProfile"
-			use:enhance={() => {
-				return ({ update }) => update({ reset: false });
-			}}
-		>
-			<Input
-				placeholder={'John'}
-				value={first_name ?? ''}
-				name={'first_name'}
-				type={'text'}
-				required={true}
-				error={form?.first_name_error}>Prénom *</Input
-			>
-			<Input
-				placeholder={'Dupont'}
-				value={last_name ?? ''}
-				name={'last_name'}
-				type={'text'}
-				required={true}
-				error={form?.last_name_error}>Nom *</Input
-			>
-			<Input placeholder={'M2'} value={grade ?? ''} name={'grade'} required={false} type={'text'}
-				>Classe</Input
-			>
-			<Input
-				placeholder={'Développement Web'}
-				value={speciality ?? ''}
-				name={'speciality'}
-				required={false}
-				type={'text'}>Spécialité</Input
-			>
-			<Input
-				placeholder={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus dignissim dolor at lacinia. Suspendisse cursus mollis dolor eu mattis. Sed ultricies commodo dictum. Suspendisse porta blandit quam. '}
-				value={description ?? ''}
-				required={false}
-				name={'description'}
-				type={'text'}>Description</Input
-			>
-
-			<Checkbox
-				name={'status'}
-				reverse
-				label={'Je suis disponible'}
-				value={status ?? false}
-				on:change={(e) => handleCheck(e)}
-			/>
-
-			<Button>Enregistrer</Button>
-		</form>
-	</Modal> -->
-
-<!-- <Modal>
-		<div class="title">
-			Modifier votre photo de profil
-			<button class="close">
-				<Icon id="x" color="black" size="2em" />
-			</button>
-		</div>
-		<div class="profilImg">
-			{#if editable && profile_img === ''}
-				<div class="img-profile" />
-			{/if}
-			{#if profile_img !== ''}
-				<div class="img-profile img-modal">
-					<img src={profile_img} alt="" />
-				</div>
-			{/if}
-		</div>
-		{#if imageIsTooBig}
-			<p class="big-img-msg">Votre image dépasse {sizeLimitInKo} ko.</p>
-		{/if}
-		<div class="modifyImg">
-			<div class="params">
-				<label class="button primary block" for="single">
-					{uploading ? 'Uploading ...' : 'Modifier / Ajouter une image'}
-				</label>
-				<input
-					style="visibility: hidden; position:absolute;"
-					type="file"
-					id="single"
-					accept=".jpg, .png, .jpeg, .JPEG, .webp"
-					bind:files
-					on:change={changeImg}
-					disabled={uploading}
-				/>
-				<Icon id="edit-2" color="black" size="1em" />
-			</div>
-			<button class="params" on:click={deleteImg}>
-				Supprimer
-				<Icon id="x" color="black" size="1em" />
-			</button>
-		</div>
-	</Modal> -->
 <style lang="sass">
 .Profile
   padding-top: 5rem

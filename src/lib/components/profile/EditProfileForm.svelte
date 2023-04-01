@@ -8,6 +8,10 @@
 
 	export let form: { first_name_error: string; last_name_error: string };
 	export let profile: Profile;
+
+	const handleCheck = (e: Event) => {
+		profile.status = (e.target as HTMLInputElement).checked;
+	};
 </script>
 
 <form
@@ -55,7 +59,13 @@
 		type={'text'}>Description</Input
 	>
 
-	<Checkbox name={'status'} reverse label={'Je suis disponible'} value={profile.status ?? false} />
+	<Checkbox
+		name={'status'}
+		reverse
+		label={'Je suis disponible'}
+		on:change={handleCheck}
+		value={profile.status ?? false}
+	/>
 
 	<Button>Enregistrer</Button>
 </form>
