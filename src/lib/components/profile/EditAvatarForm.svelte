@@ -128,7 +128,7 @@
     background-color: transparent
     padding: 0
     font-family: 'Plus Jakarta Sans', sans-serif
-    font-size: 16px
+    font-size: $p_size
     label
       cursor: pointer
 

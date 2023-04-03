@@ -64,22 +64,20 @@
 		</div>
 	</div>
 	<div class="tab">
-		<div
+		<button
 			class="curriculum"
 			on:click={() => (isCurriculum = true)}
-			on:keydown={() => (isCurriculum = true)}
 			class:tab-selected={isCurriculum === true}
 		>
 			Curriculum
-		</div>
-		<div
+		</button>
+		<button
 			class="portfolio"
 			on:click={() => (isCurriculum = false)}
-			on:keydown={() => (isCurriculum = false)}
 			class:tab-selected={isCurriculum === false}
 		>
 			Portfolio
-		</div>
+		</button>
 	</div>
 
 	<div class="container-bottom">
@@ -113,14 +111,19 @@ p
   margin: 2rem 7.5rem
   border-bottom: 1.5px solid #00000010
   padding-bottom: 1.25rem
-  div
-    color: #1818184D
 
 .tab-selected
   color: #181818!important
+      
+.curriculum, .portfolio
+  background: none
+  border: none
+  outline: none
+  margin: 0 .5rem
+  font-size: $p_size
+  font-family: $base_font
 
 .curriculum
-  padding-right: 1.5rem
   cursor: pointer
 
 .portfolio
@@ -131,10 +134,6 @@ p
 
 h1
   margin-bottom: 1.3rem
-
-h2
-  margin-bottom: 3rem
-  color: $primary-300
 
 .right
   display: flex
@@ -182,9 +181,9 @@ h2
 
 .availability
   margin: 0.75rem 0
-  font-weight: 600
+  font-weight: $bold
   color: #18181860
-  font-size: 1.25rem
+  font-size: $h5_size
   display: flex
 
 .is-not-available
@@ -205,7 +204,7 @@ h2
   margin: 0.75rem 0
   font-weight: 600
   color: $gray
-  font-size: 1.25rem
+  font-size: $h5_size
 
 .user-name
   display: flex
@@ -214,7 +213,7 @@ h2
   flex-wrap: wrap
 
 .presentation
-  font-size: 1rem
+  font-size: $p_size
   line-height: 24px
 
 .image-secondary

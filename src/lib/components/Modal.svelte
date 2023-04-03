@@ -15,12 +15,12 @@
 	const closeOnBackdrop = (event: MouseEvent | KeyboardEvent) => {
 		if (event instanceof KeyboardEvent) return;
 
-		const rect = element.getBoundingClientRect();
+		const { top, left, height, width } = element.getBoundingClientRect();
 		const isInDialog =
-			rect.top <= event.clientY &&
-			event.clientY <= rect.top + rect.height &&
-			rect.left <= event.clientX &&
-			event.clientX <= rect.left + rect.width;
+			top <= event.clientY &&
+			event.clientY <= top + height &&
+			left <= event.clientX &&
+			event.clientX <= left + width;
 		if (!isInDialog) {
 			element.close();
 		}
