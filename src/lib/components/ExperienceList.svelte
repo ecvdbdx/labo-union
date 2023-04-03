@@ -6,13 +6,6 @@
 	export let experiences: Experience[] | undefined;
 	export let openExperienceModal: null | ((isNew: boolean) => void) = null;
 
-	// avoid openExperienceModal possibly being undefined
-	function handleOpenModal(isNew: boolean) {
-		if (!openExperienceModal) return;
-
-		openExperienceModal(isNew);
-	}
-
 	const sortByDate = (a: Experience, b: Experience) => {
 		if (!a.start_date || !b.start_date) return 0;
 
@@ -31,7 +24,7 @@
 					{#if !!experiences?.length}
 						<button
 							class="edit"
-							on:click={() => handleOpenModal(false)}
+							on:click={() => openExperienceModal?.(false)}
 							title="Editer les experiences"
 						>
 							<Icon color="black" id="edit-2" size="1em" />
@@ -39,7 +32,7 @@
 					{/if}
 					<button
 						class="edit"
-						on:click={() => handleOpenModal(true)}
+						on:click={() => openExperienceModal?.(true)}
 						title="Ajouter une experience"
 					>
 						<Icon color="black" id="plus" size="1em" />

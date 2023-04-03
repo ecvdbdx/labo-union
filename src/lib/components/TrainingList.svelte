@@ -6,13 +6,6 @@
 	export let trainings: Training[] | undefined;
 	export let openTrainingModal: null | ((isNew: boolean) => void) = null;
 
-	// avoid openTrainingModal possibly being undefined
-	function handleOpenModal(isNew: boolean) {
-		if (!openTrainingModal) return;
-
-		openTrainingModal(isNew);
-	}
-
 	const sortByDate = (a: Training, b: Training) => {
 		if (!a.start_date || !b.start_date) return 0;
 
@@ -31,7 +24,7 @@
 					{#if !!trainings?.length}
 						<button
 							class="edit"
-							on:click={() => handleOpenModal(false)}
+							on:click={() => openTrainingModal?.(false)}
 							title="Éditer les expériences"
 						>
 							<Icon color="black" id="edit-2" size="1em" />
@@ -39,7 +32,7 @@
 					{/if}
 					<button
 						class="edit"
-						on:click={() => handleOpenModal(true)}
+						on:click={() => openTrainingModal?.(true)}
 						title="Ajouter une expérience"
 					>
 						<Icon color="black" id="plus" size="1em" />
