@@ -84,12 +84,10 @@
 					/>
 					<input class="name-enterprise" name="company" value={company} />
 					<input class="location-experience" name="location" value={location} />
-					{#if mission}
-						<div class="actions-experience">
-							<span>Actions confiées :</span>
-							<input value={mission} />
-						</div>
-					{/if}
+					<div class="actions-experience">
+						<span>Actions confiées :</span>
+						<input value={mission} />
+					</div>
 				</div>
 			</div>
 			{#if action}
