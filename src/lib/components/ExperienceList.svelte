@@ -12,14 +12,14 @@
 	let displayEndDate = false;
 
 	export let data;
-	export let action: boolean;
+	export let openExperienceModal: null | (() => void) = null;
 </script>
 
 <section>
 	<div class="wrapper-section">
 		<div class="head">
 			<h2 class="experience-container-title">Expériences Professionnelles</h2>
-			{#if action}
+			{#if !!openExperienceModal}
 				<div class="actions">
 					{#if !!data?.length}
 						<button
@@ -44,6 +44,10 @@
 					</li>
 				{/each}
 			</ul>
+		{:else}
+			<div class="no-data">
+				<p>Aucune expérience professionnelle</p>
+			</div>
 		{/if}
 	</div>
 </section>
@@ -113,8 +117,10 @@
 
 <style lang="sass">
   section
+    flex: 1
+
     div.wrapper-section
-			display: flex
+      display: flex
       flex-direction: column
       border-top: 1px solid rgba($gray, .1)
       gap: 2rem
@@ -133,7 +139,8 @@
       align-items: center
       gap: 2rem
       margin-bottom: 2rem
-      grid-column: 1/3
+      width: 100%
+      justify-content: space-between
 
       h2
         font-size: 1.5rem
@@ -180,4 +187,6 @@
           cursor: pointer
 
 
+  .no-data
+    text-align: center
 </style>

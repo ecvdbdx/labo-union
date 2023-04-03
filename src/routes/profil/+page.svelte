@@ -29,10 +29,38 @@
 			},
 		});
 	};
+
+	const openExperienceModal = () => {
+		modal.set({
+			title: 'Modifier mon expérience professionnelle',
+			component: EditAvatarForm,
+			props: {
+				form,
+				profile: data.profile,
+			},
+		});
+	};
+
+	const openTrainingModal = () => {
+		modal.set({
+			title: 'Modifier mon parcours de formation',
+			component: EditAvatarForm,
+			props: {
+				form,
+				profile: data.profile,
+			},
+		});
+	};
 </script>
 
 {#if data.profile}
-	<Profile profile={data.profile} {openEditModal} {openAvatarModal} />
+	<Profile
+		profile={data.profile}
+		{openEditModal}
+		{openAvatarModal}
+		{openTrainingModal}
+		{openExperienceModal}
+	/>
 {:else}
 	<div>loading...</div>
 {/if}

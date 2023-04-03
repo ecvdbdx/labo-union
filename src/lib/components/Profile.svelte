@@ -8,6 +8,8 @@
 	export let profile: Profile;
 	export let openEditModal: null | (() => void) = null;
 	export let openAvatarModal: null | (() => void) = null;
+	export let openExperienceModal: null | (() => void) = null;
+	export let openTrainingModal: null | (() => void) = null;
 
 	$: ({ first_name, last_name, speciality, description, status, grade, profile_img } = profile);
 	let isCurriculum = true;
@@ -82,7 +84,7 @@
 
 	<div class="container-bottom">
 		{#if isCurriculum}
-			<Curriculum {profile} />
+			<Curriculum {profile} {openExperienceModal} {openTrainingModal} />
 		{:else}
 			<Portfolio />
 		{/if}
