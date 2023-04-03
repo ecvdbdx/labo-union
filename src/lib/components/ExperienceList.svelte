@@ -6,12 +6,13 @@
 	export let experiences: Experience[] | undefined;
 	export let openExperienceModal: null | ((isNew: boolean) => void) = null;
 
-	// avoid openTrainingModal possibly being undefined
+	// avoid openExperienceModal possibly being undefined
 	function handleOpenModal(isNew: boolean) {
 		if (!openExperienceModal) return;
 
 		openExperienceModal(isNew);
 	}
+
 	const sortByDate = (a: Experience, b: Experience) => {
 		if (!a.start_date || !b.start_date) return 0;
 

@@ -7,6 +7,7 @@
 	import Icon from '$lib/components/Icon.svelte';
 	import { uploadImg, uploading } from '$lib/utils/upload';
 	import { realUploadSizeLimit, uploadSizeLimit } from '$lib/constants/files';
+	import { modal } from '$lib/stores/modal';
 
 	export let profile: Profile;
 	let files: FileList;
@@ -14,7 +15,7 @@
 	$: ({ user_id, profile_img } = profile);
 	$: imageIsTooBig = false;
 
-	function changeImg() {
+	async function changeImg() {
 		if (!profile_img || !user_id) {
 			return;
 		}
@@ -39,7 +40,8 @@
 		profile.profile_img = URL.createObjectURL(file);
 		const filePath = `${hashProfile}-profile.${format}`;
 
-		uploadImg(user_id, filePath, currentImg, file);
+		await uploadImg(user_id, filePath, currentImg, file);
+		modal.set(null);
 	}
 
 	async function deleteImg() {
@@ -50,7 +52,9 @@
 		if (err) {
 			return err;
 		}
-		invalidate('app:profile');
+
+		await invalidate('app:profile');
+		modal.set(null);
 	}
 </script>
 

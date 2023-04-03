@@ -226,4 +226,7 @@ h1
   gap: 2rem
   justify-content: space-between
 
+.edit-profile
+  cursor: pointer
+
 </style>

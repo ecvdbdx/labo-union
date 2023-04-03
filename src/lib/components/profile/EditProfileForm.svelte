@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { Profile } from '$lib/types/profile';
 
+	import type { Profile } from '$lib/types/profile';
 	import Input from '$lib/components/forms/Input.svelte';
 	import Checkbox from '$lib/components/forms/Checkbox.svelte';
 	import Button from '$lib/components/Button.svelte';
+	import { modal } from '$lib/stores/modal';
 
 	export let form: { first_name_error: string; last_name_error: string };
 	export let profile: Profile;
@@ -17,9 +18,12 @@
 <form
 	class="form"
 	method="POST"
+	action="?/updateProfile"
 	use:enhance={() =>
-		({ update }) =>
-			update({ reset: false })}
+		({ update }) => {
+			modal.set(null);
+			update({ reset: false });
+		}}
 >
 	<Input
 		placeholder={'John'}
