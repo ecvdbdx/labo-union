@@ -474,12 +474,12 @@ h2
     div
       color: #1818184D
 
-  .tab-selected
-    color: #181818 !important
+.tab-selected
+  color: #181818!important
 
-  .curriculum
-    padding-right: 1.5rem
-    cursor: pointer
+.curriculum
+  padding-right: 1.5rem
+  cursor: pointer
 
   .portfolio
     cursor: pointer
@@ -505,40 +505,40 @@ h2
     width: 40%
     margin-right: 1.25rem
 
-  .img-profile
-    width: 84px
-    height: 84px
-    border-radius: 100%
-    border: 1px solid #000
-    display: flex
-    justify-content: center
-    align-items: center
-    position: relative
-    object-fit: cover
-    padding: 0
+.img-profile
+  width: 84px
+  height: 84px
+  border-radius: 100%
+  border: 1px solid #000
+  display: flex
+  justify-content: center
+  align-items: center
+  position: relative
+  object-fit: cover
+  padding: 0
 
 
-  .pencil
-    position: absolute
-    display: flex
-    cursor: pointer
-    align-items: center
-    justify-content: center
-    right: 1px
-    top: 3.5rem
-    bottom: 0
-    margin: auto
-    width: 30px
-    height: 30px
-    background-color: #fff
-    border-radius: 50%
+.pencil
+  position: absolute
+  display: flex
+  cursor: pointer
+  align-items: center
+  justify-content: center
+  right: 1px
+  top: 3.5rem
+  bottom: 0
+  margin: auto
+  width: 30px
+  height: 30px
+  background-color: #fff
+  border-radius: 50%
     padding: 5px
 
-  .img-modal
-    width: auto
-    height: auto
-    cursor: initial
-    margin-bottom: 0.75rem
+.img-modal
+  width: auto
+  height: auto
+  cursor: initial
+  margin-bottom: 0.75rem
 
   .availability
     margin: 0.75rem 0
@@ -547,19 +547,19 @@ h2
     font-size: 1.25rem
     display: flex
 
-  .is-not-available
-    background-color: red
-    width: 10px
-    height: 10px
-    border-radius: 50%
-    margin-left: 0.313rem
+.is-not-available
+  background-color: red
+  width: 10px
+  height: 10px
+  border-radius: 50%
+  margin-left: 0.313rem
 
-  .is-available
-    background-color: green
-    width: 10px
-    height: 10px
-    border-radius: 50%
-    margin-left: 0.313rem
+.is-available
+  background-color: green
+  width: 10px
+  height: 10px
+  border-radius: 50%
+  margin-left: 0.313rem
 
   .grade
     margin: 0.75rem 0
@@ -589,8 +589,8 @@ h2
     //flex-wrap: wrap
     justify-content: space-between
 
-  .location-degree
-    color: #18181860
+.location-degree
+  color: #18181860
 
     @media screen and (max-width: 768px)
       margin: 7.5rem 2rem
@@ -602,11 +602,11 @@ h2
     padding: 2.6rem 1.5rem
     margin-bottom: 15px
 
-    @media screen and (max-width: 1024px)
-      margin-left: auto
-      margin-right: auto
-      max-width: 100%
-      width: 100%
+  @media screen and (max-width: 1024px)
+    margin-left: auto
+    margin-right: auto
+    max-width: 100%
+    width: 100%
 
   .degree-container
     max-width: 40vw
@@ -643,8 +643,8 @@ h2
       font-weight: 600
       margin-bottom: 0.5rem
 
-  .location-degree
-    color: #18181860
+.location-degree
+  color: #18181860
 
   .name-degree
     color: #18181860
@@ -655,16 +655,16 @@ h2
     grid-gap: 0.75rem 2rem
 
 
-  .duration-experience
-    grid-column: 1
+.duration-experience
+  grid-column: 1
 
-    p
-      color: $black
-      opacity: 1
-      font-weight: 600
+  p
+    color: $black
+    opacity: 1
+    font-weight: 600
 
-  .name-experience
-    grid-column: 2
+.name-experience
+  grid-column: 2
 
   .block-degree
     display: grid
@@ -700,43 +700,43 @@ h2
     &:hover
       cursor: pointer
 
-  .title
-    font-weight: 700
-    font-size: 2rem
-    line-height: 36px
-    letter-spacing: 0.02em
-    margin-bottom: 60px
-    display: flex
-    flex-direction: row
-    align-items: center
-    justify-content: space-between
-    width: 100%
+.title
+  font-weight: 700
+  font-size: 2rem
+  line-height: 36px
+  letter-spacing: 0.02em
+  margin-bottom: 60px
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
+  width: 100%
 
-  .close
-    border: none
-    background-color: transparent
-    cursor: pointer
+.close
+  border: none
+  background-color: transparent
+  cursor: pointer
 
   .big-img-msg
     text-align: center
     margin-top: 1rem
     font-size: 0.8rem
 
-  .form
-    display: flex
-    flex-direction: column
-    align-items: flex-start
-    width: 100%
-    gap: 14px
+.form
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+  width: 100%
+  gap: 14px
 
     :global(.Button)
       align-self: end
 
-  .profilImg
-    display: flex
-    align-items: center
-    justify-content: center
-    width: 100%
+.profilImg
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 100%
 
     img
       border-radius: 50%
