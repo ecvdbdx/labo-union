@@ -86,7 +86,7 @@
 					<input class="location-experience" name="location" value={location} />
 					<div class="actions-experience">
 						<span>Actions confiées :</span>
-						<input value={mission} />
+						<input value={mission} name="mission" />
 					</div>
 				</div>
 			</div>
