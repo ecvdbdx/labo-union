@@ -4,14 +4,15 @@
 	import Button from '$lib/components/Button.svelte';
 	import { invalidateAll } from '$app/navigation';
 	import { enhance } from '$app/forms';
+	import type { Training } from '$lib/types/profile';
 
-	export let data;
-	$: ({ id, school, location, diploma, start_date, end_date, profile_id } = data);
+	export let train: Training;
+	$: ({ id, school, location, diploma, start_date, end_date, profile_id } = train);
 	export let action;
 
 	let editmode = false;
 
-	async function deleteTraining(experience_id) {
+	async function deleteTraining(experience_id: number) {
 		const { error } = await supabase.from('Training').delete().eq('id', experience_id);
 		error && console.error(error);
 		invalidateAll();
@@ -22,8 +23,10 @@
 	<div class="Experience">
 		<div class="wrapper">
 			<p class="duration-experience">
-				<span>{start_date?.split('-')[0]} - </span>
-				<span>{end_date?.split('-')[0] ?? "Aujourd'hui"}</span>
+				<span>{start_date?.split('-')[0]}</span>
+				{#if start_date?.split('-')[0] !== end_date?.split('-')[0]}
+					<span> - {end_date?.split('-')[0] ?? "Aujourd'hui"}</span>
+				{/if}
 			</p>
 			<div class="infos">
 				<p class="name-experience">{diploma}</p>

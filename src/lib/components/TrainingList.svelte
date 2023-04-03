@@ -1,125 +1,69 @@
 <script lang="ts">
+	import type { Training } from '$lib/types/profile';
 	import TrainingDisplay from '$lib/components/TrainingDisplay.svelte';
-	import Modal from '$lib/components/Modal.svelte';
 	import Icon from '$lib/components/Icon.svelte';
-	import Input from '$lib/components/forms/Input.svelte';
-	import Button from '$lib/components/Button.svelte';
-	import { enhance } from '$app/forms';
-	import Checkbox from '$lib/components/forms/Checkbox.svelte';
 
-	let displayEditTrain = false;
-	let addNew = false;
-	let displayEndDate = false;
+	export let trainings: Training[] | undefined;
+	export let openTrainingModal: null | ((isNew: boolean) => void) = null;
 
-	export let data;
-	export let action: boolean;
+	const sortByDate = (a: Training, b: Training) => {
+		if (!a.start_date || !b.start_date) return 0;
+
+		if (a.start_date > b.start_date) return -1;
+		if (a.start_date < b.start_date) return 1;
+		return 0;
+	};
 </script>
 
 <section>
 	<div class="wrapper-section">
 		<div class="head">
 			<h2 class="experience-container-title">Formations</h2>
-			{#if action}
+			{#if !!openTrainingModal}
 				<div class="actions">
-					{#if !!data?.length}
+					{#if !!trainings?.length}
 						<button
 							class="edit"
-							on:click={() => (displayEditTrain = true)}
+							on:click={() => openTrainingModal?.(false)}
 							title="Éditer les expériences"
 						>
 							<Icon color="black" id="edit-2" size="1em" />
 						</button>
 					{/if}
-					<button class="edit" on:click={() => (addNew = !addNew)} title="Ajouter une expérience">
+					<button
+						class="edit"
+						on:click={() => openTrainingModal?.(true)}
+						title="Ajouter une expérience"
+					>
 						<Icon color="black" id="plus" size="1em" />
 					</button>
 				</div>
 			{/if}
 		</div>
-		<ul class="ExperienceList">
-			{#if data}
-				{#each data as train}
+		{#if trainings && trainings.length}
+			<ul class="ExperienceList">
+				{#each trainings.sort(sortByDate) as train}
 					<li class="block-experience">
-						<TrainingDisplay data={train} {action} />
+						<TrainingDisplay {train} action={false} />
 					</li>
 				{/each}
-			{/if}
-		</ul>
+			</ul>
+		{:else}
+			<div class="no-data">
+				<p>Aucune formation</p>
+			</div>
+		{/if}
 	</div>
 </section>
 
-{#if displayEditTrain === true}
-	<Modal>
-		<div class="modalSection">
-			<div class="title">
-				<div class="left">
-					<button class="close" on:click={() => (displayEditTrain = false)} title="Fermer">
-						<Icon id="x" color="black" size="2em" />
-					</button>
-					<span>Formations</span>
-				</div>
-			</div>
-			<div class="professional-container">
-				<ul class="ExperienceList">
-					{#if data}
-						{#each data as train}
-							<li class="block-experience">
-								<TrainingDisplay data={train} action={true} />
-							</li>
-						{/each}
-					{/if}
-				</ul>
-			</div>
-		</div>
-	</Modal>
-{/if}
-
-{#if addNew}
-	<Modal>
-		<div class="modalSection">
-			<div class="title">
-				<div class="left">
-					<button class="close" on:click={() => (addNew = false)} title="Fermer">
-						<Icon id="x" color="black" size="2em" />
-					</button>
-					<span>Ajouter une expériences professionnelles</span>
-				</div>
-			</div>
-			<form
-				class="form"
-				method="POST"
-				action="?/postTraining"
-				use:enhance={() => {
-					addNew = false;
-					return ({ update }) => update({ reset: false });
-				}}
-			>
-				<Input value="" type="date" name="start_date">Date de début</Input>
-				<Checkbox
-					value={displayEndDate}
-					name="end_date_check"
-					label="Je suis actuellement dans cette école"
-					on:change={(e) => (displayEndDate = e.target.checked)}
-				/>
-				{#if !displayEndDate}
-					<Input value="" type="date" name="end_date">Date de fin</Input>
-				{/if}
-				<Input value="" type="text" name="school">École</Input>
-				<Input value="" type="text" name="diploma">Diplôme</Input>
-				<Button>Enregistrer</Button>
-			</form>
-		</div>
-	</Modal>
-{/if}
-
 <style lang="sass">
   section
-
+    flex: 1
+		
     div.wrapper-section
       border-top: 1px solid rgba($gray, .1)
-      display: grid
-      grid-template-columns: repeat(2, 1fr)
-      grid-template-rows: auto
+      display: flex
+      flex-direction: column
       gap: 2rem
       background-color: $white
       border-radius: 30px
@@ -136,7 +80,8 @@
       align-items: center
       gap: 2rem
       margin-bottom: 2rem
-      grid-column: 1/3
+      width: 100%
+      justify-content: space-between
 
       h2
         font-size: 1.5rem
@@ -155,32 +100,6 @@
           align-items: center
           justify-content: center
 
-  .modalSection
-    display: flex
-    flex-direction: column
-    gap: 4rem
-
-    .title
-      display: flex
-      align-items: center
-      justify-content: space-between
-
-      .left
-        display: flex
-        align-items: center
-        gap: 2rem
-
-        span
-          font-size: 2rem
-
-      button
-        all: inherit
-        text-decoration: underline
-
-        &:hover, &:focus
-          transition: all ease-in-out 150ms
-          color: $primary
-          cursor: pointer
-
-
+  .no-data
+    text-align: center
 </style>
