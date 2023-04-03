@@ -36,13 +36,15 @@
 				</div>
 			{/if}
 		</div>
-		<ul class="ExperienceList">
-			{#each data as experience}
-				<li class="block-experience">
-					<ExperienceDisplay data={experience} {action} />
-				</li>
-			{/each}
-		</ul>
+		{#if data?.length > 0}
+			<ul class="ExperienceList">
+				{#each data as experience}
+					<li class="block-experience">
+						<ExperienceDisplay data={experience} action={false} />
+					</li>
+				{/each}
+			</ul>
+		{/if}
 	</div>
 </section>
 
@@ -58,13 +60,13 @@
 				</div>
 			</div>
 			<div class="professional-container">
-				<ul class="ExperienceList">
-					{#each data as experience}
+				{#each data as experience}
+					<ul class="ExperienceList">
 						<li class="block-experience">
-							<ExperienceDisplay data={experience} action />
+							<ExperienceDisplay data={experience} action={true} />
 						</li>
-					{/each}
-				</ul>
+					</ul>
+				{/each}
 			</div>
 		</div>
 	</Modal>
@@ -112,10 +114,9 @@
 <style lang="sass">
   section
     div.wrapper-section
+			display: flex
+      flex-direction: column
       border-top: 1px solid rgba($gray, .1)
-      display: grid
-      grid-template-columns: repeat(2, 1fr)
-      grid-template-rows: auto
       gap: 2rem
       background-color: $white
       border-radius: 30px

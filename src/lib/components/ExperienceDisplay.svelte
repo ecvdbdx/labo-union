@@ -22,8 +22,10 @@
 	<div class="Experience">
 		<div class="wrapper">
 			<p class="duration-experience">
-				<span>{start_date?.split('-')[0]} - </span>
-				<span>{end_date?.split('-')[0] ?? "Aujourd'hui"}</span>
+				<span>{start_date?.split('-')[0]}</span>
+				{#if start_date?.split('-')[0] !== end_date?.split('-')[0]}
+					<span> - {end_date?.split('-')[0] ?? "Aujourd'hui"}</span>
+				{/if}
 			</p>
 			<div class="infos">
 				<p class="name-experience">{job}</p>
@@ -67,11 +69,6 @@
 				<p class="duration-experience">
 					<input type="date" name="start_date" value={start_date} />
 					<input type="date" name="end_date" value={end_date} />
-					<!--
-                    <label for="here">J'occupe actuellement ce post</label>
-                    <input on:input={() => end_date = null} checked={end_date ? false : tru
-                    e} id="here" type="checkbox">
-                    -->
 				</p>
 				<div class="infos">
 					<input
@@ -82,12 +79,11 @@
 					/>
 					<input class="name-enterprise" name="company" value={company} />
 					<input class="location-experience" name="location" value={location} />
-					{#if mission}
-						<div class="actions-experience">
-							<span>Actions confiées :</span>
-							<input value={mission} />
-						</div>
-					{/if}
+
+					<div class="actions-experience">
+						<span>Actions confiées :</span>
+						<input value={mission} name="mission" />
+					</div>
 				</div>
 			</div>
 			{#if action}

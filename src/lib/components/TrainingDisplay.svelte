@@ -22,8 +22,10 @@
 	<div class="Experience">
 		<div class="wrapper">
 			<p class="duration-experience">
-				<span>{start_date?.split('-')[0]} - </span>
-				<span>{end_date?.split('-')[0] ?? "Aujourd'hui"}</span>
+				<span>{start_date?.split('-')[0]}</span>
+				{#if start_date?.split('-')[0] !== end_date?.split('-')[0]}
+					<span> - {end_date?.split('-')[0] ?? "Aujourd'hui"}</span>
+				{/if}
 			</p>
 			<div class="infos">
 				<p class="name-experience">{diploma}</p>
