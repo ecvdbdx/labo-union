@@ -18,6 +18,7 @@
 	import { uploadImg, uploading } from '$lib/utils/upload';
 
 	export let editable = false;
+	export let action = false;
 	export let userId: string;
 	export let profile: Profile;
 	export let form: { first_name_error: string; last_name_error: string } | null = null;
@@ -343,7 +344,7 @@ h2
   object-fit: cover
   padding: 0
 
-.pencil 
+.pencil
   position: absolute
   display: flex
   cursor: pointer
@@ -358,7 +359,7 @@ h2
   background-color: #fff
   border-radius: 50%
 
-.img-modal 
+.img-modal
   width: auto
   height: auto
   cursor: initial
@@ -406,12 +407,8 @@ h2
   box-shadow: 50px -20px #B6AEA7
 
 .container-bottom
- margin-inline: 7.5rem
- display: flex
- flex-direction: row
- gap: 2rem
-  //flex-wrap: wrap
- justify-content: space-between
+ width: 100%
+ margin-inline: auto
 
 .location-degree
   color: #18181860

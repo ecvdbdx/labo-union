@@ -36,15 +36,15 @@
 				</div>
 			{/if}
 		</div>
-		<ul class="ExperienceList">
-			{#if data}
+		{#if data?.length}
+			<ul class="ExperienceList">
 				{#each data as train}
 					<li class="block-experience">
-						<TrainingDisplay data={train} {action} />
+						<TrainingDisplay data={train} action={false} />
 					</li>
 				{/each}
-			{/if}
-		</ul>
+			</ul>
+		{/if}
 	</div>
 </section>
 
@@ -116,10 +116,9 @@
   section
 
     div.wrapper-section
+      display: flex
+      flex-direction: column
       border-top: 1px solid rgba($gray, .1)
-      display: grid
-      grid-template-columns: repeat(2, 1fr)
-      grid-template-rows: auto
       gap: 2rem
       background-color: $white
       border-radius: 30px
@@ -135,7 +134,6 @@
       display: flex
       align-items: center
       gap: 2rem
-      margin-bottom: 2rem
       grid-column: 1/3
 
       h2
