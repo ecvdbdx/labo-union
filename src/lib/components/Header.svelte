@@ -115,5 +115,7 @@
 	:global(.Header a:not(.active):not(.empty))
 		text-decoration: none
 		color: $black
+		&:hover
+			color: $primary
 
 </style>

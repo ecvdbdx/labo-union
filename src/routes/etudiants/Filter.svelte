@@ -7,8 +7,8 @@
 </script>
 
 <div class="Filter">
-	<label for="data-id">{label}</label>
-	<select bind:value={selectedOption} on:change>
+	<label for={label}>{label}</label>
+	<select bind:value={selectedOption} on:change id={label}>
 		<option value="">Sélectionner</option>
 		{#each options as option}
 			<option value={option[key]}>{option[key]}</option>

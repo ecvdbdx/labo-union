@@ -16,7 +16,7 @@
 	{/if}
 	{#if rounded}
 		<div class="input-rounded">
-			<input bind:value={search} type="search" {name} {placeholder} />
+			<input bind:value={search} type="search" {name} {placeholder} on:input />
 
 			<Button type="rounded" on:click>
 				{buttonText}
@@ -34,17 +34,17 @@
 </div>
 
 <style lang="sass">
-	.group 
+	.group
 		margin-bottom: 1rem
 		width: 100%
 		position: relative
 
-		label 
+		label
 			display: block
 			margin-bottom: 0.5rem
-		
 
-		.input 
+
+		.input
 			display: flex
 			position: relative
 			padding: 0.55rem 0.7rem
@@ -52,17 +52,17 @@
 			background-color: $white
 			border-radius: 10px
 
-			input 
+			input
 				flex-grow: 1
 				color: $black
 				border: none
 				background-color: transparent
 				padding: 0
 
-				&:focus-visible 
+				&:focus-visible
 					outline: none
 
-			.submit 
+			.submit
 				background-color: transparent
 				border: none
 				cursor: pointer

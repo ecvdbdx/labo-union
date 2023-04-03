@@ -22,20 +22,19 @@
     &:hover
       cursor: default
 
-    &:active 
+    &:active
       color: $active
-
       &:hover
         color: $primary
         transition: 200ms linear color
 
-    // &:visited 
+    // &:visited
     //   color: $focus
-    
-    &:hover 
+
+    &:hover
       color: $hover
       cursor: pointer
 
-    &:focus-visible 
+    &:focus-visible
       color: $focus
 </style>

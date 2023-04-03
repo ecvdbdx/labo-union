@@ -48,7 +48,13 @@
 <div class="container main-container">
 	<h2>L'annuaire</h2>
 	<div class="container-search-bar">
-		<Search rounded={true} name="profile" bind:search on:click={searchProfiles} />
+		<Search
+			rounded={true}
+			name="profile"
+			bind:search
+			on:click={searchProfiles}
+			on:input={searchProfiles}
+		/>
 	</div>
 	<div class="container-filters">
 		<Filter label="Cursus" options={data.speciality} on:change={updateSpecialty} />
@@ -97,115 +103,126 @@
 </div>
 
 <style lang="sass">
-.main-container
-	margin-top: 8rem
+  .main-container
+    margin-top: 8rem
 
-	@media screen and (max-width: 768px)
-		width: 90vw
+    @media screen and (max-width: 768px)
+      width: 90vw
 
-	h2
-		margin-bottom: 2rem	
+    h2
+      margin-bottom: 2rem
 
-	.container-search-bar
-		width: 55%
+    .container-search-bar
+      width: 55%
 
-		@media screen and (max-width: 1024px)
-			width: 100%  	
+      @media screen and (max-width: 1024px)
+        width: 100%
 
-	.container-filters
-		width: 100%
-		display: flex
-		margin-bottom: 2rem
+    .container-filters
+      width: 100%
+      display: flex
+      margin-bottom: 2rem
 
-	ul.grid-container
-		padding: 0
-		display: grid
-		grid-gap: 2rem
-		grid-template-columns: repeat(auto-fill, 17rem)
-	
-		li
-			position: relative
-			list-style: none
-			height: auto
-			width: fit-content
+    ul.grid-container
+      padding: 0
+      display: grid
+      width: 100%
+      grid-template-columns: repeat(4, 1fr)
+      gap: 2rem
+      @media screen and (max-width: 1200px)
+        grid-template-columns: repeat(3, 1fr)
+      @media screen and (max-width: 1000px)
+        grid-template-columns: repeat(2, 1fr)
+      @media screen and (max-width: 500px)
+        grid-template-columns: repeat(1, 1fr)
+      li
+        position: relative
+        list-style: none
+        height: auto
+        &:hover, &:focus
+          * > img
+            transform: scale(1.1)
 
-			a
-				text-decoration: none
-				width: fit-content
-				display: block
-				height: 100%
+        a
+          text-decoration: none
+          //width: fit-content
+          display: block
+          height: 100%
+          width: 100%
 
-				.picture-student
-					width: 100%
-					height: 70%
-					margin: 0 auto
-					border-radius: 0.5rem
-					background-color: $tertiary
-					margin-bottom: 1.5rem
-					box-sizing: border-box
-					display: flex
-					justify-content: center
-					box-sizing: border-box
-					align-items: center
+          .picture-student
+            width: 100%
+            height: 70%
+            margin: 0 auto
+            border-radius: 0.5rem
+            background-color: $tertiary
+            margin-bottom: 1.5rem
+            box-sizing: border-box
+            display: flex
+            justify-content: center
+            box-sizing: border-box
+            align-items: center
+            overflow: hidden
 
-					img
-						width: 100%
-						height: 100%
-						object-fit: cover
+            img
+              width: 100%
+              height: 100%
+              object-fit: cover
+              transition: all ease-in-out 300ms
 
-					.no-picture
-						opacity: 0.3
-						width: 30%
-						height: auto
+            .no-picture
+              opacity: 0.3
+              width: 30%
+              height: auto
 
-				.container-student
-					height: fit-content
-					font-size: 1rem
-					color: black
-					width: 100%
-					margin-bottom: 0.6rem
-        
-				.container-cursus
-					color: $gray
-					margin-bottom: 0.6rem
+          .container-student
+            height: fit-content
+            font-size: 1rem
+            color: black
+            width: 100%
+            margin-bottom: 0.6rem
 
-				.undefined
-					font-size: 1rem
-					font-weight: 400
-					color: $black
+          .container-cursus
+            color: $gray
+            margin-bottom: 0.6rem
 
-				.container-tags
-					position: absolute
-					width: 45%
-					top: 50%
-					right: 0
+          .undefined
+            font-size: 1rem
+            font-weight: 400
+            color: $black
 
-					.tag
-						height: 1.5rem
-						border-radius: 1.5rem 0 0 1.5rem			
-						background-color: $disabled
+          .container-tags
+            position: absolute
+            width: 45%
+            top: 50%
+            right: 0
 
-					&:first-child
-						margin-bottom: 0.3rem
+            .tag
+              height: 1.5rem
+              border-radius: 1.5rem 0 0 1.5rem
+              background-color: $disabled
 
-					.student-tag
-						background-color: $primary
+            &:first-child
+              margin-bottom: 0.3rem
 
-					.is-available
-						background-color: $success
+            .student-tag
+              background-color: $primary
 
-					.student-disponibility
-						margin-top: 0.5rem
-  
-					span
-						display: block
-						font-size: 0.8rem
-						color: $white
-						margin: 0
-						padding: 0.28rem 1.25rem 0 1.25rem
-						height: fit-content
-						width: 100%
-						text-overflow: ellipsis
-						overflow: hidden
-						white-space: nowrap
+            .is-available
+              background-color: $success
+
+            .student-disponibility
+              margin-top: 0.5rem
+
+            span
+              display: block
+              font-size: 0.8rem
+              color: $white
+              margin: 0
+              padding: 0.28rem 1.25rem 0 1.25rem
+              height: fit-content
+              width: 100%
+              text-overflow: ellipsis
+              overflow: hidden
+              white-space: nowrap
 </style>

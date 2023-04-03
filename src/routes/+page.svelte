@@ -185,6 +185,12 @@
 							mix-blend-mode: darken
 							z-index: -1
 							opacity: 0.35
+							animation: 1s lined ease-in-out normal
+							@keyframes lined
+								from
+									width: 0%
+								to
+									width: 100%
 
 							@media screen and (max-width: 768px)
 								height: 1rem
@@ -230,7 +236,7 @@
 
 				@media screen and (max-width: 1024px)
 					display: none
-		
+
 		.section-pictos
 			width: 100%
 			height: fit-content
@@ -261,7 +267,7 @@
 					align-items: center
 					justify-content: center
 					margin: 0 auto 1.25rem auto
-				
+
 					.container-icon-circle-2
 						background-color: $primary-200
 						width: 2rem
@@ -323,7 +329,7 @@
 						margin-bottom: 1rem
 						font-weight: 700
 
-					p 
+					p
 						margin-bottom: 2rem
 
 					a
@@ -366,7 +372,7 @@
 			width: fit-content
 			height: fit-content
 			margin-bottom: 1rem
-		
+
 		.container-icon
 			width: 3rem
 			height: 3rem

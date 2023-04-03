@@ -7,11 +7,30 @@ body {
 	margin: 0;
 	background-color: #faf5f0;
 	font-family: 'Plus Jakarta Sans', sans-serif;
+	position: relative;
+	z-index: 10;
+}
+body::before {
+	content: '';
+	display: block;
+	width: 100vw;
+	height: 100vh;
+	background-image: url('./png/noise.png');
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: -1;
+	mix-blend-mode: hard-light;
+	opacity: 0.7;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .container {
 	width: calc(100vw - 240px);
 	margin: 0 auto;
+	z-index: 10;
 }
 
 h1 {
