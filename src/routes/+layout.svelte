@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Profile } from '$lib/types/profile';
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 
@@ -8,7 +9,7 @@
 
 	export let data;
 
-	$: user = data.user;
+	$: user = data.user as Profile;
 
 	onMount(() => {
 		const {
@@ -26,5 +27,5 @@
 <Header {user} />
 <main>
 	<slot />
-	<Modal />
 </main>
+<Modal />

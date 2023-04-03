@@ -178,6 +178,7 @@ h1
   height: auto
   cursor: initial
   margin-bottom: 0.75rem
+  padding: .3rem
 
 .availability
   margin: 0.75rem 0
