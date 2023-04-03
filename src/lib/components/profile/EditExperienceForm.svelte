@@ -36,7 +36,7 @@
 		<Input value="" type="text" name="job">Poste</Input>
 		<Input value="" type="text" name="company">Entreprise</Input>
 		<Input value="" type="textarea" name="mission">Mission</Input>
-		<Button on:click={() => modal.set(null)}>Enregistrer</Button>
+		<Button>Enregistrer</Button>
 	</form>
 {:else}
 	<div class="professional-container">

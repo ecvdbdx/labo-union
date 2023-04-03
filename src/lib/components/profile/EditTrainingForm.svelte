@@ -6,6 +6,7 @@
 	import Checkbox from '$lib/components/forms/Checkbox.svelte';
 	import TrainingDisplay from '$lib/components/TrainingDisplay.svelte';
 	import type { Training } from '$lib/types/profile';
+	import { modal } from '$lib/stores/modal';
 
 	export let trainings: Training[];
 	export let isNew = false;
@@ -21,6 +22,7 @@
 		use:enhance={() =>
 			({ update }) => {
 				isNew = false;
+				modal.set(null);
 				return update({ reset: false });
 			}}
 	>
