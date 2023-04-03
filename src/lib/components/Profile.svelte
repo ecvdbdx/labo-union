@@ -8,8 +8,8 @@
 	export let profile: Profile;
 	export let openEditModal: null | (() => void) = null;
 	export let openAvatarModal: null | (() => void) = null;
-	export let openExperienceModal: null | (() => void) = null;
-	export let openTrainingModal: null | (() => void) = null;
+	export let openExperienceModal: null | ((isNew: boolean) => void) = null;
+	export let openTrainingModal: null | ((isNew: boolean) => void) = null;
 
 	$: ({ first_name, last_name, speciality, description, status, grade, profile_img } = profile);
 	let isCurriculum = true;

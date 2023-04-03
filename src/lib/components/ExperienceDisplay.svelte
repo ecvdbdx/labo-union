@@ -4,14 +4,15 @@
 	import Button from '$lib/components/Button.svelte';
 	import { invalidateAll } from '$app/navigation';
 	import { enhance } from '$app/forms';
+	import type { Experience } from '$lib/types/profile';
 
-	export let data;
-	$: ({ id, job, start_date, end_date, company, mission, location, profile_id } = data);
+	export let experience: Experience;
+	$: ({ id, job, start_date, end_date, company, mission, location, profile_id } = experience);
 	export let action;
 
 	let editmode = false;
 
-	async function deleteExperience(experience_id) {
+	async function deleteExperience(experience_id: number) {
 		const { error } = await supabase.from('Experience').delete().eq('id', experience_id);
 		error && console.error(error);
 		invalidateAll();

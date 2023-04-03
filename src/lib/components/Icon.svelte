@@ -15,6 +15,7 @@
 	width={size}
 	height={size}
 	on:click
+	on:keydown
 >
 	<use href={`/svg/feather-sprite.svg#${id}`} />
 </svg>
