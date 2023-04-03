@@ -67,14 +67,14 @@
 		<button
 			class="curriculum"
 			on:click={() => (isCurriculum = true)}
-			class:tab-selected={isCurriculum === true}
+			class:tab-selected={isCurriculum}
 		>
 			Curriculum
 		</button>
 		<button
 			class="portfolio"
 			on:click={() => (isCurriculum = false)}
-			class:tab-selected={isCurriculum === false}
+			class:tab-selected={!isCurriculum}
 		>
 			Portfolio
 		</button>
@@ -112,9 +112,6 @@ p
   border-bottom: 1.5px solid #00000010
   padding-bottom: 1.25rem
 
-.tab-selected
-  color: #181818!important
-      
 .curriculum, .portfolio
   background: none
   border: none
@@ -122,6 +119,12 @@ p
   margin: 0 .5rem
   font-size: $p_size
   font-family: $base_font
+  opacity: .4
+  transition: opacity .2s ease-in-out
+
+.tab-selected
+  opacity: 1
+      
 
 .curriculum
   cursor: pointer
