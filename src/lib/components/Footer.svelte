@@ -48,7 +48,7 @@
 	<a href="/">
 		<img src="/svg/logo_white.svg" alt="logo union" />
 	</a>
-	<div>
+	<div class="container">
 		<div class="container-links">
 			<nav>
 				{#each links as link}
@@ -82,16 +82,21 @@
 		height: fit-content
 		padding: 1.25rem 7.5rem
 		display: flex
-		justify-content: center
+		justify-content: space-between
+		align-items: center
 		font-size: 0.9rem
 		
 		img
 			width: auto
 			height: 100%
 			
+		.container
+			margin: auto
+			
 		.container-links
 			display: flex
 			align-items: center
+			justify-content: center
 
 			nav
 				display: flex
@@ -101,7 +106,7 @@
 				align-items: center
 				margin-right: 2rem
 	
-	:global(.Footer a:not(.active):not(.empty))
+	:global(.Footer a:not(.active))
 		text-decoration: none
 		color: $white
 		
@@ -112,7 +117,7 @@
 		padding: 1.25rem 7.5rem
 		display: flex
 		justify-content: center
-		font-size: 0.9rem
+		font-size: 0.75rem
 		
 		.container-links
 			display: flex
@@ -121,8 +126,12 @@
 			nav
 				display: flex
 				gap: 2rem
-				color: $white
+				color: $disabled
 				height: fit-content
 				align-items: center
 				margin-right: 2rem
+				
+	:global(.subFooter a:not(.active))
+		text-decoration: none
+		color: $disabled
 </style>
