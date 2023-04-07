@@ -75,7 +75,9 @@
 			</p>
 		</div>
 		<div class="container-part">
-			<div class="container-image" />
+			<div class="container-image">
+				<img src="/png/home/profile.png" alt="profile" />
+			</div>
 			<div class="container-text-part">
 				<div class="container-icon">
 					<Icon id="zap" color="#F25824" />
@@ -101,10 +103,14 @@
 					d’entreprise et liens utiles.
 				</p>
 			</div>
-			<div class="container-image" />
+			<div class="container-image">
+				<img src="/png/home/exp.png" alt="profile" />
+			</div>
 		</div>
 		<div class="container-part">
-			<div class="container-image" />
+			<div class="container-image">
+				<img src="/png/home/yearbook.png" alt="profile" />
+			</div>
 			<div class="container-text-part">
 				<div class="container-icon">
 					<Icon id="zap" color="#F25824" />
@@ -307,7 +313,13 @@
 				.container-image
 					width: 50%
 					height: 100%
-					background-color: $black
+                    
+					img
+						max-width: 100%
+						max-height: 100%
+						height: auto
+						width: auto
+						display: block
 
 				.container-text-part:nth-child(1)
 					padding-left: 7.5rem
