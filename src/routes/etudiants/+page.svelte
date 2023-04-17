@@ -6,7 +6,6 @@
 	import Search from '$lib/components/Search.svelte';
 
 	export let data: PageData;
-	$: ({ supabase } = data);
 
 	// TODO: Update this variables when data from database is available
 	const disponibilityIsVisible = true;
@@ -18,17 +17,17 @@
 	$: filteredProfiles = data.profiles;
 
 	async function searchProfiles() {
-		const { data, error: err } = await supabase.rpc('searchprofile', {
+		const { data: profiles, error: err } = await data.supabase.rpc('searchprofile', {
 			search,
-			grade: grade || null,
-			speciality: speciality || null,
+			grade: grade,
+			speciality: speciality,
 		});
 
 		if (err) {
 			console.error(err);
 		}
 
-		filteredProfiles = await data;
+		filteredProfiles = profiles || [];
 	}
 
 	function updateSpecialty(e: Event) {
