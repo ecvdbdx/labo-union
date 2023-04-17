@@ -25,14 +25,9 @@
 			subscription.unsubscribe();
 		};
 	});
-
-	const logout = async () => {
-		await supabase.auth.signOut();
-		invalidate('supabase:auth');
-	};
 </script>
 
-<Header {user} {logout} />
+<Header {user} />
 <main>
 	<slot />
 </main>
