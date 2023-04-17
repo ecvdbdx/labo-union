@@ -7,6 +7,7 @@
 	import type { Profile } from '$lib/types/profile';
 
 	export let user: Profile;
+	export let logout: () => void;
 
 	const logout = async () => {
 		await $page.data.supabase.auth.signOut();
