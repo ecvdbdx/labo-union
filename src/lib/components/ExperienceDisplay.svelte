@@ -93,12 +93,11 @@
 						Modifier
 						<Icon color="black" id="edit-2" size="1em" />
 					</button>
-					<form method="POST" action={`?/deleteExperience&id=${id}`}>
-						<button>
-							>Supprimer
-							<Icon color="black" id="edit-2" size="1em" />
-						</button>
-					</form>
+
+					<button on:click={() => deleteExperience(id)}>
+						Supprimer
+						<Icon color="black" id="edit-2" size="1em" />
+					</button>
 				</div>
 			{/if}
 		</div>
