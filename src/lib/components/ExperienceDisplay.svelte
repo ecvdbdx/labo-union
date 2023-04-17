@@ -1,10 +1,11 @@
 <script lang="ts">
-	import Icon from '$lib/components/Icon.svelte';
-	import Button from '$lib/components/Button.svelte';
 	import { invalidateAll } from '$app/navigation';
 	import { enhance } from '$app/forms';
-	import type { Experience } from '$lib/types/profile';
 	import { page } from '$app/stores';
+
+	import Icon from '$lib/components/Icon.svelte';
+	import Button from '$lib/components/Button.svelte';
+	import type { Experience } from '$lib/types/profile';
 
 	export let experience: Experience;
 	export let action: boolean;
