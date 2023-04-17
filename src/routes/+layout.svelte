@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { Profile } from '$lib/types/profile';
-	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import { invalidate } from '$app/navigation';
+
+	import type { Profile } from '$lib/types/profile';
 	import Header from '$lib/components/Header.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 

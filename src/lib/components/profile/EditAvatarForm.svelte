@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { invalidate } from '$app/navigation';
 	import { v4 as uuidv4 } from 'uuid';
+	import { invalidate } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	import type { Profile } from '$lib/types/profile';
 	import Icon from '$lib/components/Icon.svelte';
 	import { realUploadSizeLimit, uploadSizeLimit } from '$lib/constants/files';
 	import { modal } from '$lib/stores/modal';
-	import { page } from '$app/stores';
 
 	export let profile: Profile;
 	let files: FileList;
@@ -55,11 +55,11 @@
 	}
 
 	async function changeImg() {
-		if (!profile_img || !user_id) {
+		if (!user_id) {
 			return;
 		}
 
-		const currentImg = profile_img.split('image-profile/')[1];
+		const currentImg = profile_img ? profile_img.split('image-profile/')[1] : '';
 
 		if (!files || files.length === 0) {
 			throw new Error('You must select an image to upload.');
