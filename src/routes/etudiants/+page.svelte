@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { supabase } from '$lib/auth';
-
 	import type { PageData } from './$types';
 	import Card from '$lib/components/Card.svelte';
 	import Filter from './Filter.svelte';
@@ -8,6 +6,7 @@
 	import Search from '$lib/components/Search.svelte';
 
 	export let data: PageData;
+	$: ({ supabase } = data);
 
 	// TODO: Update this variables when data from database is available
 	const disponibilityIsVisible = true;

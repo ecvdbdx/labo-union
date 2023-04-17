@@ -1,11 +1,10 @@
 import type { Actions } from './$types';
 import { fail } from '@sveltejs/kit';
 
-import { supabase } from '$lib/auth';
 import { isPasswordValid } from '$lib/validators/auth';
 
 export const actions: Actions = {
-	default: async ({ request }) => {
+	default: async ({ request, locals: { supabase } }) => {
 		const formData = await request.formData();
 
 		const email = formData.get('email')?.toString();
@@ -56,33 +55,34 @@ export const actions: Actions = {
 			});
 		}
 
-		try {
-			const { data } = await supabase.auth.signUp({
-				email: email as string,
-				password: password as string,
+		const { data, error } = await supabase.auth.signUp({
+			email: email as string,
+			password: password as string,
+		});
+
+		if (error) {
+			return fail(400, {
+				email_error: error.message,
+				email,
+				password,
 			});
-
-			const user_information = await supabase
-				.from('AuthorizedEmail')
-				.select('*')
-				.eq('email', email);
-
-			if (user_information.data === null) {
-				throw new Error('Profile cannot be created');
-			}
-
-			await supabase.from('Profile').insert({
-				created_at: new Date().toISOString(),
-				user_id: data.user?.id,
-				first_name: user_information.data[0].firstname,
-				last_name: user_information.data[0].lastname,
-				speciality: user_information.data[0].speciality,
-				grade: user_information.data[0].grade,
-				date_of_birth: user_information.data[0].birth,
-			});
-		} catch (error) {
-			console.error(error);
 		}
+
+		const user_information = await supabase.from('AuthorizedEmail').select('*').eq('email', email);
+
+		if (user_information.data === null) {
+			throw new Error('Profile cannot be created');
+		}
+
+		await supabase.from('Profile').insert({
+			created_at: new Date().toISOString(),
+			user_id: data.user?.id,
+			first_name: user_information.data[0].firstname,
+			last_name: user_information.data[0].lastname,
+			speciality: user_information.data[0].speciality,
+			grade: user_information.data[0].grade,
+			date_of_birth: user_information.data[0].birth,
+		});
 
 		return { success: true };
 	},

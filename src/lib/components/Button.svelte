@@ -1,16 +1,14 @@
 <script lang="ts">
-	export let type: 'default' | 'rounded' | 'square' = 'default';
+	export let type: 'default' | 'rounded' | 'square' | 'link' = 'default';
 	export let disabled = false;
 	export let light = false;
 	export let href: string | null = null;
 </script>
 
 {#if href}
-	<button class="Button button-link {type}" class:light {disabled}>
-		<a {href}>
-			<slot>Text link</slot>
-		</a>
-	</button>
+	<a class="Button {type}" class:light {href}>
+		<slot>Text link</slot>
+	</a>
 {:else}
 	<button class="Button {type}" class:light {disabled} on:click>
 		<slot>Text Label</slot>
@@ -21,7 +19,7 @@
 	.Button 
 		color: $white
 		background-color: $primary
-		padding: 0.8rem 1rem
+		padding: 0.65rem 1rem
 		border-radius: 10px
 		border: none
 		cursor: pointer
@@ -29,6 +27,7 @@
 		min-width: 7.25rem
 		font-size: 1rem
 		font-weight: 500
+		text-decoration: none
 
 		&:disabled
 			background-color: $disabled
@@ -53,6 +52,23 @@
 
 		&.square
 			border-radius: 0
+
+		&.link
+			color: $primary
+			text-decoration: underline
+			background-color: transparent
+			padding: 0
+
+			&:hover
+				color: $hover
+
+			&:active
+				color: $active
+
+			&:focus-visible
+				color: $focus
+
+
 		
 	.light
 		background-color: $white
@@ -63,8 +79,4 @@
 			opacity: 0.7
 			background-color: $white
 
-	.button-link
-		a
-			color: $primary
-			text-decoration: none
 </style>

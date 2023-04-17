@@ -3,17 +3,56 @@
 	import { v4 as uuidv4 } from 'uuid';
 
 	import type { Profile } from '$lib/types/profile';
-	import { supabase } from '$lib/auth';
 	import Icon from '$lib/components/Icon.svelte';
-	import { uploadImg, uploading } from '$lib/utils/upload';
 	import { realUploadSizeLimit, uploadSizeLimit } from '$lib/constants/files';
 	import { modal } from '$lib/stores/modal';
+	import { page } from '$app/stores';
 
 	export let profile: Profile;
 	let files: FileList;
 
 	$: ({ user_id, profile_img } = profile);
 	$: imageIsTooBig = false;
+	$: uploading = false;
+
+	async function uploadImg(userId: string, filePath: string, currentImg: string, file: File) {
+		try {
+			uploading = true;
+
+			const { error } = await $page.data.supabase.storage
+				.from('image-profile')
+				.upload(filePath, file, { cacheControl: '0' });
+			if (error) {
+				return error;
+			}
+
+			const { data } = await $page.data.supabase.storage
+				.from('image-profile')
+				.getPublicUrl(filePath);
+
+			const { error: err } = await $page.data.supabase
+				.from('Profile')
+				.update({ profile_img: data.publicUrl })
+				.eq('user_id', userId);
+			if (err) {
+				return err;
+			}
+
+			if (currentImg !== '') {
+				const { error: errorDeleteImg } = await $page.data.supabase.storage
+					.from('image-profile')
+					.remove([currentImg[1]]);
+
+				if (errorDeleteImg) {
+					return errorDeleteImg;
+				}
+			}
+
+			invalidate('app:profile');
+		} finally {
+			uploading = false;
+		}
+	}
 
 	async function changeImg() {
 		if (!profile_img || !user_id) {
@@ -45,7 +84,7 @@
 	}
 
 	async function deleteImg() {
-		const { error: err } = await supabase
+		const { error: err } = await $page.data.supabase
 			.from('Profile')
 			.update({ profile_img: '' })
 			.eq('user_id', user_id);

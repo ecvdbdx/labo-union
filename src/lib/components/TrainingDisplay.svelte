@@ -1,19 +1,21 @@
 <script lang="ts">
-	import { supabase } from '$lib/auth';
+	import { enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
+	import { page } from '$app/stores';
+
 	import Icon from '$lib/components/Icon.svelte';
 	import Button from '$lib/components/Button.svelte';
-	import { invalidateAll } from '$app/navigation';
-	import { enhance } from '$app/forms';
 	import type { Training } from '$lib/types/profile';
 
 	export let train: Training;
-	$: ({ id, school, location, diploma, start_date, end_date, profile_id } = train);
-	export let action;
+	export let action: boolean;
+
+	$: ({ id, school, location, diploma, start_date, end_date } = train);
 
 	let editmode = false;
 
 	async function deleteTraining(experience_id: number) {
-		const { error } = await supabase.from('Training').delete().eq('id', experience_id);
+		const { error } = await $page.data.supabase.from('Training').delete().eq('id', experience_id);
 		error && console.error(error);
 		invalidateAll();
 	}

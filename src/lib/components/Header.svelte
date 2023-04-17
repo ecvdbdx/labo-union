@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { supabase } from '$lib/auth';
 
 	import Link from './Link.svelte';
 	import Button from './Button.svelte';
 	import type { Profile } from '$lib/types/profile';
 
 	export let user: Profile;
+	export let logout: () => void;
 
 	const links: { label: string; url: string | null }[] = [
 		{
@@ -55,7 +55,7 @@
 			{/if}
 		</nav>
 		{#if user}
-			<Button on:click={() => supabase.auth.signOut()}>Déconnexion</Button>
+			<Button on:click={logout}>Déconnexion</Button>
 		{/if}
 	</div>
 </header>
