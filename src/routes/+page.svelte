@@ -2,6 +2,7 @@
 	import Icon from '$lib/components/Icon.svelte';
 	import { page } from '$app/stores';
 	import Button from '$lib/components/Button.svelte';
+
 	$: isNotConnected = !$page.data.session?.user.id;
 </script>
 

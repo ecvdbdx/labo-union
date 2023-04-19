@@ -3,38 +3,18 @@
 import { fail, redirect, error } from '@sveltejs/kit';
 
 import type { PageServerLoad, Actions } from './$types';
-import { supabase } from '$lib/auth';
 
-export const load = (async ({ params }) => {
+export const load: PageServerLoad = async ({ params }) => {
 	return {
 		params,
 	};
-}) satisfies PageServerLoad;
+};
 
-export const actions = {
-	postExperience: async ({ request, cookies }) => {
-		const session_cookie = cookies.get('supabase-auth-token');
+export const actions: Actions = {
+	postExperience: async ({ request, locals: { getSession, supabase } }) => {
+		const session = await getSession();
+		const user_id = session?.user.id;
 
-		if (!session_cookie) {
-			throw error(500, {
-				code: 500,
-				message: 'No session cookie found',
-			});
-		}
-
-		const session = await supabase.auth
-			.setSession({
-				access_token: JSON.parse(session_cookie)[0],
-				refresh_token: JSON.parse(session_cookie)[1],
-			})
-			.catch((err) => {
-				throw error(500, {
-					code: 500,
-					message: err.message,
-				});
-			});
-
-		const user_id = session.data.user?.id;
 		const { data } = await supabase.from('Profile').select('id').eq('user_id', user_id).single();
 
 		const formData = await request.formData();
@@ -71,16 +51,7 @@ export const actions = {
 
 		throw redirect(303, '/profil');
 	},
-	updateExperience: async ({ request, cookies }) => {
-		const session_cookie = cookies.get('supabase-auth-token');
-
-		if (!session_cookie) {
-			throw error(500, {
-				code: 500,
-				message: 'No session cookie found',
-			});
-		}
-
+	updateExperience: async ({ request, locals: { supabase } }) => {
 		const formData = await request.formData();
 		const start_date = formData.get('start_date') as string;
 		const end_date = formData.get('end_date') ? (formData.get('end_date') as string) : null;
@@ -115,29 +86,10 @@ export const actions = {
 
 		throw redirect(303, '/profil');
 	},
-	postTraining: async ({ request, cookies }) => {
-		const session_cookie = cookies.get('supabase-auth-token');
+	postTraining: async ({ request, locals: { getSession, supabase } }) => {
+		const session = await getSession();
+		const user_id = session?.user.id;
 
-		if (!session_cookie) {
-			throw error(500, {
-				code: 500,
-				message: 'No session cookie found',
-			});
-		}
-
-		const session = await supabase.auth
-			.setSession({
-				access_token: JSON.parse(session_cookie)[0],
-				refresh_token: JSON.parse(session_cookie)[1],
-			})
-			.catch((err) => {
-				throw error(500, {
-					code: 500,
-					message: err.message,
-				});
-			});
-
-		const user_id = session.data.user?.id;
 		const { data, error: errr } = await supabase
 			.from('Profile')
 			.select('id')
@@ -177,16 +129,7 @@ export const actions = {
 
 		throw redirect(303, '/profil');
 	},
-	updateTraining: async ({ request, cookies }) => {
-		const session_cookie = cookies.get('supabase-auth-token');
-
-		if (!session_cookie) {
-			throw error(500, {
-				code: 500,
-				message: 'No session cookie found',
-			});
-		}
-
+	updateTraining: async ({ request, locals: { supabase } }) => {
 		const formData = await request.formData();
 		const start_date = formData.get('start_date') as string;
 		const end_date = formData.get('end_date') ? (formData.get('end_date') as string) : null;
@@ -219,29 +162,9 @@ export const actions = {
 
 		throw redirect(303, '/profil');
 	},
-	updateProfile: async ({ request, cookies }) => {
-		const session_cookie = cookies.get('supabase-auth-token');
-
-		if (!session_cookie) {
-			throw error(500, {
-				code: 500,
-				message: 'No session cookie found',
-			});
-		}
-
-		const session = await supabase.auth
-			.setSession({
-				access_token: JSON.parse(session_cookie)[0],
-				refresh_token: JSON.parse(session_cookie)[1],
-			})
-			.catch((err) => {
-				throw error(500, {
-					code: 500,
-					message: err.message,
-				});
-			});
-
-		const user_id = session.data.user?.id;
+	updateProfile: async ({ request, locals: { getSession, supabase } }) => {
+		const session = await getSession();
+		const user_id = session?.user.id;
 
 		const formData = await request.formData();
 		const first_name = formData.get('first_name') as string;
@@ -279,4 +202,4 @@ export const actions = {
 
 		throw redirect(303, '/profil');
 	},
-} satisfies Actions;
+};

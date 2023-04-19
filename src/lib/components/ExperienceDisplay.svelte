@@ -1,19 +1,20 @@
 <script lang="ts">
-	import { supabase } from '$lib/auth';
-	import Icon from '$lib/components/Icon.svelte';
-	import Button from '$lib/components/Button.svelte';
 	import { invalidateAll } from '$app/navigation';
 	import { enhance } from '$app/forms';
+	import { page } from '$app/stores';
+
+	import Icon from '$lib/components/Icon.svelte';
+	import Button from '$lib/components/Button.svelte';
 	import type { Experience } from '$lib/types/profile';
 
 	export let experience: Experience;
-	$: ({ id, job, start_date, end_date, company, mission, location, profile_id } = experience);
-	export let action;
-
+	export let action: boolean;
 	let editmode = false;
 
+	$: ({ id, job, start_date, end_date, company, mission, location } = experience);
+
 	async function deleteExperience(experience_id: number) {
-		const { error } = await supabase.from('Experience').delete().eq('id', experience_id);
+		const { error } = await $page.data.supabase.from('Experience').delete().eq('id', experience_id);
 		error && console.error(error);
 		invalidateAll();
 	}
@@ -93,8 +94,9 @@
 						Modifier
 						<Icon color="black" id="edit-2" size="1em" />
 					</button>
-					<button on:click={() => deleteExperience(id)}
-						>Supprimer
+
+					<button on:click={() => deleteExperience(id)}>
+						Supprimer
 						<Icon color="black" id="edit-2" size="1em" />
 					</button>
 				</div>

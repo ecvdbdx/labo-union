@@ -1,8 +1,9 @@
-import { supabase } from '$lib/auth';
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-export const load = (async () => {
+export const load: PageLoad = async ({ parent }) => {
+	const { supabase } = await parent();
+
 	const { data: profiles, error: profilesErr } = await supabase.from('Profile').select('*');
 	const { data: grade, error: gradeErr } = await supabase.from('distinct_grade').select();
 	const { data: speciality, error: specialityErr } = await supabase
@@ -28,4 +29,4 @@ export const load = (async () => {
 		grade,
 		speciality,
 	};
-}) satisfies PageLoad;
+};

@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let options: Record<string, string>[];
+	export let options: Record<string, string | null>[];
 	export let label: string;
 
 	let selectedOption: string;

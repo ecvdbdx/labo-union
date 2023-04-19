@@ -1,10 +1,9 @@
 import { error } from '@sveltejs/kit';
 
 import type { PageLoad } from './$types';
-import getProfile from '$lib/utils/getProfile';
 
 export const load: PageLoad = async ({ parent, depends }) => {
-	const { session } = await parent();
+	const { session, supabase } = await parent();
 	const userId = session?.user.id;
 
 	depends('app:profile');
@@ -16,7 +15,18 @@ export const load: PageLoad = async ({ parent, depends }) => {
 		});
 	}
 
-	const data = await getProfile(userId);
+	const { data, error: err } = await supabase
+		.from('Profile')
+		.select('*, Experience(*), Training(*)')
+		.eq('user_id', userId)
+		.maybeSingle();
+
+	if (err) {
+		throw error(500, {
+			code: 500,
+			message: 'Une erreur est survenue',
+		});
+	}
 
 	return {
 		profile: data,

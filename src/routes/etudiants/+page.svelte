@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { supabase } from '$lib/auth';
-
 	import type { PageData } from './$types';
 	import Card from '$lib/components/Card.svelte';
 	import Filter from './Filter.svelte';
@@ -29,7 +27,7 @@
 			console.error(err);
 		}
 
-		filteredProfiles = await data;
+		filteredProfiles = profiles || [];
 	}
 
 	function updateSpecialty(e: Event) {

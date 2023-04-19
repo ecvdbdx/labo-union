@@ -1,21 +1,23 @@
 <script lang="ts">
-	import type { Profile } from '$lib/types/profile';
-	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import { invalidate } from '$app/navigation';
 
-	import { supabase } from '$lib/auth';
+	import type { Profile } from '$lib/types/profile';
 	import Header from '$lib/components/Header.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 
 	export let data;
 
+	$: ({ supabase } = data);
 	$: user = data.user as Profile;
 
 	onMount(() => {
 		const {
 			data: { subscription },
-		} = supabase.auth.onAuthStateChange(() => {
-			invalidate('supabase:auth');
+		} = supabase.auth.onAuthStateChange((event, _session) => {
+			if (_session?.expires_at !== _session?.expires_at) {
+				invalidate('supabase:auth');
+			}
 		});
 
 		return () => {
