@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { supabase } from '$lib/auth';
-
 	import type { PageData } from './$types';
 	import Card from '$lib/components/Card.svelte';
 	import Filter from './Filter.svelte';
@@ -19,17 +17,17 @@
 	$: filteredProfiles = data.profiles;
 
 	async function searchProfiles() {
-		const { data, error: err } = await supabase.rpc('searchprofile', {
+		const { data: profiles, error: err } = await data.supabase.rpc('searchprofile', {
 			search,
-			grade: grade || null,
-			speciality: speciality || null,
+			grade: grade,
+			speciality: speciality,
 		});
 
 		if (err) {
 			console.error(err);
 		}
 
-		filteredProfiles = await data;
+		filteredProfiles = profiles || [];
 	}
 
 	function updateSpecialty(e: Event) {

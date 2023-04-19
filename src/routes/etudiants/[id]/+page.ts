@@ -1,9 +1,8 @@
-import { supabase } from '$lib/auth';
 import { error, redirect } from '@sveltejs/kit';
+import type { PageLoad } from '../$types';
 
-/** @type {import('./$types').PageLoad} */
-export async function load({ params, parent }) {
-	const { session } = await parent();
+export const load: PageLoad = async ({ params, parent }) => {
+	const { session, supabase } = await parent();
 	const userId = params.id;
 	const userSession = session?.user.id;
 
@@ -13,12 +12,13 @@ export async function load({ params, parent }) {
 		.eq('id', userId)
 		.maybeSingle();
 
-	if (err) {
+	if (err || !data) {
 		throw error(500, {
 			code: 500,
 			message: 'Une erreur est survenue',
 		});
 	}
+
 	if (userSession === data.user_id) {
 		throw redirect(302, '/profil');
 	}
@@ -26,4 +26,4 @@ export async function load({ params, parent }) {
 	return {
 		profile: data,
 	};
-}
+};

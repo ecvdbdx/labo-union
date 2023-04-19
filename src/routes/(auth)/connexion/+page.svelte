@@ -29,6 +29,7 @@
 			>
 			<Button>Me connecter</Button>
 			<span>Première connexion ? <Link href="/inscription">Créer un compte</Link></span>
+			<Link href="forgot-password">Mot de passe oublié ?</Link>
 		</div>
 		{#if form?.error}
 			<p class="error">{form.error}</p>
@@ -55,4 +56,5 @@
 		font-size: 1rem
 		display: block
 		margin-top: 2rem
+		margin-bottom: .5rem
 </style>
