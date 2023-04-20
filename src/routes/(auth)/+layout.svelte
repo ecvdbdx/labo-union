@@ -20,7 +20,7 @@
 		display: flex
 		width: 100vw
 		height: fit-content
-		min-height: 100%
+		min-height: 100vh
 		margin-top: 5rem
 
 		.container-content
@@ -43,7 +43,7 @@
 
 
 		.container-pictures
-			position: fixed
+			position: absolute
 			width: 50%
 			height: calc(100% - 5rem)
 			right: 0
