@@ -14,9 +14,16 @@ export const actions: Actions = {
 			});
 		}
 
-		await supabase.auth.resetPasswordForEmail(email, {
-			redirectTo: `${getURL()}reset-password`,
-		});
+		try {
+			await supabase.auth.resetPasswordForEmail(email, {
+				redirectTo: `${getURL()}reset-password`,
+			});
+		} catch (error) {
+			return fail(400, {
+				error: 'Une erreur est survenue, veuillez réessayer',
+				email,
+			});
+		}
 
 		return { success: true };
 	},

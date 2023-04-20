@@ -24,6 +24,12 @@
 	<Button>Envoyer</Button>
 </form>
 
+{#if form?.error}
+	<p class="error">
+		{form.error}
+	</p>
+{/if}
+
 {#if form?.success}
 	<p class="success">
 		Un email vous a été envoyé avec un lien pour réinitialiser votre mot de passe.
@@ -31,6 +37,7 @@
 {/if}
 
 <style lang="sass">
+
   h2
     margin-bottom: 3rem
 
@@ -38,8 +45,11 @@
     margin-bottom: 2rem
 
   .success
-    color: green
+    color: $success
     margin-top: 1rem
 
+	.error
+		color: $error
+		margin-top: 1rem
 
 </style>
