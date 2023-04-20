@@ -6,7 +6,6 @@
 	import Search from '$lib/components/Search.svelte';
 
 	export let data: PageData;
-	$: ({ supabase } = data);
 
 	// TODO: Update this variables when data from database is available
 	const disponibilityIsVisible = true;
