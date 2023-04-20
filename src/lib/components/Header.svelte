@@ -13,11 +13,6 @@
 		invalidate('supabase:auth');
 	};
 
-	const logout = async () => {
-		await $page.data.supabase.auth.signOut();
-		invalidate('supabase:auth');
-	};
-
 	const links: { label: string; url: string | null }[] = [
 		{
 			label: 'Annuaire',

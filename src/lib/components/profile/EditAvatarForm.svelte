@@ -7,7 +7,6 @@
 	import Icon from '$lib/components/Icon.svelte';
 	import { realUploadSizeLimit, uploadSizeLimit } from '$lib/constants/files';
 	import { modal } from '$lib/stores/modal';
-	import { page } from '$app/stores';
 
 	export let profile: Profile;
 	let files: FileList;
