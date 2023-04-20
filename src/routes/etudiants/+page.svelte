@@ -97,6 +97,7 @@
 <style lang="sass">
 .main-container
 	margin-top: 8rem
+	margin-bottom: 4rem
 
 	@media screen and (max-width: 768px)
 		width: 90vw
