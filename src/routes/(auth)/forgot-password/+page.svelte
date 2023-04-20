@@ -37,7 +37,6 @@
 {/if}
 
 <style lang="sass">
-
   h2
     margin-bottom: 3rem
 
@@ -48,8 +47,8 @@
     color: $success
     margin-top: 1rem
 
-	.error
-		color: $error
-		margin-top: 1rem
+  .error
+    color: $error
+    margin-top: 1rem
 
 </style>
