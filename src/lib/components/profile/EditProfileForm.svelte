@@ -60,7 +60,7 @@
 		value={profile.description ?? ''}
 		required={false}
 		name={'description'}
-		type={'text'}>Description</Input
+		type={'textarea'}>Description</Input
 	>
 
 	<Checkbox
