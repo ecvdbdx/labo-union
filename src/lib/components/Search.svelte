@@ -10,7 +10,7 @@
 	export let buttonText: string | null = 'Rechercher';
 </script>
 
-<div class="group">
+<form class="group">
 	{#if label}
 		<label for={name}>{label}</label>
 	{/if}
@@ -31,54 +31,54 @@
 			</button>
 		</div>
 	{/if}
-</div>
+</form>
 
 <style lang="sass">
-	.group 
-		margin-bottom: 1rem
-		width: 100%
-		position: relative
+  .group
+    margin-bottom: 1rem
+    width: 100%
+    position: relative
 
-		label 
-			display: block
-			margin-bottom: 0.5rem
-		
+    label
+      display: block
+      margin-bottom: 0.5rem
 
-		.input 
-			display: flex
-			position: relative
-			padding: 0.55rem 0.7rem
-			border: 1px solid $disabled
-			background-color: $white
-			border-radius: 10px
 
-			input 
-				flex-grow: 1
-				color: $black
-				border: none
-				background-color: transparent
-				padding: 0
+    .input
+      display: flex
+      position: relative
+      padding: 0.55rem 0.7rem
+      border: 1px solid $disabled
+      background-color: $white
+      border-radius: 10px
 
-				&:focus-visible 
-					outline: none
+      input
+        flex-grow: 1
+        color: $black
+        border: none
+        background-color: transparent
+        padding: 0
 
-			.submit 
-				background-color: transparent
-				border: none
-				cursor: pointer
-				display: flex
-				align-items: center
+        &:focus-visible
+          outline: none
 
-		.input-rounded
-			widht: 100%
-			display: flex
+      .submit
+        background-color: transparent
+        border: none
+        cursor: pointer
+        display: flex
+        align-items: center
 
-			input
-				padding: 0.6rem 1rem
-				background-color: $white
-				border: none
-				border-radius: 2rem
-				margin-right: 0.5rem
-				width: 100%
+    .input-rounded
+      widht: 100%
+      display: flex
+
+      input
+        padding: 0.6rem 1rem
+        background-color: $white
+        border: none
+        border-radius: 2rem
+        margin-right: 0.5rem
+        width: 100%
 
 </style>
