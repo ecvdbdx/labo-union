@@ -84,7 +84,7 @@
 
 					<div class="actions-experience">
 						<span>Actions confiées :</span>
-						<input value={mission} name="mission" />
+						<textarea value={mission} name="mission" />
 					</div>
 				</div>
 			</div>
@@ -131,53 +131,56 @@
         gap: 1em
         flex-direction: column
 
-        input
-          all: inherit
-          display: inline-block
-          background: $white
-          padding: .5rem 1rem
-          border-radius: 4px
-          color: $black !important
-          text-decoration: none !important
-          font-weight: normal !important
+        textarea
+          resize: vertical
 
-
-        .name-experience
-          font-weight: 600
-
-        .name-enterprise
-          color: $primary
-          text-decoration: underline
-          font-weight: 600
-
-        .location-experience
-          display: none
-
-        .actions-experience
-          display: flex
-          flex-direction: column
-          gap: 1em
-
-          span
-            font-weight: 600
-
-          p
-            color: $gray
-
-    .actions
-      display: flex
-      gap: 1rem
-      align-items: center
-
-      button
+      input, textarea
         all: inherit
-        text-decoration: underline
-        display: flex
-        align-items: center
-        gap: .5rem
-        transition: all ease-in-out 150ms
-        cursor: pointer
+        display: inline-block
+        background: $white
+        padding: .5rem 1rem
+        border-radius: 4px
+        color: $black !important
+        text-decoration: none !important
+        font-weight: normal !important
 
-        &:hover, &:focus
-          color: $primary
+
+      .name-experience
+        font-weight: 600
+
+      .name-enterprise
+        color: $primary
+        text-decoration: underline
+        font-weight: 600
+
+      .location-experience
+        display: none
+
+      .actions-experience
+        display: flex
+        flex-direction: column
+        gap: 1em
+
+        span
+          font-weight: 600
+
+        p
+          color: $gray
+
+      .actions
+        display: flex
+        gap: 1rem
+        align-items: center
+
+        button
+          all: inherit
+          text-decoration: underline
+          display: flex
+          align-items: center
+          gap: .5rem
+          transition: all ease-in-out 150ms
+          cursor: pointer
+
+          &:hover, &:focus
+            color: $primary
 </style>

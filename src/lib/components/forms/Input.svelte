@@ -26,16 +26,29 @@
 			<slot>Label</slot>
 		</label>
 	{/if}
-	<input
-		{type}
-		{placeholder}
-		{value}
-		{name}
-		{required}
-		on:input={handleInput}
-		on:change={handleInput}
-		id={name}
-	/>
+	{#if type !== 'textarea'}
+		<input
+			{type}
+			{placeholder}
+			{value}
+			{name}
+			{required}
+			on:input={handleInput}
+			on:change={handleInput}
+			id={name}
+		/>
+	{:else}
+		<textarea
+			{type}
+			{placeholder}
+			{value}
+			{name}
+			{required}
+			on:input={handleInput}
+			on:change={handleInput}
+			id={name}
+		/>
+	{/if}
 	{#if error}
 		<div class="error">
 			{error}
@@ -44,36 +57,38 @@
 </div>
 
 <style lang="sass">
-	.group 
-		position: relative
-		width: 100%
+  .group
+    position: relative
+    width: 100%
 
-		&.onError 
-			input 
-				border: 1px solid $error
-				margin-bottom: 0.5rem
+    &.onError
+      input
+        border: 1px solid $error
+        margin-bottom: 0.5rem
 
-			.error
-				color: red
+      .error
+        color: red
 
-		label 
-			display: block
-			margin-bottom: 0.5rem
-		
+    label
+      display: block
+      margin-bottom: 0.5rem
 
-		input 
-			box-sizing: border-box
-			width: 100%
-			display: block 
-			position: relative
-			padding: 0.7rem
-			border: 1px solid $disabled
-			background-color: $white
-			border-radius: 10px
-			color: $black
-			margin-bottom: 1.8rem
+    textarea, input
+      box-sizing: border-box
+      width: 100%
+      display: block
+      position: relative
+      padding: 0.7rem
+      border: 1px solid $disabled
+      background-color: $white
+      border-radius: 10px
+      color: $black
+      margin-bottom: 1.8rem
 
-			&:focus-visible 
-				outline: none
+    textarea
+      resize: vertical
+
+      &:focus-visible
+        outline: none
 
 </style>
