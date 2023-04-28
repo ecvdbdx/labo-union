@@ -73,6 +73,32 @@ export interface Database {
 					start_date?: string | null;
 				};
 			};
+			Portfolio: {
+				Row: {
+					category: string | null;
+					created_at: string | null;
+					id: number;
+					link: string | null;
+					thumbnail: string | null;
+					title: string | null;
+				};
+				Insert: {
+					category?: string | null;
+					created_at?: string | null;
+					id?: number;
+					link?: string | null;
+					thumbnail?: string | null;
+					title?: string | null;
+				};
+				Update: {
+					category?: string | null;
+					created_at?: string | null;
+					id?: number;
+					link?: string | null;
+					thumbnail?: string | null;
+					title?: string | null;
+				};
+			};
 			Profile: {
 				Row: {
 					cover_img: string | null;
@@ -163,6 +189,27 @@ export interface Database {
 			};
 		};
 		Functions: {
+			filterandsearchprofile: {
+				Args: {
+					search: string;
+					grade?: string;
+					speciality?: string;
+				};
+				Returns: {
+					cover_img: string | null;
+					created_at: string | null;
+					date_of_birth: string | null;
+					description: string | null;
+					first_name: string | null;
+					grade: string | null;
+					id: number;
+					last_name: string | null;
+					profile_img: string | null;
+					speciality: string | null;
+					status: boolean | null;
+					user_id: string | null;
+				}[];
+			};
 			searchprofile: {
 				Args: {
 					search: string;

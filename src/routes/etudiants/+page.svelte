@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+
 	import Card from '$lib/components/Card.svelte';
 	import Filter from './Filter.svelte';
 	import Tooltip from '$lib/components/Tooltip.svelte';
@@ -11,16 +12,17 @@
 	const disponibilityIsVisible = true;
 
 	let search = '';
-	let grade: string | undefined;
-	let speciality: string | undefined;
+	let grade: string | null;
+	let speciality: string | null;
 
 	$: filteredProfiles = data.profiles;
 
 	async function searchProfiles() {
-		const { data: profiles, error: err } = await data.supabase.rpc('searchprofile', {
+		const { data: profiles, error: err } = await data.supabase.rpc('filterandsearchprofile', {
 			search,
-			grade: grade,
-			speciality: speciality,
+			grade: grade || undefined,
+			speciality: speciality || undefined,
+
 		});
 
 		if (err) {

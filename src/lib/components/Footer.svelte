@@ -77,7 +77,6 @@
 
 <style lang="sass">
 	.Footer
-		width: 100vw
 		background-color: $primary
 		height: fit-content
 		padding: 1.25rem 7.5rem
@@ -111,7 +110,6 @@
 		color: $white
 		
 	.subFooter
-		width: 100vw
 		background-color: $hover
 		height: fit-content
 		padding: 1.25rem 7.5rem
