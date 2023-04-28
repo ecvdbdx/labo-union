@@ -46,7 +46,7 @@
 						<Icon id="heart" color="#F25824" />
 					</div>
 				</div>
-				<h3>Rester en contact</h3>
+				<h3>Des informations que vous auriez aimé avoir</h3>
 				<p>
 					Accédez au contact des entreprises qui ont recrutés et des étudiants qui y ont travaillés,
 					années après années.
@@ -88,7 +88,7 @@
 					expériences, compétences, lien utiles ...
 				</p>
 				{#if isNotConnected}
-					<Button href="/connexion" light>Se connecter</Button>
+					<Button href="/inscription" light>Créer mon compte</Button>
 				{/if}
 			</div>
 		</div>
@@ -135,7 +135,7 @@
 			<p>Inscrivez-vous dès maintenant</p>
 			{#if isNotConnected}
 				<Button type="rounded" light>
-					<a href="/connexion">Se connecter</a>
+					<a href="/inscription">Créer mon compte</a>
 				</Button>
 			{/if}
 		</div>
@@ -293,8 +293,10 @@
 					width: 100%
 
 				h2
+					margin-top: 1rem
 					margin-bottom: 1.5rem
 					font-size: 3.75rem
+					line-height: 4rem
 					font-weight: 700
 
 				p

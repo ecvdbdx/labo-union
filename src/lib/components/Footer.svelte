@@ -8,7 +8,7 @@
 		},
 		{
 			label: 'Annuaire',
-			url: 'null',
+			url: null,
 		},
 		{
 			label: 'Messages',
@@ -20,7 +20,7 @@
 		},
 		{
 			label: 'Profil',
-			url: null,
+			url: '/profil',
 		},
 	];
 
@@ -31,7 +31,7 @@
 		},
 		{
 			label: 'CGU',
-			url: 'null',
+			url: null,
 		},
 		{
 			label: 'Politique de confidentialité',
