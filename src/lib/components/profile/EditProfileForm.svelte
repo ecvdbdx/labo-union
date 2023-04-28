@@ -40,6 +40,7 @@
 	<Input
 		placeholder={'M2'}
 		value={profile.grade ?? ''}
+		disabled={true}
 		name={'grade'}
 		required={false}
 		type={'text'}>Classe</Input
@@ -47,6 +48,7 @@
 	<Input
 		placeholder={'Développement Web'}
 		value={profile.speciality ?? ''}
+		disabled={true}
 		name={'speciality'}
 		required={false}
 		type={'text'}>Spécialité</Input

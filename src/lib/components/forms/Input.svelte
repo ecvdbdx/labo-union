@@ -4,6 +4,7 @@
 	export let noLabel = false;
 	export let error: string | null = null;
 	export let name: string;
+	export let disabled: boolean;
 	export let type:
 		| 'text'
 		| 'password'
@@ -28,6 +29,7 @@
 	{/if}
 	{#if type !== 'textarea'}
 		<input
+			{disabled}
 			{type}
 			{placeholder}
 			{value}
@@ -84,6 +86,10 @@
       border-radius: 10px
       color: $black
       margin-bottom: 1.8rem
+
+      &:disabled
+        background: $disabled
+        cursor: not-allowed
 
     textarea
       resize: vertical

@@ -165,12 +165,11 @@ export const actions: Actions = {
 	updateProfile: async ({ request, locals: { getSession, supabase } }) => {
 		const session = await getSession();
 		const user_id = session?.user.id;
-
 		const formData = await request.formData();
 		const first_name = formData.get('first_name') as string;
 		const last_name = formData.get('last_name') as string;
-		const grade = formData.get('grade') as string;
-		const speciality = formData.get('speciality') as string;
+		//const grade = formData.get('grade') as string;
+		//const speciality = formData.get('speciality') as string;
 		const description = formData.get('description') as string;
 		const status = formData.get('status') as string;
 
@@ -186,8 +185,8 @@ export const actions: Actions = {
 			.update({
 				first_name: first_name,
 				last_name: last_name,
-				grade: grade,
-				speciality: speciality,
+				//grade: grade,
+				//speciality: speciality,
 				description: description,
 				status: !!status,
 			})
