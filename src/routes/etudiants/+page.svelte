@@ -21,8 +21,8 @@
 	async function searchProfiles() {
 		const { data, error: err } = await supabase.rpc('filterandsearchprofile', {
 			search,
-			grade: grade || null || undefined,
-			speciality: speciality || null || undefined,
+			grade: grade || undefined,
+			speciality: speciality || undefined,
 		});
 
 		if (err) {
