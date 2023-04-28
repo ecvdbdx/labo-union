@@ -13,16 +13,16 @@
 	const disponibilityIsVisible = true;
 
 	let search = '';
-	let grade: string | undefined;
-	let speciality: string | undefined;
+	let grade: string | null;
+	let speciality: string | null;
 
 	$: filteredProfiles = data.profiles;
 
 	async function searchProfiles() {
-		const { data, error: err } = await supabase.rpc('searchprofile', {
+		const { data, error: err } = await supabase.rpc('filterandsearchprofile', {
 			search,
-			grade: grade || null,
-			speciality: speciality || null,
+			grade: grade || null || undefined,
+			speciality: speciality || null || undefined,
 		});
 
 		if (err) {
