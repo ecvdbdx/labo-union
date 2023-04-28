@@ -10,7 +10,7 @@
 	export let buttonText: string | null = 'Rechercher';
 </script>
 
-<div class="group">
+<form class="group">
 	{#if label}
 		<label for={name}>{label}</label>
 	{/if}
@@ -31,7 +31,7 @@
 			</button>
 		</div>
 	{/if}
-</div>
+</form>
 
 <style lang="sass">
   .group
