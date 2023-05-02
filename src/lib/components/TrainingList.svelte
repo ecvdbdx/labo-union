@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	import type { Training } from '$lib/types/profile';
+	import { modal } from '$lib/stores/modal';
 	import TrainingDisplay from '$lib/components/TrainingDisplay.svelte';
+	import EditTrainingForm from '$lib/components/profile/EditTrainingForm.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 
 	export let trainings: Training[] | undefined;
-	export let openTrainingModal: null | ((isNew: boolean) => void) = null;
 
 	const sortByDate = (a: Training, b: Training) => {
 		if (!a.start_date || !b.start_date) return 0;
@@ -12,6 +15,19 @@
 		if (a.start_date > b.start_date) return -1;
 		if (a.start_date < b.start_date) return 1;
 		return 0;
+	};
+
+	const openTrainingModal = (isNew: boolean) => {
+		modal.set({
+			title: isNew ? 'Ajouter une nouvelle formation' : 'Modifier la formation',
+			component: EditTrainingForm,
+			props: {
+				isNew,
+				form: $page.form,
+				profile: $page.data.profile,
+				trainings: $page.data.profile.Training,
+			},
+		});
 	};
 </script>
 

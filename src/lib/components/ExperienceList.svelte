@@ -1,10 +1,13 @@
 <script lang="ts">
-	import ExperienceDisplay from '$lib/components/ExperienceDisplay.svelte';
-	import Icon from '$lib/components/Icon.svelte';
+	import { page } from '$app/stores';
+
+	import { modal } from '$lib/stores/modal';
 	import type { Experience } from '$lib/types/profile';
+	import ExperienceDisplay from '$lib/components/ExperienceDisplay.svelte';
+	import EditExperienceForm from '$lib/components/profile/EditExperienceForm.svelte';
+	import Icon from '$lib/components/Icon.svelte';
 
 	export let experiences: Experience[] | undefined;
-	export let openExperienceModal: null | ((isNew: boolean) => void) = null;
 
 	const sortByDate = (a: Experience, b: Experience) => {
 		if (!a.start_date || !b.start_date) return 0;
@@ -12,6 +15,21 @@
 		if (a.start_date > b.start_date) return -1;
 		if (a.start_date < b.start_date) return 1;
 		return 0;
+	};
+
+	const openExperienceModal = (isNew: boolean) => {
+		modal.set({
+			title: isNew
+				? 'Ajouter une expérience professionnelle'
+				: 'Modifier mon expérience professionnelle',
+			component: EditExperienceForm,
+			props: {
+				isNew,
+				form: $page.form,
+				profile: $page.data.profile,
+				experiences: $page.data.profile.Experience,
+			},
+		});
 	};
 </script>
 

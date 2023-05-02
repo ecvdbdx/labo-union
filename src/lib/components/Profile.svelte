@@ -1,18 +1,40 @@
 <script lang="ts">
 	import type { Profile } from '$lib/types/profile';
+	import { page } from '$app/stores';
 
 	import Icon from '$lib/components/Icon.svelte';
-	import Curriculum from './Curriculum.svelte';
-	import Portfolio from './Portfolio.svelte';
+	import Curriculum from '$lib/components/Curriculum.svelte';
+	import Portfolio from '$lib/components/Portfolio.svelte';
+	import { modal } from '$lib/stores/modal';
+	import EditProfileForm from '$lib/components/profile/EditProfileForm.svelte';
+	import EditAvatarForm from '$lib/components/profile/EditAvatarForm.svelte';
 
 	export let profile: Profile;
-	export let openEditModal: null | (() => void) = null;
-	export let openAvatarModal: null | (() => void) = null;
-	export let openExperienceModal: null | ((isNew: boolean) => void) = null;
-	export let openTrainingModal: null | ((isNew: boolean) => void) = null;
 
 	$: ({ first_name, last_name, speciality, description, status, grade, profile_img } = profile);
 	let isCurriculum = true;
+
+	const openEditModal = () => {
+		modal.set({
+			title: 'Modifier le résumé de votre profil',
+			component: EditProfileForm,
+			props: {
+				form: $page.form,
+				profile: $page.data.profile,
+			},
+		});
+	};
+
+	const openAvatarModal = () => {
+		modal.set({
+			title: 'Modifier votre photo de profil',
+			component: EditAvatarForm,
+			props: {
+				form: $page.form,
+				profile: $page.data.profile,
+			},
+		});
+	};
 </script>
 
 <div class="Profile">
@@ -84,7 +106,7 @@
 
 	<div class="container-bottom">
 		{#if isCurriculum}
-			<Curriculum {profile} {openExperienceModal} {openTrainingModal} />
+			<Curriculum {profile} />
 		{:else}
 			<Portfolio />
 		{/if}
