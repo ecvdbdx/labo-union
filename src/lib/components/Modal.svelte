@@ -9,6 +9,7 @@
 	let css = '';
 
 	onMount(() => {
+		// if browser support dialog element, do nothing
 		if (typeof HTMLDialogElement === 'function') return;
 
 		dialogPolyfill.registerDialog(element);
