@@ -8,6 +8,7 @@
 	import Icon from '$lib/components/Icon.svelte';
 
 	export let trainings: Training[] | undefined;
+	const canEdit = $page.url.pathname === '/profil';
 
 	const sortByDate = (a: Training, b: Training) => {
 		if (!a.start_date || !b.start_date) return 0;
@@ -35,7 +36,7 @@
 	<div class="wrapper-section">
 		<div class="head">
 			<h2 class="experience-container-title">Formations</h2>
-			{#if !!openTrainingModal}
+			{#if canEdit}
 				<div class="actions">
 					{#if !!trainings?.length}
 						<button

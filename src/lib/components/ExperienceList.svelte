@@ -8,6 +8,7 @@
 	import Icon from '$lib/components/Icon.svelte';
 
 	export let experiences: Experience[] | undefined;
+	const canEdit = $page.url.pathname === '/profil';
 
 	const sortByDate = (a: Experience, b: Experience) => {
 		if (!a.start_date || !b.start_date) return 0;
@@ -37,7 +38,7 @@
 	<div class="wrapper-section">
 		<div class="head">
 			<h2 class="experience-container-title">Expériences Professionnelles</h2>
-			{#if !!openExperienceModal}
+			{#if canEdit}
 				<div class="actions">
 					{#if !!experiences?.length}
 						<button

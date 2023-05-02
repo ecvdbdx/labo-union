@@ -11,6 +11,8 @@
 
 	export let profile: Profile;
 
+	const canEdit = $page.url.pathname === '/profil';
+
 	$: ({ first_name, last_name, speciality, description, status, grade, profile_img } = profile);
 	let isCurriculum = true;
 
@@ -40,7 +42,7 @@
 <div class="Profile">
 	<div class="container-top">
 		<div class="left">
-			{#if openAvatarModal}
+			{#if canEdit}
 				{#if profile_img !== ''}
 					<button class="img-profile" on:click={openAvatarModal}>
 						<img class="img-profile" src={profile_img} alt="" />
@@ -59,7 +61,7 @@
 
 			<div class="user-name">
 				<h1>{first_name} {last_name}</h1>
-				{#if openEditModal}
+				{#if canEdit}
 					<div class="edit-profile" on:keydown={openEditModal} on:click={openEditModal}>
 						Modifier le profil
 						<Icon id="edit-2" color="black" size="1em" />

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	import Button from '$lib/components/Button.svelte';
 
 	export let portfolioData: {
@@ -7,6 +9,7 @@
 		title: string;
 		description: string;
 	}[] = [];
+	const canEdit = $page.url.pathname === '/profil';
 
 	const createNewProject = () => {
 		return;
@@ -14,20 +17,28 @@
 </script>
 
 <div class="grid-container">
-	<div class="project-card add-project">
-		<div>
-			<p>Ajouter un projet à votre Portfolio</p>
-			<Button on:click={createNewProject} type="another-one">Ajouter un projet</Button>
+	{#if canEdit}
+		<div class="project-card add-project">
+			<div>
+				<p>Ajouter un projet à votre Portfolio</p>
+				<Button on:click={createNewProject} type="another-one">Ajouter un projet</Button>
+			</div>
 		</div>
-	</div>
+	{/if}
 
-	{#each portfolioData as portfolioItem}
-		<div class="project-card">
-			<img src={portfolioItem.image} alt={portfolioItem.img_alt} />
-			<h3>{portfolioItem.title}</h3>
-			<p>{portfolioItem.description}</p>
+	{#if portfolioData.length === 0 && !canEdit}
+		<div class="no-project">
+			<p>Il n'y a pas encore de projet dans ce portfolio</p>
 		</div>
-	{/each}
+	{:else}
+		{#each portfolioData as portfolioItem}
+			<div class="project-card">
+				<img src={portfolioItem.image} alt={portfolioItem.img_alt} />
+				<h3>{portfolioItem.title}</h3>
+				<p>{portfolioItem.description}</p>
+			</div>
+		{/each}
+	{/if}
 </div>
 
 <style lang="sass">
@@ -55,6 +66,10 @@
   grid-template-columns: repeat(3, 1fr)
   grid-gap: 2rem
   margin-bottom: 2rem
+
+  .no-project
+    text-align: center
+    grid-column: 2
 
 h3
   padding-top: 0.625rem
