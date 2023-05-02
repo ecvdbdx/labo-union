@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
+	import { modal } from '$lib/stores/modal';
+	import PortfolioForm from '$lib/components/profile/PortfolioForm.svelte';
 	import Button from '$lib/components/Button.svelte';
 
 	export let portfolioData: {
@@ -12,7 +14,13 @@
 	const canEdit = $page.url.pathname === '/profil';
 
 	const createNewProject = () => {
-		return;
+		modal.set({
+			title: 'Ajouter un projet à votre Portfolio',
+			component: PortfolioForm,
+			props: {
+				form: $page.form,
+			},
+		});
 	};
 </script>
 

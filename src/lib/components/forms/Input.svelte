@@ -1,10 +1,10 @@
 <script lang="ts">
 	export let placeholder = '';
-	export let value: string | number | boolean;
+	export let value: string | number | boolean = '';
 	export let noLabel = false;
 	export let error: string | null = null;
 	export let name: string;
-	export let disabled: boolean;
+	export let disabled = false;
 	export let type:
 		| 'text'
 		| 'password'
@@ -41,9 +41,9 @@
 		/>
 	{:else}
 		<textarea
-			{type}
+			{disabled}
 			{placeholder}
-			{value}
+			value={value.toString()}
 			{name}
 			{required}
 			on:input={handleInput}

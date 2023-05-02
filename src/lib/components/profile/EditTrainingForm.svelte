@@ -26,7 +26,7 @@
 				return update({ reset: false });
 			}}
 	>
-		<Input value="" type="date" name="start_date">Date de début</Input>
+		<Input type="date" name="start_date">Date de début</Input>
 		<Checkbox
 			bind:value={displayEndDate}
 			name="end_date_check"
@@ -35,8 +35,8 @@
 		{#if !displayEndDate}
 			<Input value="" type="date" name="end_date">Date de fin</Input>
 		{/if}
-		<Input value="" type="text" name="school">École</Input>
-		<Input value="" type="text" name="diploma">Diplôme</Input>
+		<Input type="text" name="school">École</Input>
+		<Input type="text" name="diploma">Diplôme</Input>
 		<Button>Enregistrer</Button>
 	</form>
 {:else}

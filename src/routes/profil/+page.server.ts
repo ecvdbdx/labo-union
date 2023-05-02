@@ -201,4 +201,43 @@ export const actions: Actions = {
 
 		throw redirect(303, '/profil');
 	},
+	createPortfolio: async ({ request, locals: { getSession, supabase } }) => {
+		const session = await getSession();
+		const user_id = session?.user.id;
+		const formData = await request.formData();
+
+		const title = formData.get('title') as string;
+		const description = formData.get('description') as string;
+		const link = formData.get('link') as string;
+		const thumbnail = formData.get('thumbnail') as string;
+
+		if (title === '' || description === '' || thumbnail === '') {
+			return fail(400, {
+				title_error: title === '' ? 'Veuillez renseigner un titre' : null,
+				description_error: description === '' ? 'Veuillez renseigner une description' : null,
+				thumbnail_error: thumbnail === '' ? 'Veuillez renseigner une image' : null,
+				title,
+				description,
+				link,
+				thumbnail,
+			});
+		}
+
+		const { error: errr } = await supabase.from('Portfolio').insert({
+			title: title,
+			description: description,
+			link: link,
+			thumbnail: thumbnail,
+			user_id: user_id,
+		});
+
+		if (errr) {
+			throw error(500, {
+				code: 500,
+				message: errr.message,
+			});
+		}
+
+		throw redirect(303, '/profil');
+	},
 };
