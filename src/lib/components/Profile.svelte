@@ -110,7 +110,7 @@
 		{#if isCurriculum}
 			<Curriculum {profile} />
 		{:else}
-			<Portfolio />
+			<Portfolio portfolioData={profile.Portfolio} />
 		{/if}
 	</div>
 </div>

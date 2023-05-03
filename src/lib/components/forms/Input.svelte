@@ -5,6 +5,7 @@
 	export let error: string | null = null;
 	export let name: string;
 	export let disabled = false;
+	export let hidden = false;
 	export let type:
 		| 'text'
 		| 'password'
@@ -35,6 +36,7 @@
 			{value}
 			{name}
 			{required}
+			{hidden}
 			on:input={handleInput}
 			on:change={handleInput}
 			id={name}
@@ -86,10 +88,16 @@
       border-radius: 10px
       color: $black
       margin-bottom: 1.8rem
+      font-family: $base_font
 
       &:disabled
         background: $disabled
         cursor: not-allowed
+			
+      &[hidden]
+        display: none
+		
+ 
 
     textarea
       resize: vertical

@@ -13,6 +13,7 @@ export interface Profile {
 	cover_img?: string;
 	Experience?: Experience[];
 	Training?: Training[];
+	Portfolio?: Portfolio[];
 }
 
 export interface Experience {
@@ -38,4 +39,14 @@ export interface Training {
 	start_date?: string;
 	end_date?: string;
 	Profile?: Profile;
+}
+
+export interface Portfolio {
+	id: number /* primary key */;
+	created_at?: string;
+	title?: string;
+	category?: string;
+	thumbnail?: string;
+	link?: string;
+	user_id?: string;
 }
