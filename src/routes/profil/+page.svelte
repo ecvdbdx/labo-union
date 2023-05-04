@@ -9,6 +9,7 @@
 	import EditExperienceForm from '$lib/components/profile/EditExperienceForm.svelte';
 	import EditTrainingForm from '$lib/components/profile/EditTrainingForm.svelte';
 	import Loader from '$lib/components/Loader.svelte';
+	import UploadImage from '$lib/components/UploadImage.svelte';
 
 	export let data: PageData;
 	export let form: ActionData;
@@ -68,6 +69,7 @@
 
 {#if data.profile}
 	<Profile {profile} {openEditModal} {openAvatarModal} {openTrainingModal} {openExperienceModal} />
+	<UploadImage {profile} />
 {:else}
 	<Loader />
 {/if}
