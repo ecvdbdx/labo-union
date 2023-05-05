@@ -20,7 +20,7 @@ export const actions: Actions = {
 					? 'Veuillez confirmer votre mot de passe'
 					: null,
 				termAndConditions_error: !termAndConditions
-					? "Veuillez accepter les conditions d'utilisation"
+					? 'Merci d’accepter les conditions d’utilisation et la politique de confidentialité'
 					: null,
 				email,
 				password,
@@ -30,7 +30,7 @@ export const actions: Actions = {
 		if (!isPasswordValid(password)) {
 			return fail(400, {
 				password_error:
-					'Votre mot de passe doit contenir 9 caractères minimum, une majuscule, une minuscule, un chiffre et un caractère spécial',
+					'Votre mot de passe doit contenir 9 caractères minimum, une majuscule, une minuscule, un chiffre et un caractère spécial (@$!#?&)',
 				email,
 				password,
 			});
@@ -49,7 +49,7 @@ export const actions: Actions = {
 
 		if (isEmailValid.data?.length === 0) {
 			return fail(400, {
-				email_error: "Cette adresse email n'est pas autorisée",
+				email_error: 'Votre mail n’existe pas, merci de rentrer le bon email',
 				email,
 				password,
 			});

@@ -19,21 +19,24 @@
 			type="email"
 			required
 			placeholder="john.doe@mail-ecv.com"
-			error={form?.email_error}>Email*</Input
+			error={form?.email_error}
+			disabled={false}>Email*</Input
 		>
 		<Input
 			value={form?.password ?? ''}
 			name="password"
 			required
 			type="password"
-			error={form?.password_error}>Mot de passe*</Input
+			error={form?.password_error}
+			disabled={false}>Mot de passe*</Input
 		>
 		<Input
 			value={''}
 			name="confirmedPassword"
 			type="password"
 			required
-			error={form?.confirmedPassword_error}>Confirmer votre mot de passe*</Input
+			error={form?.confirmedPassword_error}
+			disabled={false}>Confirmer votre mot de passe*</Input
 		>
 		<Checkbox
 			name="termAndConditions"
@@ -47,9 +50,9 @@
 
 		<Button>Créer un compte</Button>
 
-		{#if form?.success}
-			<p class="success">Votre compte a bien été créé !</p>
-		{/if}
+		<!-- {#if form?.success} -->
+		<p class="success">Votre compte a bien été créé !</p>
+		<!-- {/if} -->
 	</form>
 </div>
 
@@ -72,4 +75,5 @@ h2
 	
 	.success
 		color: $success
+		font-weight: $bold
 </style>
