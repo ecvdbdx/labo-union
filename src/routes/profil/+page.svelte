@@ -65,11 +65,13 @@
 			},
 		});
 	};
+	let input;
 </script>
 
 {#if data.profile}
 	<Profile {profile} {openEditModal} {openAvatarModal} {openTrainingModal} {openExperienceModal} />
-	<UploadImage {profile} />
+	<UploadImage bind:this={input} uploading={false} type="profilPicture" />
+	<button on:click={input.onClick}>Click</button>
 {:else}
 	<Loader />
 {/if}
