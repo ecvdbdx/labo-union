@@ -1,0 +1,41 @@
+dialog.polyfill {
+	position: fixed;
+	left: 0;
+	right: 0;
+	width: -moz-fit-content;
+	width: -webkit-fit-content;
+	width: fit-content;
+	height: -moz-fit-content;
+	height: -webkit-fit-content;
+	height: fit-content;
+	max-height: 90vh;
+	margin: auto;
+	border: solid;
+	padding: 1em;
+	background: white;
+	color: black;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+}
+
+dialog.polyfill:not([open]) {
+	display: none;
+}
+
+dialog.polyfill + .backdrop {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.1);
+}
+
+._dialog_overlay.polyfill {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}

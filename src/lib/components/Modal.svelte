@@ -1,14 +1,30 @@
 <script lang="ts">
+	import dialogPolyfill from 'dialog-polyfill';
+
 	import { modal } from '$lib/stores/modal';
 	import Icon from '$lib/components/Icon.svelte';
+	import { onMount } from 'svelte';
 
 	let element: HTMLDialogElement;
+	let css = '';
+
+	onMount(() => {
+		// if browser support dialog element, do nothing
+		if (typeof HTMLDialogElement === 'function') return;
+
+		dialogPolyfill.registerDialog(element);
+		css = 'polyfill';
+	});
 
 	$: if (element) {
 		if ($modal) {
 			element.showModal();
 		} else {
-			element.close();
+			try {
+				element.close();
+			} catch (error) {
+				// ignore
+			}
 		}
 	}
 
@@ -27,7 +43,12 @@
 	};
 </script>
 
-<dialog bind:this={element} on:click={closeOnBackdrop} on:keydown={closeOnBackdrop} class="modal">
+<dialog
+	bind:this={element}
+	on:click={closeOnBackdrop}
+	on:keydown={closeOnBackdrop}
+	class="modal {css}"
+>
 	<div class="title">
 		{$modal ? $modal.title : 'Modal'}
 		<button class="close" on:click={() => modal.set(null)} aria-label="close modal">
