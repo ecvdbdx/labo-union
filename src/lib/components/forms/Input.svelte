@@ -1,6 +1,5 @@
 <script lang="ts">
 	export let placeholder = '';
-	export let value: string | number | boolean = '';
 	export let noLabel = false;
 	export let error: string | null = null;
 	export let name: string;
@@ -16,10 +15,6 @@
 		| 'textarea'
 		| 'date' = 'text';
 	export let required = false;
-
-	const handleInput = (e: Event) => {
-		value = (e.target as HTMLInputElement).value;
-	};
 </script>
 
 <div class="group" class:onError={error}>
@@ -29,29 +24,9 @@
 		</label>
 	{/if}
 	{#if type !== 'textarea'}
-		<input
-			{disabled}
-			{type}
-			{placeholder}
-			{value}
-			{name}
-			{required}
-			{hidden}
-			on:input={handleInput}
-			on:change={handleInput}
-			id={name}
-		/>
+		<input {disabled} {type} {placeholder} {name} {required} {hidden} id={name} />
 	{:else}
-		<textarea
-			{disabled}
-			{placeholder}
-			value={value.toString()}
-			{name}
-			{required}
-			on:input={handleInput}
-			on:change={handleInput}
-			id={name}
-		/>
+		<textarea {disabled} {placeholder} {name} {required} id={name} />
 	{/if}
 	{#if error}
 		<div class="error">
@@ -94,7 +69,7 @@
         background: $disabled
         cursor: not-allowed
 			
-      &[hidden]
+    input[hidden]
         display: none
 		
  
