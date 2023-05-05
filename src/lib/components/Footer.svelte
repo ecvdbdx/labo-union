@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Link from './Link.svelte';
 
+	export let isConnected: boolean;
+
 	const links: { label: string; url: string | null }[] = [
 		{
 			label: 'Opportunités',
@@ -8,7 +10,7 @@
 		},
 		{
 			label: 'Annuaire',
-			url: null,
+			url: '/etudiants',
 		},
 		{
 			label: 'Messages',
@@ -52,9 +54,17 @@
 		<div class="container-links">
 			<nav>
 				{#each links as link}
-					<Link href={link.url} empty={link.url === null ? true : false}>
-						{link.label}
-					</Link>
+					{#if link.url === '/profil'}
+						{#if isConnected}
+							<Link href={link.url} empty={link.url === null ? true : false}>
+								{link.label}
+							</Link>
+						{/if}
+					{:else}
+						<Link href={link.url} empty={link.url === null ? true : false}>
+							{link.label}
+						</Link>
+					{/if}
 				{/each}
 			</nav>
 		</div>
@@ -105,7 +115,7 @@
 				align-items: center
 				margin-right: 2rem
 	
-	:global(.Footer a:not(.active))
+	:global(.Footer a:not(.empty))
 		text-decoration: none
 		color: $white
 		
@@ -129,7 +139,7 @@
 				align-items: center
 				margin-right: 2rem
 				
-	:global(.subFooter a:not(.active))
+	:global(.subFooter a:not(.empty))
 		text-decoration: none
 		color: $disabled
 </style>

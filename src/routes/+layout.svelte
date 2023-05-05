@@ -12,6 +12,8 @@
 	$: ({ supabase } = data);
 	$: user = data.user as Profile;
 
+	$: isConnected = user ? true : false;
+
 	onMount(() => {
 		const {
 			data: { subscription },
@@ -32,4 +34,4 @@
 	<slot />
 </main>
 <Modal />
-<Footer />
+<Footer {isConnected} />
