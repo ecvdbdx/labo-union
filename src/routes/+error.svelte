@@ -6,10 +6,10 @@
 
 <div class="page">
 	<div class="error">
-		<p>{$page.error && $page.error.code}</p>
+		<p>{$page.status}</p>
 		<span>|</span>
 		<h1>
-			{$page.error && $page.error.message}
+			{$page.error?.message}
 		</h1>
 	</div>
 	<Link href="/">Retour à l'accueil</Link>
