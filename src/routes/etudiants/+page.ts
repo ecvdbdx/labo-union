@@ -1,8 +1,18 @@
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ parent }) => {
+export const load: PageLoad = async ({
+	parent,
+	// , url
+}) => {
 	const { supabase } = await parent();
+
+	let spec;
+	// let params = new URLSearchParams(url.search);
+	// for (const [key, value] of params.entries()) {
+	// 	spec = value;
+	// }
+	// const resultSupabase = await supabase.from('Profile').select('*').eq('speciality', spec);
 
 	const { data: profiles, error: profilesErr } = await supabase.from('Profile').select('*');
 	const { data: grade, error: gradeErr } = await supabase.from('distinct_grade').select();
@@ -28,5 +38,6 @@ export const load: PageLoad = async ({ parent }) => {
 		profiles,
 		grade,
 		speciality,
+		spec,
 	};
 };

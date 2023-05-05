@@ -4,8 +4,11 @@
 	import Filter from './Filter.svelte';
 	import Tooltip from '$lib/components/Tooltip.svelte';
 	import Search from '$lib/components/Search.svelte';
+	// import { goto } from '$app/navigation';
 
 	export let data: PageData;
+
+	// console.log('DAAAA', data.spec);
 
 	// TODO: Update this variables when data from database is available
 	const disponibilityIsVisible = true;
@@ -13,6 +16,7 @@
 	let search = '';
 	let grade: string | undefined;
 	let speciality: string | undefined;
+	// let spec: string;
 
 	$: filteredProfiles = data.profiles;
 
@@ -24,15 +28,22 @@
 		});
 
 		if (err) {
-			console.error(err);
+			// console.error(err);
 		}
+		// option 1
+		// goto();
 
+		URLSearchParams;
 		filteredProfiles = profiles || [];
 	}
 
 	function updateSpecialty(e: Event) {
 		const target = e.target as HTMLSelectElement;
+		// HERE
+		// console.log('target => ', target?.value);
+
 		speciality = target?.value;
+
 		searchProfiles();
 	}
 
