@@ -1,14 +1,14 @@
 <script lang="ts">
-	import dialogPolyfill from 'dialog-polyfill';
-
 	import { modal } from '$lib/stores/modal';
 	import Icon from '$lib/components/Icon.svelte';
 	import { onMount } from 'svelte';
 
 	let element: HTMLDialogElement;
+	let dialogPolyfill;
 	let css = '';
 
-	onMount(() => {
+	onMount(async () => {
+		dialogPolyfill = (await import('dialog-polyfill')).default;
 		// if browser support dialog element, do nothing
 		if (typeof HTMLDialogElement === 'function') return;
 
