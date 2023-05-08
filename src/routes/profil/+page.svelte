@@ -9,7 +9,6 @@
 	import EditExperienceForm from '$lib/components/profile/EditExperienceForm.svelte';
 	import EditTrainingForm from '$lib/components/profile/EditTrainingForm.svelte';
 	import Loader from '$lib/components/Loader.svelte';
-	import UploadImage from '$lib/components/UploadImage.svelte';
 
 	export let data: PageData;
 	export let form: ActionData;
@@ -65,13 +64,10 @@
 			},
 		});
 	};
-	let input;
 </script>
 
 {#if data.profile}
 	<Profile {profile} {openEditModal} {openAvatarModal} {openTrainingModal} {openExperienceModal} />
-	<UploadImage bind:this={input} uploading={false} type="profilPicture" />
-	<button on:click={input.onClick}>Click</button>
 {:else}
 	<Loader />
 {/if}

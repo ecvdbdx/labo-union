@@ -2,30 +2,30 @@
 	import { realUploadSizeLimit, uploadSizeLimit } from '$lib/constants/files';
 
 	export let uploading = false;
-	export let type: 'profilPicture' | 'portfolioPicture' = 'portfolioPicture';
+	export let type: 'avatar' | 'classic' = 'classic';
 
 	let input: HTMLInputElement;
-	let img: HTMLImageElement;
 
 	export function onClick() {
 		input.click();
 	}
 
 	$: imageIsTooBig = false;
+	$: src = '';
 
 	const updateImage = () => {
-		if (input && img && input.files && input.files[0]) {
+		if (input && input.files && input.files[0]) {
 			if (input.files[0].size > realUploadSizeLimit) {
 				imageIsTooBig = true;
 				return;
 			}
 
-			img.src = URL.createObjectURL(input.files[0]);
+			src = URL.createObjectURL(input.files[0]);
 		}
 	};
 </script>
 
-{#if type === 'portfolioPicture'}
+{#if type === 'classic'}
 	<div class="container-upload-img">
 		<input
 			type="file"
@@ -44,10 +44,14 @@
 		<h3>Téleversez un fichier</h3>
 		<p>Formats acceptés : .png, .jpg, .xd, .mp4 Taille maximale pour chaque fichier : 100 mo</p>
 
-		<img bind:this={img} src="" alt="" />
-
 		{#if imageIsTooBig}
 			<p class="big-img-msg">Votre image dépasse {uploadSizeLimit} ko !</p>
+		{/if}
+	</div>
+
+	<div class="preview">
+		{#if src}
+			<img {src} alt="" />
 		{/if}
 	</div>
 {:else}
@@ -61,8 +65,9 @@
 				on:input={updateImage}
 				bind:this={input}
 			/>
-			{#if img}
-				<img bind:this={img} src="" alt="" />
+
+			{#if src}
+				<img {src} alt="" />
 			{/if}
 		</div>
 	</div>
@@ -88,11 +93,7 @@
 			// TODO: Not use opacity to hide the input
 			opacity: 0
 			&:hover
-			cursor: pointer
-
-		.container-header
-			width: 100%
-			height: 100%
+				cursor: pointer
 
 		h3, p
 			padding: 0 4rem
@@ -122,6 +123,7 @@
 			height: 10rem
 			background-color: white
 			margin: 0 auto
+			position: relative
 
 			&:hover
 				cursor: pointer
@@ -132,7 +134,25 @@
 				opacity: 0
 
 			img
-				width: 100%
-				height: 100%
 				object-fit: cover
+				z-index: 2
+				position: absolute
+				top: 0
+				left: 0
+				width: 10rem
+				height: 10rem
+				cursor: pointer
+
+	.preview
+		margin-top: 1rem
+		border: 1px dashed $black
+		border-radius: 0.5rem
+		width: 10rem
+		height: 10rem
+
+		img
+			width: 100%
+			height: 100%
+			object-fit: cover
+
 </style>
