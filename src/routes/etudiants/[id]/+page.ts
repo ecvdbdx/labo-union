@@ -8,7 +8,7 @@ export const load: PageLoad = async ({ params, parent }) => {
 
 	const { data, error: err } = await supabase
 		.from('Profile')
-		.select('*, Experience(*), Training(*)')
+		.select('*, Experience(*), Training(*), Portfolio(*)')
 		.eq('id', userId)
 		.maybeSingle();
 
