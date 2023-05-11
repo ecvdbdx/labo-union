@@ -212,7 +212,7 @@ export const actions: Actions = {
 		if (title === '' || category === '' || thumbnail.length === 0) {
 			return fail(400, {
 				title_error: title === '' ? 'Veuillez renseigner un titre' : null,
-				category_error: category === '' ? 'Veuillez renseigner une category' : null,
+				category_error: category === '' ? 'Veuillez renseigner une categorie' : null,
 				thumbnail_error: thumbnail.length === 0 ? 'Veuillez ajouter une image' : null,
 				title,
 				category,
