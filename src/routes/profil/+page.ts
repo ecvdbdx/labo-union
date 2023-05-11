@@ -17,7 +17,7 @@ export const load: PageLoad = async ({ parent, depends }) => {
 
 	const { data, error: err } = await supabase
 		.from('Profile')
-		.select('*, Experience(*), Training(*)')
+		.select('*, Experience(*), Training(*), Portfolio(*)')
 		.eq('user_id', userId)
 		.maybeSingle();
 

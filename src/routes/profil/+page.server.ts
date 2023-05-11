@@ -1,8 +1,10 @@
 /** @type {import('./$types').Actions} */
 
 import { fail, redirect, error } from '@sveltejs/kit';
+import { v4 as uuidv4 } from 'uuid';
 
 import type { PageServerLoad, Actions } from './$types';
+import { realUploadSizeLimit } from '$lib/constants/files';
 
 export const load: PageServerLoad = async ({ params }) => {
 	return {
@@ -168,8 +170,6 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		const first_name = formData.get('first_name') as string;
 		const last_name = formData.get('last_name') as string;
-		//const grade = formData.get('grade') as string;
-		//const speciality = formData.get('speciality') as string;
 		const description = formData.get('description') as string;
 		const status = formData.get('status') as string;
 
@@ -185,8 +185,6 @@ export const actions: Actions = {
 			.update({
 				first_name: first_name,
 				last_name: last_name,
-				//grade: grade,
-				//speciality: speciality,
 				description: description,
 				status: !!status,
 			})
@@ -196,6 +194,78 @@ export const actions: Actions = {
 			throw error(500, {
 				code: 500,
 				message: err.message,
+			});
+		}
+
+		throw redirect(303, '/profil');
+	},
+	createPortfolio: async ({ request, locals: { getSession, supabase } }) => {
+		const session = await getSession();
+		const user_id = session?.user.id;
+		const formData = await request.formData();
+
+		const title = formData.get('title') as string;
+		const category = formData.get('category') as string;
+		const link = formData.get('link') as string;
+		const thumbnail = formData.get('thumbnail') as Blob;
+
+		if (title === '' || category === '' || thumbnail.length === 0) {
+			return fail(400, {
+				title_error: title === '' ? 'Veuillez renseigner un titre' : null,
+				category_error: category === '' ? 'Veuillez renseigner une categorie' : null,
+				thumbnail_error: thumbnail.length === 0 ? 'Veuillez ajouter une image' : null,
+				title,
+				category,
+				link,
+				thumbnail,
+			});
+		}
+
+		const format = thumbnail.name.split('.').pop();
+		const hashProfile = uuidv4();
+		const filePath = `${hashProfile}-porfolio.${format}`;
+
+		if (thumbnail.size > realUploadSizeLimit) {
+			return fail(400, {
+				thumbnail_error: 'Le fichier est trop volumineux',
+			});
+		}
+
+		const { error: thumb_err } = await supabase.storage
+			.from('portfolio-thumbnail')
+			.upload(filePath, thumbnail, { cacheControl: '0' });
+
+		if (thumb_err) {
+			return fail(500, {
+				error: "Une erreur est survenue lors de l'upload de votre image",
+			});
+		}
+
+		const url = supabase.storage.from('portfolio-thumbnail').getPublicUrl(filePath).data.publicUrl;
+
+		const { data: profile, error: profile_error } = await supabase
+			.from('Profile')
+			.select('id')
+			.eq('user_id', user_id)
+			.single();
+
+		if (profile_error) {
+			return fail(500, {
+				error: 'Une erreur est survenue lors de la récupération de votre profil',
+			});
+		}
+
+		const { error: err } = await supabase.from('Portfolio').insert({
+			title: title,
+			category: category,
+			link: link,
+			thumbnail: url,
+			user_id: profile.id,
+		});
+
+		if (err) {
+			return fail(500, {
+				error: err.message,
 			});
 		}
 

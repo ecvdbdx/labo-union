@@ -4,14 +4,12 @@
 	import ExperienceList from '$lib/components/ExperienceList.svelte';
 	import TrainingList from '$lib/components/TrainingList.svelte';
 	export let profile: Profile;
-	export let openExperienceModal: null | ((isNew: boolean) => void) = null;
-	export let openTrainingModal: null | ((isNew: boolean) => void) = null;
 </script>
 
 <section class="Curriculum">
 	<div class="wrapper-section">
-		<ExperienceList {openExperienceModal} experiences={profile.Experience} />
-		<TrainingList {openTrainingModal} trainings={profile.Training} />
+		<ExperienceList experiences={profile.Experience} />
+		<TrainingList trainings={profile.Training} />
 	</div>
 </section>
 

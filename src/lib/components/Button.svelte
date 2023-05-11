@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let type: 'default' | 'rounded' | 'square' | 'link' = 'default';
+	export let type: 'default' | 'rounded' | 'square' | 'link' | 'another-one' = 'default';
 	export let disabled = false;
 	export let light = false;
 	export let href: string | null = null;
@@ -52,6 +52,16 @@
 
 		&.square
 			border-radius: 0
+
+		&.another-one
+			background: transparent
+			color: $primary
+			border: 1px solid #DDD3D0
+
+			&:hover
+				color: $white
+				background-color: $primary
+				border: 1px solid transparent
 
 		&.link
 			color: $primary
