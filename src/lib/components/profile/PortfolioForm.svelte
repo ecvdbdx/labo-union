@@ -5,6 +5,7 @@
 	import { modal } from '$lib/stores/modal';
 	import Input from '$lib/components/forms/Input.svelte';
 	import Button from '$lib/components/Button.svelte';
+	import UploadImage from '$lib/components/UploadImage.svelte';
 </script>
 
 <form
@@ -18,7 +19,7 @@
 		Donnez lui un nom
 	</Input>
 
-	<input name="thumbnail" type="file" accept=".jpg, .png, .jpeg, .webp" />
+	<UploadImage name="thumbnail" required />
 
 	<Input name="category" type="text" required placeholder="Ajoutez une description">
 		Ajoutez une category

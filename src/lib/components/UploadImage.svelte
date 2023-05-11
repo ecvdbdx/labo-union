@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { realUploadSizeLimit, uploadSizeLimit } from '$lib/constants/files';
 
+	export let name: string;
+	export let required = false;
 	export let uploading = false;
 	export let type: 'avatar' | 'classic' = 'classic';
 
@@ -31,6 +33,8 @@
 			type="file"
 			accept=".jpg, .png, .jpeg, .JPEG, .webp"
 			disabled={uploading}
+			{name}
+			{required}
 			on:change={updateImage}
 			on:input={updateImage}
 			bind:this={input}
@@ -149,6 +153,7 @@
 		border-radius: 0.5rem
 		width: 10rem
 		height: 10rem
+		margin-bottom: 2rem
 
 		img
 			width: 100%
