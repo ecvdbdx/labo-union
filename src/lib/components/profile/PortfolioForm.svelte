@@ -16,13 +16,13 @@
 	}}
 >
 	<Input name="title" type="text" required placeholder="Nom de votre projet">
-		Donnez lui un nom
+		Donner lui un nom
 	</Input>
 
 	<UploadImage name="thumbnail" required />
 
 	<Input name="category" type="text" required placeholder="Ajoutez une description">
-		Ajoutez une category
+		Ajouter une categorie
 	</Input>
 
 	<Input
@@ -31,7 +31,7 @@
 		required
 		placeholder="Lien de votre projet Behance, Github, Dribble etc..."
 	>
-		Ajoutez un lien
+		Ajouter un lien
 	</Input>
 
 	<Button>Ajouter</Button>
