@@ -2,6 +2,7 @@
 	import type { PageData } from './$types';
 
 	import Card from '$lib/components/Card.svelte';
+	import Button from '$lib/components/Button.svelte';
 	import Filter from './Filter.svelte';
 	import Tooltip from '$lib/components/Tooltip.svelte';
 	import Search from '$lib/components/Search.svelte';
@@ -22,7 +23,6 @@
 			search,
 			grade: grade || undefined,
 			speciality: speciality || undefined,
-
 		});
 
 		if (err) {
@@ -31,6 +31,44 @@
 
 		filteredProfiles = profiles || [];
 	}
+
+	$: grades = data.grade
+		.map((e) => e.grade)
+		.sort((a, b) => {
+			if (a === null || b === null) {
+				return 0;
+			}
+			const nameGradeA = a.toUpperCase();
+			const nameGradeB = b.toUpperCase();
+
+			if (nameGradeA < nameGradeB) {
+				return -1;
+			}
+			if (nameGradeA > nameGradeB) {
+				return 1;
+			}
+
+			return 0;
+		});
+
+	$: specialities = data.speciality
+		.map((e) => e.speciality)
+		.sort((a, b) => {
+			if (a === null || b === null) {
+				return 0;
+			}
+			const nameSpecialityA = a.toUpperCase();
+			const nameSpecialityB = b.toUpperCase();
+
+			if (nameSpecialityA < nameSpecialityB) {
+				return -1;
+			}
+			if (nameSpecialityA > nameSpecialityB) {
+				return 1;
+			}
+
+			return 0;
+		});
 
 	function updateSpecialty(e: Event) {
 		const target = e.target as HTMLSelectElement;
@@ -43,6 +81,12 @@
 		grade = target?.value;
 		searchProfiles();
 	}
+
+	function deleteFilters() {
+		grade = '';
+		speciality = '';
+		searchProfiles();
+	}
 </script>
 
 <div class="container main-container">
@@ -51,8 +95,14 @@
 		<Search rounded={true} name="profile" bind:search on:click={searchProfiles} />
 	</div>
 	<div class="container-filters">
-		<Filter label="Cursus" options={data.speciality} on:change={updateSpecialty} />
-		<Filter label="Classe" options={data.grade} on:change={updateGrade} />
+		<Filter
+			label="Cursus"
+			options={specialities}
+			on:change={updateSpecialty}
+			current={speciality}
+		/>
+		<Filter label="Classe" options={grades} on:change={updateGrade} current={grade} />
+		<Button type="rounded" on:click={deleteFilters}>Supprimer les filtres</Button>
 	</div>
 	{#if filteredProfiles?.length > 0}
 		<ul class="grid-container">

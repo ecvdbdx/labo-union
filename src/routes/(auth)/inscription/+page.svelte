@@ -50,9 +50,9 @@
 
 		<Button>Créer un compte</Button>
 
-		<!-- {#if form?.success} -->
-		<p class="success">Votre compte a bien été créé !</p>
-		<!-- {/if} -->
+		{#if form?.success}
+			<p class="success">Votre compte a bien été créé !</p>
+		{/if}
 	</form>
 </div>
 

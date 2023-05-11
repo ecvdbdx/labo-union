@@ -1,9 +1,12 @@
 <script lang="ts">
-	export let options: Record<string, string | null>[];
+	export let options: (string | null)[];
 	export let label: string;
+	export let current: string | null;
 
-	let selectedOption: string;
-	let key = Object.keys(options[0])[0];
+	let selectedOption: string | null;
+	// let key = Object.keys(options[0])[0];
+
+	$: selectedOption = current;
 </script>
 
 <div class="Filter">
@@ -11,7 +14,7 @@
 	<select bind:value={selectedOption} on:change>
 		<option value="">Sélectionner</option>
 		{#each options as option}
-			<option value={option[key]}>{option[key]}</option>
+			<option value={option}>{option}</option>
 		{/each}
 	</select>
 </div>
